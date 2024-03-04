@@ -40,7 +40,19 @@ body {
 
 .bottom-nav {
     background-color: whitesmoke;
+    display: flex;
     gap: 24px;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+@media screen and (min-width: 981px) {
+    .bottom-nav {
+        display: none;
+    }
 }
 
 .bottom-nav-button {
