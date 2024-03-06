@@ -41,6 +41,7 @@ body {
 .bottom-nav {
     background-color: whitesmoke;
     display: flex;
+    flex-wrap: wrap;
     gap: 24px;
     justify-content: center;
     position: fixed;
