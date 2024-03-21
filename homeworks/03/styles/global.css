@@ -13,17 +13,20 @@
     --neutral-color-secondary: #e2e8f0;
     --border-color: #cbd5e1;
     --text-color: #0f172a;
+    --error-color: #b91c1c;
 
     --border-radius: 8px;
 }
+/*
 @media (prefers-color-scheme: dark) {
     :root {
         --neutral-color-primary: #0f172a;
         --neutral-color-secondary: #172030;
         --border-color: #334155;
         --text-color: #f1f5f9;
+        --error-color: #ef4444;
     }
-}
+}*/
 
 body {
     height: 100vh;
@@ -33,4 +36,14 @@ body {
     padding: 36px 18px;
     background-color: var(--neutral-color-primary);
     color: var(--text-color);
+}
+
+.loading-indicator,
+.error-message {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.error-message {
+    color: var(--error-color);
 }
