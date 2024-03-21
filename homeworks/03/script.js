@@ -6,11 +6,15 @@ const QUESTIONS_PER_DIFFICULTY = Math.floor(QUESTIONS_NUM / 3)
 
 let currentQuestion = 1
 
-async function startQuiz() {
-    const startContainer = document.querySelector('.start-container')
-    startContainer.parentNode.removeChild(startContainer)
+function startQuiz() {
     startButton.removeEventListener('click', startQuiz)
+    const startContainer = document.querySelector('.start-container')
+    startContainer.remove()
 
+    nextQuestion()
+}
+
+async function nextQuestion() {
     const questionData = await getQuestionData()
     console.log(questionData)
     showQuestionContainer(questionData)
@@ -18,9 +22,9 @@ async function startQuiz() {
 
 async function getQuestionData() {
     let difficulty
-    if (currentQuestion < QUESTIONS_PER_DIFFICULTY) {
+    if (currentQuestion <= QUESTIONS_PER_DIFFICULTY) {
         difficulty = 'easy'
-    } else if (currentQuestion < QUESTIONS_PER_DIFFICULTY * 2) {
+    } else if (currentQuestion <= QUESTIONS_PER_DIFFICULTY * 2) {
         difficulty = 'medium'
     } else {
         difficulty = 'hard'
@@ -54,12 +58,12 @@ function showLoadingIndicator() {
     const loadingIndicator = document.createElement('p')
     loadingIndicator.classList.add('loading-indicator')
     loadingIndicator.innerText = 'Loading...'
-    document.body.appendChild(loadingIndicator)
+    document.body.prepend(loadingIndicator)
 }
 
 function hideLoadingIndicator() {
     const loadingIndicator = document.querySelector('.loading-indicator')
-    loadingIndicator.parentNode.removeChild(loadingIndicator)
+    loadingIndicator.remove()
 }
 
 function showError(message) {
@@ -67,7 +71,7 @@ function showError(message) {
     const errorMessage = document.createElement('p')
     errorMessage.classList.add('error-message')
     errorMessage.innerHTML = `${message}`
-    document.body.appendChild(errorMessage)
+    document.body.prepend(errorMessage)
 }
 
 function showQuestionContainer(questionData) {
@@ -97,7 +101,7 @@ function showQuestionContainer(questionData) {
 
         const answerLabel = document.createElement('label')
         answerLabel.htmlFor = `answer${index + 1}`
-        answerLabel.innerText = answer
+        answerLabel.innerHTML = answer
 
         const answerCard = document.createElement('div')
         answerCard.classList.add('answer-card')
@@ -115,6 +119,20 @@ function showQuestionContainer(questionData) {
     questionContainer.append(questionContent, answersContainer, answerButton)
 
     document.body.prepend(questionContainer)
+
+    answerButton.addEventListener('click', function () {
+        const selectedOption = document.querySelector(
+            'input[name="answer"]:checked'
+        )
+        const selectedAnswer = selectedOption.value
+        if (selectedAnswer === questionData.correctAnswer) {
+            questionContainer.remove()
+            currentQuestion++
+            if (currentQuestion <= QUESTIONS_NUM) {
+                nextQuestion()
+            }
+        }
+    })
 }
 
 function shuffle(answers) {
