@@ -17,7 +17,6 @@
 
     --border-radius: 8px;
 }
-/*
 @media (prefers-color-scheme: dark) {
     :root {
         --neutral-color-primary: #0f172a;
@@ -26,7 +25,7 @@
         --text-color: #f1f5f9;
         --error-color: #ef4444;
     }
-}*/
+}
 
 body {
     height: 100vh;
