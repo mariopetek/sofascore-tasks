@@ -1,0 +1,38 @@
+.start-container {
+    max-width: 860px;
+    width: 100%;
+    background-color: var(--neutral-color-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.info-heading {
+    line-height: 1.2;
+}
+
+.info-paragraph {
+    font-size: 18px;
+    line-height: 1.2;
+    margin: 12px 0;
+}
+
+.start-button {
+    color: #f1f5f9;
+    background-color: var(--main-color);
+    border: 1px solid var(--main-color);
+    border-radius: var(--border-radius);
+    padding: 4px 18px;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.start-button:hover {
+    filter: brightness(1.2);
+}

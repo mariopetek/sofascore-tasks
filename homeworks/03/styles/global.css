@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Martel Sans', sans-serif;
+}
+
+:root {
+    --main-color: #3b82f6;
+    --neutral-color-primary: #f1f5f9;
+    --neutral-color-secondary: #e2e8f0;
+    --border-color: #cbd5e1;
+    --text-color: #0f172a;
+
+    --border-radius: 8px;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --neutral-color-primary: #0f172a;
+        --neutral-color-secondary: #172030;
+        --border-color: #334155;
+        --text-color: #f1f5f9;
+    }
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px 18px;
+    background-color: var(--neutral-color-primary);
+    color: var(--text-color);
+}
