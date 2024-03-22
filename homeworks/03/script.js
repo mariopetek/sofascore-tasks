@@ -57,7 +57,6 @@ async function getQuestionData() {
 function showLoadingIndicator() {
     const loadingIndicator = document.createElement('div')
     loadingIndicator.classList.add('loading-indicator')
-    /*loadingIndicator.innerText = 'Loading...'*/
     document.body.prepend(loadingIndicator)
 }
 
@@ -149,19 +148,24 @@ function showQuestionContainer(questionData) {
         )
         if (selectedAnswer === questionData.correctAnswer) {
             selectedLabel.classList.add('correct-answer')
-            const nextQuestionButton = document.createElement('button')
-            nextQuestionButton.classList.add('next-question-button')
-            nextQuestionButton.innerText = 'Next question'
-            nextQuestionButton.addEventListener('click', function () {
+            const nextButton = document.createElement('button')
+            nextButton.classList.add('next-button')
+            nextButton.innerText =
+                currentQuestion < QUESTIONS_NUM ? 'Next question' : 'Finish'
+            nextButton.addEventListener('click', function () {
                 questionContainer.remove()
                 currentQuestion++
                 if (currentQuestion <= QUESTIONS_NUM) {
                     nextQuestion()
+                } else {
+                    //Show win message
                 }
             })
-            buttonsContainer.appendChild(nextQuestionButton)
+            buttonsContainer.appendChild(nextButton)
+            //Add a message to the screen
         } else {
             selectedLabel.classList.add('wrong-answer')
+            //Add a message to the screen with a button to start again
         }
     })
 }

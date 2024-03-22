@@ -115,7 +115,7 @@ label.wrong-answer {
     }
 }
 
-.next-question-button {
+.next-button {
     cursor: pointer;
     background: none;
     border: none;
@@ -125,6 +125,6 @@ label.wrong-answer {
     text-decoration: underline;
     font-weight: 700;
 }
-.next-question-button:hover {
+.next-button:hover {
     color: var(--main-color);
 }
