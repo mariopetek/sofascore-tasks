@@ -55,9 +55,9 @@ async function getQuestionData() {
 }
 
 function showLoadingIndicator() {
-    const loadingIndicator = document.createElement('p')
+    const loadingIndicator = document.createElement('div')
     loadingIndicator.classList.add('loading-indicator')
-    loadingIndicator.innerText = 'Loading...'
+    /*loadingIndicator.innerText = 'Loading...'*/
     document.body.prepend(loadingIndicator)
 }
 
@@ -92,12 +92,20 @@ function showQuestionContainer(questionData) {
     ]
     shuffle(answers)
 
+    const answerButton = document.createElement('button')
+    answerButton.classList.add('answer-button')
+    answerButton.innerText = 'Answer'
+    answerButton.disabled = true
+
     answers.forEach((answer, index) => {
         const answerInput = document.createElement('input')
         answerInput.type = 'radio'
         answerInput.name = 'answer'
         answerInput.id = `answer${index + 1}`
         answerInput.value = answer
+        answerInput.addEventListener('click', function () {
+            answerButton.disabled = false
+        })
 
         const answerLabel = document.createElement('label')
         answerLabel.htmlFor = `answer${index + 1}`
@@ -110,27 +118,50 @@ function showQuestionContainer(questionData) {
         answersContainer.appendChild(answerCard)
     })
 
-    const answerButton = document.createElement('button')
-    answerButton.classList.add('answer-button')
-    answerButton.innerText = 'Answer'
+    const buttonsContainer = document.createElement('div')
+    buttonsContainer.classList.add('buttons-container')
+    buttonsContainer.appendChild(answerButton)
 
     const questionContainer = document.createElement('div')
     questionContainer.classList.add('question-container')
-    questionContainer.append(questionContent, answersContainer, answerButton)
+    questionContainer.append(
+        questionContent,
+        answersContainer,
+        buttonsContainer
+    )
 
     document.body.prepend(questionContainer)
 
     answerButton.addEventListener('click', function () {
-        const selectedOption = document.querySelector(
-            'input[name="answer"]:checked'
-        )
-        const selectedAnswer = selectedOption.value
-        if (selectedAnswer === questionData.correctAnswer) {
-            questionContainer.remove()
-            currentQuestion++
-            if (currentQuestion <= QUESTIONS_NUM) {
-                nextQuestion()
+        answerButton.disabled = true
+        const options = document.querySelectorAll('input[name="answer"]')
+        options.forEach(option => (option.disabled = true))
+        let selectedOption
+        for (const option of options) {
+            if (option.checked) {
+                selectedOption = option
+                break
             }
+        }
+        const selectedAnswer = selectedOption.value
+        const selectedLabel = document.querySelector(
+            `label[for="${selectedOption.id}"]`
+        )
+        if (selectedAnswer === questionData.correctAnswer) {
+            selectedLabel.classList.add('correct-answer')
+            const nextQuestionButton = document.createElement('button')
+            nextQuestionButton.classList.add('next-question-button')
+            nextQuestionButton.innerText = 'Next question'
+            nextQuestionButton.addEventListener('click', function () {
+                questionContainer.remove()
+                currentQuestion++
+                if (currentQuestion <= QUESTIONS_NUM) {
+                    nextQuestion()
+                }
+            })
+            buttonsContainer.appendChild(nextQuestionButton)
+        } else {
+            selectedLabel.classList.add('wrong-answer')
         }
     })
 }

@@ -37,12 +37,28 @@ body {
     color: var(--text-color);
 }
 
-.loading-indicator,
 .error-message {
     font-size: 18px;
     font-weight: 600;
+    color: var(--error-color);
 }
 
-.error-message {
-    color: var(--error-color);
+.loading-indicator {
+    --loading-border: 4px;
+    border: var(--loading-border) solid var(--neutral-color-primary);
+    border-top: var(--loading-border) solid var(--text-color);
+    border-left: var(--loading-border) solid var(--text-color);
+    border-bottom: var(--loading-border) solid var(--text-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
