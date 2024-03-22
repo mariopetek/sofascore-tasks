@@ -17,7 +17,26 @@ function startQuiz() {
 async function nextQuestion() {
     const questionData = await getQuestionData()
     console.log(questionData)
+
     showQuestionContainer(questionData)
+
+    showHighScore()
+}
+
+function updateHighScore() {
+    const highScore = localStorage.getItem('highScore') || 0
+    if (highScore < currentQuestion) {
+        localStorage.setItem('highScore', currentQuestion)
+    }
+}
+
+function showHighScore() {
+    const highScore = localStorage.getItem('highScore') || 0
+    document.querySelector('.high-score-text')?.remove()
+    const highScoreText = document.createElement('span')
+    highScoreText.classList.add('high-score-text')
+    highScoreText.innerText = `High score: ${highScore}`
+    document.body.prepend(highScoreText)
 }
 
 async function getQuestionData() {
@@ -57,7 +76,7 @@ async function getQuestionData() {
 function showLoadingIndicator() {
     const loadingIndicator = document.createElement('div')
     loadingIndicator.classList.add('loading-indicator')
-    document.body.prepend(loadingIndicator)
+    document.body.appendChild(loadingIndicator)
 }
 
 function hideLoadingIndicator() {
@@ -147,6 +166,9 @@ function showQuestionContainer(questionData) {
             `label[for="${selectedOption.id}"]`
         )
         if (selectedAnswer === questionData.correctAnswer) {
+            updateHighScore()
+            showHighScore()
+
             selectedLabel.classList.add('correct-answer')
             const nextButton = document.createElement('button')
             nextButton.classList.add('next-button')
