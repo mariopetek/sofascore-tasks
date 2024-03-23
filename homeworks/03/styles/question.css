@@ -3,11 +3,12 @@
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 12px;
-    align-self: flex-start;
+    max-width: var(--content-width);
+    width: 100%;
 }
 
 .question-container {
-    max-width: 860px;
+    max-width: var(--content-width);
     width: 100%;
     background-color: var(--neutral-color-2);
     border: 1px solid var(--neutral-color-3);
@@ -140,7 +141,7 @@ label.wrong-answer {
 }
 
 .answer-response-container {
-    max-width: 860px;
+    max-width: var(--content-width);
     width: 100%;
     margin-top: 18px;
 }

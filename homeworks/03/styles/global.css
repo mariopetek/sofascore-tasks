@@ -19,6 +19,7 @@
     --wrong-color-1: #fca5a5;
     --wrong-color-2: #f87171;
 
+    --content-width: 860px;
     --border-radius: 8px;
 }
 @media (prefers-color-scheme: dark) {
