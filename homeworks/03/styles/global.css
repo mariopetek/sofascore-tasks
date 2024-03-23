@@ -46,6 +46,30 @@ body {
     color: var(--text-color);
 }
 
+.main-button {
+    color: #f1f5f9;
+    background-color: var(--main-color);
+    border: 1px solid var(--main-color);
+    border-radius: var(--border-radius);
+    padding: 4px 18px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.main-button:hover {
+    filter: brightness(1.2);
+}
+.main-button:disabled {
+    filter: brightness(1.5);
+    cursor: not-allowed;
+}
+@media (prefers-color-scheme: dark) {
+    .main-button:disabled {
+        filter: brightness(0.5);
+    }
+}
+
 .error-message {
     font-size: 18px;
     font-weight: 600;

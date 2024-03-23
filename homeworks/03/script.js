@@ -125,22 +125,22 @@ function showQuestionContainer(questionData) {
     shuffle(answers)
 
     const answerButton = document.createElement('button')
-    answerButton.classList.add('answer-button')
+    answerButton.classList.add('main-button', 'answer-button')
     answerButton.innerText = 'Answer'
     answerButton.disabled = true
 
-    answers.forEach((answer, index) => {
+    answers.forEach(answer => {
         const answerInput = document.createElement('input')
         answerInput.type = 'radio'
         answerInput.name = 'answer'
-        answerInput.id = `answer${index + 1}`
+        answerInput.id = answer
         answerInput.value = answer
         answerInput.addEventListener('click', function () {
             answerButton.disabled = false
         })
 
         const answerLabel = document.createElement('label')
-        answerLabel.htmlFor = `answer${index + 1}`
+        answerLabel.htmlFor = answer
         answerLabel.innerHTML = answer
 
         const answerCard = document.createElement('div')
@@ -170,13 +170,9 @@ function showQuestionContainer(questionData) {
         const options = document.querySelectorAll('input[name="answer"]')
         options.forEach(option => (option.disabled = true))
 
-        let selectedOption
-        for (const option of options) {
-            if (option.checked) {
-                selectedOption = option
-                break
-            }
-        }
+        const selectedOption = document.querySelector(
+            'input[name="answer"]:checked'
+        )
 
         const answerResponseContainer = document.createElement('div')
         answerResponseContainer.classList.add('answer-response-container')
@@ -222,7 +218,10 @@ function showQuestionContainer(questionData) {
                     congratulationsText.innerText = `You have reached the end of the road by answering all ${QUESTIONS_NUM} questions. Cheers!`
 
                     const backToStartButton = document.createElement('button')
-                    backToStartButton.classList.add('back-to-start-button')
+                    backToStartButton.classList.add(
+                        'main-button',
+                        'back-to-start-button'
+                    )
                     backToStartButton.innerText = 'Back to Start'
                     backToStartButton.addEventListener('click', function () {
                         answerResponseContainer.remove()
@@ -250,13 +249,17 @@ function showQuestionContainer(questionData) {
 
             selectedLabel.classList.add('wrong-answer')
 
+            document
+                .querySelector(`label[for="${questionData.correctAnswer}"]`)
+                .classList.add('wrong-answer-correct')
+
             const wrongAnswerMessage = document.createElement('p')
             wrongAnswerMessage.classList.add('wrong-answer-message')
             wrongAnswerMessage.innerText =
                 'Unfortunately, your answer is wrong :('
 
             const startAgainButton = document.createElement('button')
-            startAgainButton.classList.add('start-again-button')
+            startAgainButton.classList.add('main-button', 'start-again-button')
             startAgainButton.innerText = 'Start again'
             startAgainButton.addEventListener('click', function () {
                 answerResponseContainer.remove()
