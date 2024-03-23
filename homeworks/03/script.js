@@ -12,17 +12,25 @@ const startButton = document.querySelector('.start-button')
 startButton.addEventListener('click', startQuiz)
 
 let currentQuestion
+let numOf100Jokers
+let numOf5050Jokers
+
+function setInitialState() {
+    currentQuestion = 1
+    numOf100Jokers = 1
+    numOf5050Jokers = 3
+}
 
 const congratulationsSound = new Audio('./sounds/congratulations.mp3')
 const correctSound = new Audio('./sounds/correct.mp3')
 const wrongSound = new Audio('./sounds/wrong.mp3')
 
 function startQuiz() {
-    currentQuestion = 1
     startButton.removeEventListener('click', startQuiz)
     const startContainer = document.querySelector('.start-container')
     startContainer.remove()
 
+    setInitialState()
     getNextQuestion()
 }
 
@@ -103,7 +111,7 @@ function showQuestion(questionData) {
         questionData.correctAnswer,
         ...questionData.incorrectAnswers
     ]
-    shuffle(answers)
+    const correctIndex = shuffle(answers)
 
     answers.forEach(answer => {
         const answerInput = document.createElement('input')
@@ -135,6 +143,10 @@ function showQuestion(questionData) {
     function handleAnswerClick() {
         answerButton.removeEventListener('click', handleAnswerClick)
         answerButton.disabled = true
+
+        document
+            .querySelectorAll('.joker-button')
+            .forEach(jokerButton => (jokerButton.disabled = true))
 
         const options = document.querySelectorAll('input[name="answer"]')
         options.forEach(option => {
@@ -170,6 +182,7 @@ function showQuestion(questionData) {
 
                 answerResponseContainer.remove()
                 questionContainer.remove()
+                jokersContainer.remove()
 
                 currentQuestion++
                 if (currentQuestion <= QUESTIONS_NUM) {
@@ -243,7 +256,9 @@ function showQuestion(questionData) {
                 )
                 answerResponseContainer.remove()
                 questionContainer.remove()
-                currentQuestion = 1
+                jokersContainer.remove()
+
+                setInitialState()
                 getNextQuestion()
             }
             answerResponseContainer.append(wrongAnswerMessage, startAgainButton)
@@ -263,7 +278,113 @@ function showQuestion(questionData) {
         buttonsContainer
     )
 
+    const jokersContainer = document.createElement('div')
+    jokersContainer.classList.add('jokers-container')
+    document.body.prepend(jokersContainer)
+
     document.body.prepend(questionContainer)
+
+    function show100Jokers() {
+        for (let i = 0; i < numOf100Jokers; i++) {
+            const joker100Button = document.createElement('button')
+            joker100Button.classList.add('joker-button', 'joker-button-100')
+            joker100Button.innerText = '100%'
+            joker100Button.addEventListener('click', use100Joker)
+
+            jokersContainer.appendChild(joker100Button)
+        }
+    }
+
+    function show5050Jokers() {
+        for (let i = 0; i < numOf5050Jokers; i++) {
+            const joker5050Button = document.createElement('button')
+            joker5050Button.classList.add('joker-button', 'joker-button-5050')
+            joker5050Button.innerText = '50:50'
+            joker5050Button.addEventListener('click', use5050Joker)
+
+            jokersContainer.appendChild(joker5050Button)
+        }
+    }
+
+    function removeJokers() {
+        document
+            .querySelectorAll('.joker-button')
+            ?.forEach(jokerButton => jokerButton.remove())
+    }
+
+    function reRenderJokers() {
+        removeJokers()
+        show100Jokers()
+        show5050Jokers()
+    }
+
+    function use100Joker() {
+        const answerInputs = document.querySelectorAll('input[name="answer"]')
+        answerInputs.forEach(answerInput => {
+            if (answerInput.value !== questionData.correctAnswer) {
+                if (answerInput.checked) {
+                    answerInput.checked = false
+                    answerButton.disabled = true
+                }
+                answerInput.disabled = true
+
+                const answerLabel = document.querySelector(
+                    `label[for="${answerInput.id}"]`
+                )
+                const answerLabelComputedStyle = getComputedStyle(answerLabel)
+                answerLabel.style.color =
+                    answerLabelComputedStyle.getPropertyValue(
+                        'background-color'
+                    )
+            }
+        })
+
+        numOf100Jokers--
+        checkJokers()
+    }
+
+    let randomIndex
+    do {
+        randomIndex = Math.floor(Math.random() * 4)
+    } while (randomIndex === correctIndex)
+    function use5050Joker() {
+        const answerInputs = document.querySelectorAll('input[name="answer"]')
+
+        answerInputs.forEach((answerInput, index) => {
+            if (
+                answerInput.value !== questionData.correctAnswer &&
+                index !== randomIndex
+            ) {
+                if (answerInput.checked) {
+                    answerInput.checked = false
+                    answerButton.disabled = true
+                }
+                answerInput.disabled = true
+
+                const answerLabel = document.querySelector(
+                    `label[for="${answerInput.id}"]`
+                )
+                const answerLabelComputedStyle = getComputedStyle(answerLabel)
+                answerLabel.style.color =
+                    answerLabelComputedStyle.getPropertyValue(
+                        'background-color'
+                    )
+            }
+        })
+
+        numOf5050Jokers--
+        checkJokers()
+    }
+
+    function checkJokers() {
+        if (numOf100Jokers + numOf5050Jokers === 0) {
+            jokersContainer.remove()
+        } else {
+            reRenderJokers()
+        }
+    }
+
+    checkJokers()
 }
 
 function updateHighScore() {
@@ -279,13 +400,14 @@ function showHighScore() {
         document.querySelector('.high-score-text') ||
         document.createElement('span')
     highScoreText.classList.add('high-score-text')
-    highScoreText.innerText = `High score: ${highScore}`
+    highScoreText.innerHTML = `High score: <span>${highScore}</span>`
     document.body.prepend(highScoreText)
 }
 
 function shuffle(answers) {
     const randomIndex = Math.floor(Math.random() * answers.length)
     ;[answers[0], answers[randomIndex]] = [answers[randomIndex], answers[0]]
+    return randomIndex
 }
 
 function getRandomEmoji() {
