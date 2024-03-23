@@ -23,33 +23,16 @@ function startQuiz() {
     const startContainer = document.querySelector('.start-container')
     startContainer.remove()
 
-    nextQuestion()
+    getNextQuestion()
 }
 
-async function nextQuestion() {
+async function getNextQuestion() {
     const questionData = await getQuestionData()
-    console.log(questionData)
+    //console.log(questionData)
 
-    showQuestionContainer(questionData)
+    questionData && showQuestion(questionData)
 
     showHighScore()
-}
-
-function updateHighScore() {
-    const highScore = localStorage.getItem('highScore') || 0
-    if (highScore < currentQuestion) {
-        localStorage.setItem('highScore', currentQuestion)
-    }
-}
-
-function showHighScore() {
-    const highScore = localStorage.getItem('highScore') || 0
-    const highScoreText =
-        document.querySelector('.high-score-text') ||
-        document.createElement('span')
-    highScoreText.classList.add('high-score-text')
-    highScoreText.innerText = `High score: ${highScore}`
-    document.body.prepend(highScoreText)
 }
 
 async function getQuestionData() {
@@ -86,14 +69,12 @@ async function getQuestionData() {
     }
 }
 
+const loadingIndicator = document.createElement('div')
+loadingIndicator.classList.add('loading-indicator')
 function showLoadingIndicator() {
-    const loadingIndicator = document.createElement('div')
-    loadingIndicator.classList.add('loading-indicator')
     document.body.appendChild(loadingIndicator)
 }
-
 function hideLoadingIndicator() {
-    const loadingIndicator = document.querySelector('.loading-indicator')
     loadingIndicator.remove()
 }
 
@@ -105,7 +86,7 @@ function showError(message) {
     document.body.appendChild(errorMessage)
 }
 
-function showQuestionContainer(questionData) {
+function showQuestion(questionData) {
     const questionNumber = document.createElement('h2')
     questionNumber.innerText = `Question ${currentQuestion}`
     const questionText = document.createElement('p')
@@ -124,20 +105,13 @@ function showQuestionContainer(questionData) {
     ]
     shuffle(answers)
 
-    const answerButton = document.createElement('button')
-    answerButton.classList.add('main-button', 'answer-button')
-    answerButton.innerText = 'Answer'
-    answerButton.disabled = true
-
     answers.forEach(answer => {
         const answerInput = document.createElement('input')
         answerInput.type = 'radio'
         answerInput.name = 'answer'
         answerInput.id = answer
         answerInput.value = answer
-        answerInput.addEventListener('click', function () {
-            answerButton.disabled = false
-        })
+        answerInput.addEventListener('click', enableAnswerButton)
 
         const answerLabel = document.createElement('label')
         answerLabel.htmlFor = answer
@@ -150,25 +124,23 @@ function showQuestionContainer(questionData) {
         answersContainer.appendChild(answerCard)
     })
 
-    const buttonsContainer = document.createElement('div')
-    buttonsContainer.classList.add('buttons-container')
-    buttonsContainer.appendChild(answerButton)
-
-    const questionContainer = document.createElement('div')
-    questionContainer.classList.add('question-container')
-    questionContainer.append(
-        questionContent,
-        answersContainer,
-        buttonsContainer
-    )
-
-    document.body.prepend(questionContainer)
-
-    answerButton.addEventListener('click', function () {
+    const answerButton = document.createElement('button')
+    answerButton.classList.add('main-button', 'answer-button')
+    answerButton.innerText = 'Answer'
+    answerButton.disabled = true
+    answerButton.addEventListener('click', handleAnswerClick)
+    function enableAnswerButton() {
+        answerButton.disabled = false
+    }
+    function handleAnswerClick() {
+        answerButton.removeEventListener('click', handleAnswerClick)
         answerButton.disabled = true
 
         const options = document.querySelectorAll('input[name="answer"]')
-        options.forEach(option => (option.disabled = true))
+        options.forEach(option => {
+            option.disabled = true
+            option.removeEventListener('click', enableAnswerButton)
+        })
 
         const selectedOption = document.querySelector(
             'input[name="answer"]:checked'
@@ -177,11 +149,10 @@ function showQuestionContainer(questionData) {
         const answerResponseContainer = document.createElement('div')
         answerResponseContainer.classList.add('answer-response-container')
 
-        const selectedAnswer = selectedOption.value
         const selectedLabel = document.querySelector(
             `label[for="${selectedOption.id}"]`
         )
-        if (selectedAnswer === questionData.correctAnswer) {
+        if (selectedOption.value === questionData.correctAnswer) {
             correctSound.play()
 
             updateHighScore()
@@ -193,12 +164,16 @@ function showQuestionContainer(questionData) {
             nextButton.classList.add('next-button')
             nextButton.innerText =
                 currentQuestion < QUESTIONS_NUM ? 'Next question' : 'Finish'
-            nextButton.addEventListener('click', function () {
+            nextButton.addEventListener('click', handleNextClick)
+            function handleNextClick() {
+                nextButton.removeEventListener('click', handleNextClick)
+
                 answerResponseContainer.remove()
                 questionContainer.remove()
+
                 currentQuestion++
                 if (currentQuestion <= QUESTIONS_NUM) {
-                    nextQuestion()
+                    getNextQuestion()
                 } else {
                     document.querySelector('.high-score-text').remove()
 
@@ -223,9 +198,8 @@ function showQuestionContainer(questionData) {
                         'back-to-start-button'
                     )
                     backToStartButton.innerText = 'Back to Start'
-                    backToStartButton.addEventListener('click', function () {
-                        answerResponseContainer.remove()
-                        window.location.reload()
+                    backToStartButton.addEventListener('click', () => {
+                        location.reload()
                     })
 
                     document.body.prepend(
@@ -234,7 +208,7 @@ function showQuestionContainer(questionData) {
                         backToStartButton
                     )
                 }
-            })
+            }
             buttonsContainer.appendChild(nextButton)
 
             const correctAnswerMessage = document.createElement('p')
@@ -261,23 +235,57 @@ function showQuestionContainer(questionData) {
             const startAgainButton = document.createElement('button')
             startAgainButton.classList.add('main-button', 'start-again-button')
             startAgainButton.innerText = 'Start again'
-            startAgainButton.addEventListener('click', function () {
+            startAgainButton.addEventListener('click', handleStartAgainClick)
+            function handleStartAgainClick() {
+                startAgainButton.removeEventListener(
+                    'click',
+                    handleStartAgainClick
+                )
                 answerResponseContainer.remove()
                 questionContainer.remove()
                 currentQuestion = 1
-                nextQuestion()
-            })
+                getNextQuestion()
+            }
             answerResponseContainer.append(wrongAnswerMessage, startAgainButton)
         }
         document.body.appendChild(answerResponseContainer)
-    })
+    }
+
+    const buttonsContainer = document.createElement('div')
+    buttonsContainer.classList.add('buttons-container')
+    buttonsContainer.appendChild(answerButton)
+
+    const questionContainer = document.createElement('div')
+    questionContainer.classList.add('question-container')
+    questionContainer.append(
+        questionContent,
+        answersContainer,
+        buttonsContainer
+    )
+
+    document.body.prepend(questionContainer)
+}
+
+function updateHighScore() {
+    const highScore = localStorage.getItem('highScore') || 0
+    if (highScore < currentQuestion) {
+        localStorage.setItem('highScore', currentQuestion)
+    }
+}
+
+function showHighScore() {
+    const highScore = localStorage.getItem('highScore') || 0
+    const highScoreText =
+        document.querySelector('.high-score-text') ||
+        document.createElement('span')
+    highScoreText.classList.add('high-score-text')
+    highScoreText.innerText = `High score: ${highScore}`
+    document.body.prepend(highScoreText)
 }
 
 function shuffle(answers) {
     const randomIndex = Math.floor(Math.random() * answers.length)
-    const temp = answers[0]
-    answers[0] = answers[randomIndex]
-    answers[randomIndex] = temp
+    ;[answers[0], answers[randomIndex]] = [answers[randomIndex], answers[0]]
 }
 
 function getRandomEmoji() {
@@ -296,8 +304,7 @@ function createFallingEmoji() {
     emoji.style.fontSize = getRandomSize() + 'px'
     document.body.appendChild(emoji)
 
-    const horizontalPos =
-        Math.random() * (window.innerWidth - emoji.clientWidth)
+    const horizontalPos = Math.random() * (innerWidth - emoji.clientWidth)
     emoji.style.left = `${horizontalPos}px`
 
     emoji.addEventListener('animationend', () => {

@@ -83,24 +83,24 @@
     filter: brightness(1);
     cursor: not-allowed;
 }
+.answer-card > label.correct-answer {
+    background-color: var(--correct-color-1);
+    border-color: var(--correct-color-2);
+}
+.answer-card > label.wrong-answer {
+    background-color: var(--wrong-color-1);
+    border-color: var(--wrong-color-2);
+}
+.answer-card > label.wrong-answer-correct {
+    outline: 2px solid var(--correct-color-2) !important;
+}
 
 .buttons-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 12px;
     flex-wrap: wrap;
-}
-
-label.correct-answer {
-    background-color: var(--correct-color-1);
-    border-color: var(--correct-color-2);
-}
-label.wrong-answer {
-    background-color: var(--wrong-color-1);
-    border-color: var(--wrong-color-2);
-}
-label.wrong-answer-correct {
-    outline: 2px solid var(--correct-color-2) !important;
 }
 
 .next-button {
@@ -112,6 +112,7 @@ label.wrong-answer-correct {
     font-size: 16px;
     text-decoration: underline;
     font-weight: 700;
+    line-height: 1.2;
 }
 .next-button:hover {
     color: var(--main-color);
