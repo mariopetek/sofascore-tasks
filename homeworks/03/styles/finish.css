@@ -1,18 +1,36 @@
 .congratulations-text {
     font-size: 18px;
     line-height: 1.2;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.back-to-start-button {
+    color: #f1f5f9;
+    background-color: var(--main-color);
+    border: 1px solid var(--main-color);
+    border-radius: var(--border-radius);
+    padding: 4px 18px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.back-to-start-button:hover {
+    filter: brightness(1.2);
 }
 
 .emoji {
     position: absolute;
     animation: drop linear 5s forwards;
+    z-index: -1;
 }
 @keyframes drop {
     0% {
         transform: translateY(-10%);
         opacity: 0;
     }
-    20% {
+    30% {
         opacity: 1;
     }
     100% {

@@ -18,7 +18,7 @@ const correctSound = new Audio('./sounds/correct.mp3')
 const wrongSound = new Audio('./sounds/wrong.mp3')
 
 function startQuiz() {
-    currentQuestion = 1
+    currentQuestion = 15
     startButton.removeEventListener('click', startQuiz)
     const startContainer = document.querySelector('.start-container')
     startContainer.remove()
@@ -204,12 +204,12 @@ function showQuestionContainer(questionData) {
                 if (currentQuestion <= QUESTIONS_NUM) {
                     nextQuestion()
                 } else {
+                    document.querySelector('.high-score-text').remove()
+
                     congratulationsSound.play()
 
                     document.body.style.overflow = 'hidden'
                     setInterval(createFallingEmoji, 200)
-
-                    document.querySelector('.high-score-text').remove()
 
                     const congratulationsHeader = document.createElement('h1')
                     congratulationsHeader.classList.add(
@@ -219,11 +219,20 @@ function showQuestionContainer(questionData) {
 
                     const congratulationsText = document.createElement('p')
                     congratulationsText.classList.add('congratulations-text')
-                    congratulationsText.innerText = `You managed to answer all ${QUESTIONS_NUM} questions.`
+                    congratulationsText.innerText = `You have reached the end of the road by answering all ${QUESTIONS_NUM} questions. Cheers!`
+
+                    const backToStartButton = document.createElement('button')
+                    backToStartButton.classList.add('back-to-start-button')
+                    backToStartButton.innerText = 'Back to Start'
+                    backToStartButton.addEventListener('click', function () {
+                        answerResponseContainer.remove()
+                        window.location.reload()
+                    })
 
                     document.body.prepend(
                         congratulationsHeader,
-                        congratulationsText
+                        congratulationsText,
+                        backToStartButton
                     )
                 }
             })
@@ -232,7 +241,9 @@ function showQuestionContainer(questionData) {
             const correctAnswerMessage = document.createElement('p')
             correctAnswerMessage.classList.add('correct-answer-message')
             correctAnswerMessage.innerText =
-                "Your answer is correct! You can move to the next question once you're ready :)"
+                currentQuestion === QUESTIONS_NUM
+                    ? 'Your answer is correct! You can finish the quiz now :)'
+                    : "Your answer is correct! You can move to the next question once you're ready :)"
             answerResponseContainer.appendChild(correctAnswerMessage)
         } else {
             wrongSound.play()
