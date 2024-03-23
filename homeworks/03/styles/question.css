@@ -51,6 +51,7 @@
     cursor: pointer;
     transition: filter 0.2s ease;
     flex: 1;
+    line-height: 1.2;
 }
 .answer-card > label:hover {
     filter: brightness(0.95);
@@ -140,6 +141,7 @@ label.wrong-answer {
     padding: 12px;
     width: fit-content;
     border-radius: var(--border-radius);
+    line-height: 1.2;
 }
 .correct-answer-message {
     border: 1px solid var(--correct-color-2);

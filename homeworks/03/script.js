@@ -13,11 +13,12 @@ startButton.addEventListener('click', startQuiz)
 
 let currentQuestion
 
+const congratulationsSound = new Audio('./sounds/congratulations.mp3')
 const correctSound = new Audio('./sounds/correct.mp3')
 const wrongSound = new Audio('./sounds/wrong.mp3')
 
 function startQuiz() {
-    currentQuestion = 1
+    currentQuestion = 14
     startButton.removeEventListener('click', startQuiz)
     const startContainer = document.querySelector('.start-container')
     startContainer.remove()
@@ -203,7 +204,27 @@ function showQuestionContainer(questionData) {
                 if (currentQuestion <= QUESTIONS_NUM) {
                     nextQuestion()
                 } else {
-                    //Show win message
+                    congratulationsSound.play()
+
+                    document.body.style.overflow = 'hidden'
+                    setInterval(createFallingEmoji, 200)
+
+                    document.querySelector('.high-score-text').remove()
+
+                    const congratulationsHeader = document.createElement('h1')
+                    congratulationsHeader.classList.add(
+                        'congratulations-header'
+                    )
+                    congratulationsHeader.innerText = 'Congratulations!'
+
+                    const congratulationsText = document.createElement('p')
+                    congratulationsText.classList.add('congratulations-text')
+                    congratulationsText.innerText = `You managed to answer all ${QUESTIONS_NUM} questions.`
+
+                    document.body.prepend(
+                        congratulationsHeader,
+                        congratulationsText
+                    )
                 }
             })
             buttonsContainer.appendChild(nextButton)
@@ -243,4 +264,29 @@ function shuffle(answers) {
     const temp = answers[0]
     answers[0] = answers[randomIndex]
     answers[randomIndex] = temp
+}
+
+function getRandomEmoji() {
+    const emojis = ['✨', '🎊', '🎉', '🏆', '🤩', '😎', '🥳']
+    return emojis[Math.floor(Math.random() * emojis.length)]
+}
+
+function getRandomSize() {
+    return Math.floor(Math.random() * 56) + 18
+}
+
+function createFallingEmoji() {
+    const emoji = document.createElement('div')
+    emoji.classList.add('emoji')
+    emoji.innerText = getRandomEmoji()
+    emoji.style.fontSize = getRandomSize() + 'px'
+    document.body.appendChild(emoji)
+
+    const horizontalPos =
+        Math.random() * (window.innerWidth - emoji.clientWidth)
+    emoji.style.left = `${horizontalPos}px`
+
+    emoji.addEventListener('animationend', () => {
+        emoji.remove()
+    })
 }
