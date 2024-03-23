@@ -28,13 +28,22 @@
 }
 
 .answers-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 12px;
+}
+@media screen and (max-width: 768px) {
+    .answers-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (max-width: 480px) {
+    .answers-container {
+        grid-template-columns: 1fr;
+    }
 }
 
 .answer-card {
-    flex: 1;
     display: flex;
 }
 .answer-card > input[name='answer'] {
