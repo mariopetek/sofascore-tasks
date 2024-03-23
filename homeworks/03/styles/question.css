@@ -71,7 +71,7 @@
 .answer-card > input[name='answer']:disabled + label {
     outline: none;
     filter: brightness(1);
-    cursor: default;
+    cursor: not-allowed;
 }
 
 .buttons-container {
@@ -99,7 +99,7 @@
 }
 .answer-button:disabled {
     filter: brightness(1.5);
-    cursor: default;
+    cursor: not-allowed;
 }
 @media (prefers-color-scheme: dark) {
     .answer-button:disabled {

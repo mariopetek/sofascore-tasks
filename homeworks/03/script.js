@@ -18,7 +18,7 @@ const correctSound = new Audio('./sounds/correct.mp3')
 const wrongSound = new Audio('./sounds/wrong.mp3')
 
 function startQuiz() {
-    currentQuestion = 14
+    currentQuestion = 1
     startButton.removeEventListener('click', startQuiz)
     const startContainer = document.querySelector('.start-container')
     startContainer.remove()
