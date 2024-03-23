@@ -9,8 +9,8 @@
 .question-container {
     max-width: 860px;
     width: 100%;
-    background-color: var(--neutral-color-secondary);
-    border: 1px solid var(--border-color);
+    background-color: var(--neutral-color-2);
+    border: 1px solid var(--neutral-color-3);
     border-radius: var(--border-radius);
     padding: 24px;
     display: flex;
@@ -41,8 +41,8 @@
     display: none;
 }
 .answer-card > label {
-    background-color: var(--border-color);
-    border: 1px solid var(--border-color);
+    background-color: var(--neutral-color-3);
+    border: 1px solid var(--neutral-color-3);
     border-radius: var(--border-radius);
     padding: 18px;
     display: flex;
@@ -80,7 +80,8 @@
     flex-wrap: wrap;
 }
 
-.answer-button {
+.answer-button,
+.start-again-button {
     color: #f1f5f9;
     background-color: var(--main-color);
     border: 1px solid var(--main-color);
@@ -91,7 +92,8 @@
     cursor: pointer;
     transition: all 0.2s ease;
 }
-.answer-button:hover {
+.answer-button:hover,
+.start-again-button:hover {
     filter: brightness(1.2);
 }
 .answer-button:disabled {
@@ -105,22 +107,12 @@
 }
 
 label.correct-answer {
-    background-color: #86efac;
-    border-color: #4ade80;
+    background-color: var(--correct-color-1);
+    border-color: var(--correct-color-2);
 }
 label.wrong-answer {
-    background-color: #fca5a5;
-    border-color: #f87171;
-}
-@media (prefers-color-scheme: dark) {
-    label.correct-answer {
-        background-color: #166534;
-        border-color: #22c55e;
-    }
-    label.wrong-answer {
-        background-color: #991b1b;
-        border-color: #ef4444;
-    }
+    background-color: var(--wrong-color-1);
+    border-color: var(--wrong-color-2);
 }
 
 .next-button {
@@ -135,4 +127,19 @@ label.wrong-answer {
 }
 .next-button:hover {
     color: var(--main-color);
+}
+
+.answer-response-container {
+    max-width: 860px;
+    width: 100%;
+    margin-top: 18px;
+}
+
+.wrong-answer-message {
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid var(--wrong-color-2);
+    border-radius: var(--border-radius);
+    background-color: var(--wrong-color-1);
+    width: fit-content;
 }

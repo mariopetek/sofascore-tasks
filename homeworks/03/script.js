@@ -1,12 +1,20 @@
-const startButton = document.querySelector('.start-button')
-startButton.addEventListener('click', startQuiz)
-
 const QUESTIONS_NUM = 15
 const QUESTIONS_PER_DIFFICULTY = Math.floor(QUESTIONS_NUM / 3)
 
-let currentQuestion = 1
+document.querySelector(
+    '.info-paragraph'
+).innerHTML = `Welcome to <strong>Rocky Road</strong>, a quiz game that
+features ${QUESTIONS_NUM} questions, each progressively more challenging
+than the last. Try to answer all the questions correctly and
+discover what awaits you at the end of the road.`
+
+const startButton = document.querySelector('.start-button')
+startButton.addEventListener('click', startQuiz)
+
+let currentQuestion
 
 function startQuiz() {
+    currentQuestion = 1
     startButton.removeEventListener('click', startQuiz)
     const startContainer = document.querySelector('.start-container')
     startContainer.remove()
@@ -32,8 +40,9 @@ function updateHighScore() {
 
 function showHighScore() {
     const highScore = localStorage.getItem('highScore') || 0
-    document.querySelector('.high-score-text')?.remove()
-    const highScoreText = document.createElement('span')
+    const highScoreText =
+        document.querySelector('.high-score-text') ||
+        document.createElement('span')
     highScoreText.classList.add('high-score-text')
     highScoreText.innerText = `High score: ${highScore}`
     document.body.prepend(highScoreText)
@@ -89,7 +98,7 @@ function showError(message) {
     const errorMessage = document.createElement('p')
     errorMessage.classList.add('error-message')
     errorMessage.innerHTML = `${message}`
-    document.body.prepend(errorMessage)
+    document.body.appendChild(errorMessage)
 }
 
 function showQuestionContainer(questionData) {
@@ -187,7 +196,26 @@ function showQuestionContainer(questionData) {
             //Add a message to the screen
         } else {
             selectedLabel.classList.add('wrong-answer')
-            //Add a message to the screen with a button to start again
+
+            const wrongAnswerMessage = document.createElement('p')
+            wrongAnswerMessage.classList.add('wrong-answer-message')
+            wrongAnswerMessage.innerText =
+                'Unfortunately, your answer is wrong :('
+
+            const startAgainButton = document.createElement('button')
+            startAgainButton.classList.add('start-again-button')
+            startAgainButton.innerText = 'Start again'
+            startAgainButton.addEventListener('click', function () {
+                answerResponseContainer.remove()
+                questionContainer.remove()
+                currentQuestion = 1
+                nextQuestion()
+            })
+
+            const answerResponseContainer = document.createElement('div')
+            answerResponseContainer.classList.add('answer-response-container')
+            answerResponseContainer.append(wrongAnswerMessage, startAgainButton)
+            document.body.appendChild(answerResponseContainer)
         }
     })
 }

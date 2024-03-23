@@ -9,21 +9,29 @@
 
 :root {
     --main-color: #3b82f6;
-    --neutral-color-primary: #f1f5f9;
-    --neutral-color-secondary: #e2e8f0;
-    --border-color: #cbd5e1;
+    --neutral-color-1: #f1f5f9;
+    --neutral-color-2: #e2e8f0;
+    --neutral-color-3: #cbd5e1;
     --text-color: #0f172a;
     --error-color: #b91c1c;
+    --correct-color-1: #86efac;
+    --correct-color-2: #4ade80;
+    --wrong-color-1: #fca5a5;
+    --wrong-color-2: #f87171;
 
     --border-radius: 8px;
 }
 @media (prefers-color-scheme: dark) {
     :root {
-        --neutral-color-primary: #0f172a;
-        --neutral-color-secondary: #172030;
-        --border-color: #334155;
+        --neutral-color-1: #0f172a;
+        --neutral-color-2: #172030;
+        --neutral-color-3: #334155;
         --text-color: #f1f5f9;
         --error-color: #ef4444;
+        --correct-color-1: #166534;
+        --correct-color-2: #22c55e;
+        --wrong-color-1: #991b1b;
+        --wrong-color-2: #ef4444;
     }
 }
 
@@ -33,7 +41,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 36px 18px;
-    background-color: var(--neutral-color-primary);
+    background-color: var(--neutral-color-1);
     color: var(--text-color);
 }
 
@@ -45,7 +53,7 @@ body {
 
 .loading-indicator {
     --loading-border: 4px;
-    border: var(--loading-border) solid var(--neutral-color-primary);
+    border: var(--loading-border) solid var(--neutral-color-1);
     border-top: var(--loading-border) solid var(--text-color);
     border-left: var(--loading-border) solid var(--text-color);
     border-bottom: var(--loading-border) solid var(--text-color);
