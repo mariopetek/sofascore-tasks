@@ -13,6 +13,9 @@ startButton.addEventListener('click', startQuiz)
 
 let currentQuestion
 
+const correctSound = new Audio('./sounds/correct.mp3')
+const wrongSound = new Audio('./sounds/wrong.mp3')
+
 function startQuiz() {
     currentQuestion = 1
     startButton.removeEventListener('click', startQuiz)
@@ -179,6 +182,8 @@ function showQuestionContainer(questionData) {
             `label[for="${selectedOption.id}"]`
         )
         if (selectedAnswer === questionData.correctAnswer) {
+            correctSound.play()
+
             updateHighScore()
             showHighScore()
 
@@ -204,6 +209,8 @@ function showQuestionContainer(questionData) {
                 "Your answer is correct! You can move to the next question once you're ready :)"
             answerResponseContainer.appendChild(correctAnswerMessage)
         } else {
+            wrongSound.play()
+
             selectedLabel.classList.add('wrong-answer')
 
             const wrongAnswerMessage = document.createElement('p')
