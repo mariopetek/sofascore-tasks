@@ -170,6 +170,10 @@ function showQuestionContainer(questionData) {
                 break
             }
         }
+
+        const answerResponseContainer = document.createElement('div')
+        answerResponseContainer.classList.add('answer-response-container')
+
         const selectedAnswer = selectedOption.value
         const selectedLabel = document.querySelector(
             `label[for="${selectedOption.id}"]`
@@ -184,6 +188,7 @@ function showQuestionContainer(questionData) {
             nextButton.innerText =
                 currentQuestion < QUESTIONS_NUM ? 'Next question' : 'Finish'
             nextButton.addEventListener('click', function () {
+                answerResponseContainer.remove()
                 questionContainer.remove()
                 currentQuestion++
                 if (currentQuestion <= QUESTIONS_NUM) {
@@ -193,7 +198,11 @@ function showQuestionContainer(questionData) {
                 }
             })
             buttonsContainer.appendChild(nextButton)
-            //Add a message to the screen
+            const correctAnswerMessage = document.createElement('p')
+            correctAnswerMessage.classList.add('correct-answer-message')
+            correctAnswerMessage.innerText =
+                "Your answer is correct! You can move to the next question once you're ready :)"
+            answerResponseContainer.appendChild(correctAnswerMessage)
         } else {
             selectedLabel.classList.add('wrong-answer')
 
@@ -211,12 +220,9 @@ function showQuestionContainer(questionData) {
                 currentQuestion = 1
                 nextQuestion()
             })
-
-            const answerResponseContainer = document.createElement('div')
-            answerResponseContainer.classList.add('answer-response-container')
             answerResponseContainer.append(wrongAnswerMessage, startAgainButton)
-            document.body.appendChild(answerResponseContainer)
         }
+        document.body.appendChild(answerResponseContainer)
     })
 }
 

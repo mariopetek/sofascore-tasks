@@ -135,11 +135,18 @@ label.wrong-answer {
     margin-top: 18px;
 }
 
+.correct-answer-message,
 .wrong-answer-message {
     padding: 12px;
-    margin-bottom: 18px;
-    border: 1px solid var(--wrong-color-2);
-    border-radius: var(--border-radius);
-    background-color: var(--wrong-color-1);
     width: fit-content;
+    border-radius: var(--border-radius);
+}
+.correct-answer-message {
+    border: 1px solid var(--correct-color-2);
+    background-color: var(--correct-color-1);
+}
+.wrong-answer-message {
+    border: 1px solid var(--wrong-color-2);
+    background-color: var(--wrong-color-1);
+    margin-bottom: 18px;
 }
