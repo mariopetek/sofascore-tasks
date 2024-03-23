@@ -116,6 +116,7 @@ function showQuestionContainer(questionData) {
 
     const answersContainer = document.createElement('div')
     answersContainer.classList.add('answers-container')
+
     const answers = [
         questionData.correctAnswer,
         ...questionData.incorrectAnswers
@@ -164,8 +165,10 @@ function showQuestionContainer(questionData) {
 
     answerButton.addEventListener('click', function () {
         answerButton.disabled = true
+
         const options = document.querySelectorAll('input[name="answer"]')
         options.forEach(option => (option.disabled = true))
+
         let selectedOption
         for (const option of options) {
             if (option.checked) {
@@ -188,6 +191,7 @@ function showQuestionContainer(questionData) {
             showHighScore()
 
             selectedLabel.classList.add('correct-answer')
+
             const nextButton = document.createElement('button')
             nextButton.classList.add('next-button')
             nextButton.innerText =
@@ -203,6 +207,7 @@ function showQuestionContainer(questionData) {
                 }
             })
             buttonsContainer.appendChild(nextButton)
+
             const correctAnswerMessage = document.createElement('p')
             correctAnswerMessage.classList.add('correct-answer-message')
             correctAnswerMessage.innerText =
