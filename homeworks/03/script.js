@@ -122,8 +122,9 @@ function showQuestion(questionData) {
         answerInput.addEventListener('click', enableAnswerButton)
 
         const answerLabel = document.createElement('label')
-        answerLabel.htmlFor = answer
         answerLabel.innerHTML = answer
+        answerLabel.htmlFor = answer
+        answerLabel.title = answerLabel.innerHTML
 
         const answerCard = document.createElement('div')
         answerCard.classList.add('answer-card')
@@ -135,6 +136,7 @@ function showQuestion(questionData) {
     const answerButton = document.createElement('button')
     answerButton.classList.add('main-button', 'answer-button')
     answerButton.innerText = 'Answer'
+    answerButton.title = 'Answer the question'
     answerButton.disabled = true
     answerButton.addEventListener('click', handleAnswerClick)
     function enableAnswerButton() {
@@ -174,7 +176,7 @@ function showQuestion(questionData) {
 
             const nextButton = document.createElement('button')
             nextButton.classList.add('next-button')
-            nextButton.innerText =
+            nextButton.innerText = nextButton.title =
                 currentQuestion < QUESTIONS_NUM ? 'Next question' : 'Finish'
             nextButton.addEventListener('click', handleNextClick)
             function handleNextClick() {
@@ -211,6 +213,7 @@ function showQuestion(questionData) {
                         'back-to-start-button'
                     )
                     backToStartButton.innerText = 'Back to Start'
+                    backToStartButton.title = 'Back to Start'
                     backToStartButton.addEventListener('click', () => {
                         location.reload()
                     })
@@ -248,6 +251,7 @@ function showQuestion(questionData) {
             const startAgainButton = document.createElement('button')
             startAgainButton.classList.add('main-button', 'start-again-button')
             startAgainButton.innerText = 'Start again'
+            startAgainButton.title = 'Start the quiz again'
             startAgainButton.addEventListener('click', handleStartAgainClick)
             function handleStartAgainClick() {
                 startAgainButton.removeEventListener(
@@ -289,6 +293,7 @@ function showQuestion(questionData) {
             const joker100Button = document.createElement('button')
             joker100Button.classList.add('joker-button', 'joker-button-100')
             joker100Button.innerText = '100%'
+            joker100Button.title = 'Joker 100%'
             joker100Button.addEventListener('click', use100Joker)
 
             jokersContainer.appendChild(joker100Button)
@@ -300,6 +305,7 @@ function showQuestion(questionData) {
             const joker5050Button = document.createElement('button')
             joker5050Button.classList.add('joker-button', 'joker-button-5050')
             joker5050Button.innerText = '50:50'
+            joker5050Button.title = 'Joker 50:50'
             joker5050Button.addEventListener('click', use5050Joker)
 
             jokersContainer.appendChild(joker5050Button)
@@ -331,11 +337,9 @@ function showQuestion(questionData) {
                 const answerLabel = document.querySelector(
                     `label[for="${answerInput.id}"]`
                 )
-                const answerLabelComputedStyle = getComputedStyle(answerLabel)
-                answerLabel.style.color =
-                    answerLabelComputedStyle.getPropertyValue(
-                        'background-color'
-                    )
+                answerLabel.style.color = 'transparent'
+                answerLabel.style.userSelect = 'none'
+                answerLabel.title = ''
             }
         })
 
@@ -364,11 +368,9 @@ function showQuestion(questionData) {
                 const answerLabel = document.querySelector(
                     `label[for="${answerInput.id}"]`
                 )
-                const answerLabelComputedStyle = getComputedStyle(answerLabel)
-                answerLabel.style.color =
-                    answerLabelComputedStyle.getPropertyValue(
-                        'background-color'
-                    )
+                answerLabel.style.color = 'transparent'
+                answerLabel.style.userSelect = 'none'
+                answerLabel.title = ''
             }
         })
 
