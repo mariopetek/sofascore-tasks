@@ -1,0 +1,21 @@
+.pokemonImageContainer {
+    flex: 1;
+    background-color: #eeeeee;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+}
+
+.pokemonImage {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+}
+
+.justifyStart {
+    justify-content: flex-start;
+}
+
+.justifyEnd {
+    justify-content: flex-end;
+}

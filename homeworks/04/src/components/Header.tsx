@@ -1,6 +1,7 @@
 import LikeButton from './LikeButton'
 import SettingsButton from './SettingsButton'
 import pokeball from '../assets/pokeball.svg'
+
 import styles from './styles/Header.module.css'
 
 function Header() {
