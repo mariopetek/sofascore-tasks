@@ -1,0 +1,44 @@
+.settingsMenuContainer {
+    width: 245px;
+    padding: 17px;
+    position: absolute;
+    right: 0;
+    top: 85px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-color) 0px 0px 10px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.settingsHeading {
+    font-size: 16px;
+}
+
+.themeOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.themeOption {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    gap: 5px;
+    cursor: pointer;
+    width: max-content;
+}
+
+.optionIcon {
+    width: 6px;
+    height: 6px;
+}
+
+@media screen and (max-width: 900px) {
+    .settingsMenuContainer {
+        top: 50px;
+    }
+}

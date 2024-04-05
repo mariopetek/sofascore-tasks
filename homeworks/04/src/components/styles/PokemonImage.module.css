@@ -1,6 +1,6 @@
 .pokemonImageContainer {
     flex: 1;
-    background-color: #eeeeee;
+    background-color: var(--image-bg-color);
     display: flex;
     align-items: center;
     padding: 0 60px;

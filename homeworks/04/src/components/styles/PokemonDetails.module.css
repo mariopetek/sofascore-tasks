@@ -5,6 +5,8 @@
     align-items: center;
     gap: 60px;
     flex-wrap: wrap;
+    background-color: var(--details-bg-color);
+    color: var(--text-color);
 }
 
 .pokemonDetailsContainer.odd {
@@ -52,9 +54,9 @@
 }
 
 .typeListItem {
-    color: #ffffff;
+    color: var(--details-bg-color);
     border-radius: 20px;
-    width: 67.92px;
+    width: 68px;
     text-align: center;
     font-size: 10px;
 }

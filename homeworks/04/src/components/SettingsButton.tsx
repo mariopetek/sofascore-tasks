@@ -3,12 +3,16 @@ import { PiGearLight } from 'react-icons/pi'
 
 import styles from './styles/SettingsButton.module.css'
 
-function SettingsButtonHeader() {
+type SettingsButtonProps = {
+    clickHandler: React.MouseEventHandler<SVGSVGElement>
+}
+
+function SettingsButton({ clickHandler }: SettingsButtonProps) {
     return (
         <IconContext.Provider value={{ className: styles.gearIcon }}>
-            <PiGearLight />
+            <PiGearLight onClick={clickHandler} />
         </IconContext.Provider>
     )
 }
 
-export default SettingsButtonHeader
+export default SettingsButton

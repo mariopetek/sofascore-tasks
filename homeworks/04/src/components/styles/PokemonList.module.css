@@ -1,0 +1,4 @@
+.pokemonListContainer {
+    background-color: var(--bg-color);
+    flex: 1;
+}
