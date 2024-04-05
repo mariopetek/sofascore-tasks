@@ -33,6 +33,7 @@ export type PokemonSpeciesInfo = {
 }
 
 export type PokemonInfo = {
+    id: number
     name: string
     height: number
     sprites: SpritesInfo
