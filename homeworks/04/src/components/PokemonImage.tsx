@@ -9,20 +9,16 @@ type PokemonImageProps = {
 }
 
 function PokemonImage({ pokemonImageUrl, pokemonNumber }: PokemonImageProps) {
-    const placement = {
-        likeButton: pokemonNumber % 2 == 1 ? 'placeRight' : 'placeLeft',
-        pokemonImage: pokemonNumber % 2 == 1 ? 'justifyEnd' : 'justifyStart'
-    }
+    const isOdd = pokemonNumber % 2 == 1
+
     return (
         <div
-            className={`${styles.pokemonImageContainer} ${
-                styles[placement.pokemonImage]
+            className={`${styles.pokemonImageContainer}  ${
+                isOdd ? styles.odd : styles.even
             }`}>
             <IconContext.Provider
                 value={{
-                    className: `${styles.likeButton} ${
-                        styles[placement.likeButton]
-                    }`
+                    className: `${styles.likeButton} ${styles.verticalPlacement}`
                 }}>
                 <PiHeartStraightLight />
             </IconContext.Provider>
@@ -30,8 +26,6 @@ function PokemonImage({ pokemonImageUrl, pokemonNumber }: PokemonImageProps) {
                 className={styles.pokemonImage}
                 src={pokemonImageUrl}
                 alt="Pokemon official artwork"
-                height={400}
-                width={400}
             />
         </div>
     )

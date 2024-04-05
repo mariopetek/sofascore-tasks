@@ -12,35 +12,16 @@ type PokemonRowProps = {
 function PokemonRow({ pokemonNumber, pokemon }: PokemonRowProps) {
     return (
         <div className={styles.pokemonRowContainer}>
-            {pokemonNumber % 2 == 1 ? (
-                <>
-                    <PokemonImage
-                        pokemonNumber={pokemonNumber}
-                        pokemonImageUrl={
-                            pokemon.sprites.other['official-artwork']
-                                .front_default
-                        }
-                    />
-                    <PokemonDetails
-                        pokemonNumber={pokemonNumber}
-                        pokemonInfo={pokemon}
-                    />
-                </>
-            ) : (
-                <>
-                    <PokemonDetails
-                        pokemonNumber={pokemonNumber}
-                        pokemonInfo={pokemon}
-                    />
-                    <PokemonImage
-                        pokemonNumber={pokemonNumber}
-                        pokemonImageUrl={
-                            pokemon.sprites.other['official-artwork']
-                                .front_default
-                        }
-                    />
-                </>
-            )}
+            <PokemonImage
+                pokemonNumber={pokemonNumber}
+                pokemonImageUrl={
+                    pokemon.sprites.other['official-artwork'].front_default
+                }
+            />
+            <PokemonDetails
+                pokemonNumber={pokemonNumber}
+                pokemonInfo={pokemon}
+            />
         </div>
     )
 }

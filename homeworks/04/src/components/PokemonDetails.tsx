@@ -9,6 +9,8 @@ type PokemonDetailsProps = {
 }
 
 function PokemonDetails({ pokemonNumber, pokemonInfo }: PokemonDetailsProps) {
+    const isOdd = pokemonNumber % 2 == 1
+
     const pokemonHeading = `#${String(pokemonNumber).padStart(
         4,
         '0'
@@ -30,7 +32,10 @@ function PokemonDetails({ pokemonNumber, pokemonInfo }: PokemonDetailsProps) {
     )
 
     return (
-        <div className={styles.pokemonDetailsContainer}>
+        <div
+            className={`${styles.pokemonDetailsContainer} ${
+                isOdd ? styles.odd : styles.even
+            }`}>
             <div className={styles.pokemonStatsContainer}>
                 <h2 className={styles.pokemonHeading}>{pokemonHeading}</h2>
                 <div className={styles.pokemonStats}>
@@ -73,15 +78,11 @@ function PokemonDetails({ pokemonNumber, pokemonInfo }: PokemonDetailsProps) {
                         className={styles.pokemonImage}
                         src={pokemonInfo.sprites.front_default}
                         alt="Pokemon front view"
-                        height={160}
-                        width={160}
                     />
                     <img
                         className={styles.pokemonImage}
                         src={pokemonInfo.sprites.back_default}
                         alt="Pokemon back biew"
-                        height={160}
-                        width={160}
                     />
                 </div>
             </div>

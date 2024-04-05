@@ -2,3 +2,10 @@
     display: flex;
     height: 516px;
 }
+
+@media screen and (max-width: 900px) {
+    .pokemonRowContainer {
+        flex-direction: column;
+        height: 756px;
+    }
+}

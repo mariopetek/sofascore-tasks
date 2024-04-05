@@ -28,3 +28,17 @@
     gap: 20px;
     align-items: center;
 }
+
+@media screen and (max-width: 900px) {
+    .header {
+        height: 45px;
+        padding: 0px 15px;
+    }
+    .pokeballIcon {
+        width: 25px;
+        height: 25px;
+    }
+    .headingText {
+        font-size: 18px;
+    }
+}
