@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react'
 
 import PokemonRow from './PokemonRow'
 
-type PokemonList = {
+type Pokemon = {
     name: string
     url: string
 }
 
 type AllPokemonData = {
     next: string
-    results: PokemonList[]
+    results: Pokemon[]
 }
 
 function PokemonList() {
