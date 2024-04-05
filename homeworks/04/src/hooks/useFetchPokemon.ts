@@ -17,7 +17,7 @@ export function useFetchPokemon() {
     const [morePokemonLoading, setMorePokemonLoading] = useState(false)
     const [pokemonError, setPokemonError] = useState(false)
 
-    const [nextPageNumber, setNextPageNumber] = useState(1)
+    const [nextPageUrl, setNextPageUrl] = useState('')
 
     useEffect(() => {
         async function fetchPokemon() {
@@ -56,6 +56,8 @@ export function useFetchPokemon() {
                     newPokemonPromises
                 )) as Pokemon[]
                 setPokemon(prevPokemon => [...prevPokemon, ...newPokemon])
+
+                setNextPageUrl(allPokemonData.next)
             } catch (err) {
                 setPokemonError(true)
             } finally {
@@ -73,11 +75,7 @@ export function useFetchPokemon() {
         setPokemonError(false)
 
         try {
-            const allPokemonDataResponse = await fetch(
-                `https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${
-                    nextPageNumber * 20
-                }`
-            )
+            const allPokemonDataResponse = await fetch(nextPageUrl)
             const allPokemonData =
                 (await allPokemonDataResponse.json()) as AllPokemonData
 
@@ -105,13 +103,13 @@ export function useFetchPokemon() {
             )) as Pokemon[]
             setPokemon(prevPokemon => [...prevPokemon, ...newPokemon])
 
-            setNextPageNumber(currentPageNumber => currentPageNumber + 1)
+            setNextPageUrl(allPokemonData.next)
         } catch (err) {
             setPokemonError(true)
         } finally {
             setMorePokemonLoading(false)
         }
-    }, [morePokemonLoading, nextPageNumber])
+    }, [morePokemonLoading, nextPageUrl])
 
     useEffect(() => {
         const handleScroll = () => {
