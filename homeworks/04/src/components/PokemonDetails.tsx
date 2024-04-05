@@ -1,11 +1,11 @@
-import { FlavorTextEntry, PokemonInfo, PokemonSpeciesInfo } from '../model'
+import { FlavorTextEntry, Pokemon } from '../model'
 import { capitalizeText, replaceNewlineAndFormFeed } from '../utils'
 
 import styles from './styles/PokemonDetails.module.css'
 
 type PokemonDetailsProps = {
     pokemonNumber: number
-    pokemonInfo: PokemonInfo & PokemonSpeciesInfo
+    pokemonInfo: Pokemon
 }
 
 function PokemonDetails({ pokemonNumber, pokemonInfo }: PokemonDetailsProps) {

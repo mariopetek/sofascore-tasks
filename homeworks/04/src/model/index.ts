@@ -43,3 +43,5 @@ export type PokemonInfo = {
     }
     weight: number
 }
+
+export type Pokemon = PokemonInfo & PokemonSpeciesInfo

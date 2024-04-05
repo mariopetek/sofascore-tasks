@@ -1,4 +1,3 @@
-import { PokemonInfo } from '../model'
 import { PiHeartStraightLight } from 'react-icons/pi'
 import { IconContext } from 'react-icons'
 
@@ -6,10 +5,10 @@ import styles from './styles/PokemonImage.module.css'
 
 type PokemonImageProps = {
     pokemonNumber: number
-    pokemonInfo: PokemonInfo
+    pokemonImageUrl: string
 }
 
-function PokemonImage({ pokemonInfo, pokemonNumber }: PokemonImageProps) {
+function PokemonImage({ pokemonImageUrl, pokemonNumber }: PokemonImageProps) {
     const placement = {
         likeButton: pokemonNumber % 2 == 1 ? 'placeRight' : 'placeLeft',
         pokemonImage: pokemonNumber % 2 == 1 ? 'justifyEnd' : 'justifyStart'
@@ -29,9 +28,7 @@ function PokemonImage({ pokemonInfo, pokemonNumber }: PokemonImageProps) {
             </IconContext.Provider>
             <img
                 className={styles.pokemonImage}
-                src={
-                    pokemonInfo.sprites.other['official-artwork'].front_default
-                }
+                src={pokemonImageUrl}
                 alt="Pokemon official artwork"
                 height={400}
                 width={400}
