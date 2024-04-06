@@ -8,25 +8,27 @@ import SettingsMenu from './SettingsMenu'
 
 function Header() {
     const [showSettingsMenu, setShowSettingsMenu] = useState(false)
-
+    const settingsButtonRef = useRef<HTMLDivElement>(null)
     const settingsMenuRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (
+                showSettingsMenu &&
+                settingsButtonRef.current &&
                 settingsMenuRef.current &&
+                !settingsButtonRef.current.contains(event.target as Node) &&
                 !settingsMenuRef.current.contains(event.target as Node)
             ) {
                 setShowSettingsMenu(false)
             }
         }
 
-        document.addEventListener('mousedown', handleClickOutside)
-
+        window.addEventListener('mousedown', handleClickOutside)
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
+            window.removeEventListener('mousedown', handleClickOutside)
         }
-    }, [])
+    }, [showSettingsMenu])
 
     return (
         <header className={styles.header}>
@@ -40,7 +42,9 @@ function Header() {
             </div>
             <div className={styles.optionsContainer}>
                 <LikeButton />
-                <div className={styles.settingsContainer}>
+                <div
+                    className={styles.settingsContainer}
+                    ref={settingsButtonRef}>
                     <SettingsButton
                         clickHandler={() => {
                             setShowSettingsMenu(!showSettingsMenu)
