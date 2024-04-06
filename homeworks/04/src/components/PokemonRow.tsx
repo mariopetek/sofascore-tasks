@@ -12,12 +12,7 @@ type PokemonRowProps = {
 function PokemonRow({ pokemonNumber, pokemon }: PokemonRowProps) {
     return (
         <div className={styles.pokemonRowContainer}>
-            <PokemonImage
-                pokemonNumber={pokemonNumber}
-                pokemonImageUrl={
-                    pokemon.sprites.other['official-artwork'].front_default
-                }
-            />
+            <PokemonImage pokemonNumber={pokemonNumber} pokemonInfo={pokemon} />
             <PokemonDetails
                 pokemonNumber={pokemonNumber}
                 pokemonInfo={pokemon}

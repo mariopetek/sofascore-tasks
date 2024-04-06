@@ -6,6 +6,7 @@
     --details-bg-color: #ffffff;
     --text-color: #262626;
     --shadow-color: rgba(0, 0, 0, 0.3);
+    --liked-color: #e3350d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,6 +17,7 @@
         --details-bg-color: #1f2735;
         --text-color: #acacac;
         --shadow-color: rgba(255, 255, 255, 0.3);
+        --liked-color: #4d638c;
     }
 }
 
@@ -26,6 +28,7 @@
     --details-bg-color: #ffffff;
     --text-color: #262626;
     --shadow-color: rgba(0, 0, 0, 0.3);
+    --liked-color: #e3350c;
 }
 
 .dark {
@@ -35,4 +38,5 @@
     --details-bg-color: #1f2735;
     --text-color: #acacac;
     --shadow-color: rgba(255, 255, 255, 0.3);
+    --liked-color: #4d638c;
 }
