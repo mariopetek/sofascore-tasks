@@ -8,7 +8,7 @@ function App() {
     const { theme } = useThemeContext()
 
     document.getElementById('root')!.classList.remove('light', 'dark')
-    if (theme !== undefined) {
+    if (theme !== null) {
         document.getElementById('root')!.classList.add(theme)
     }
 

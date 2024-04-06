@@ -4,8 +4,8 @@ import { PiHeartStraightFill } from 'react-icons/pi'
 import { IconContext } from 'react-icons'
 
 import styles from './styles/PokemonImage.module.css'
-import { useState } from 'react'
 import { Pokemon } from '../model'
+import { useLikedPokemonContext } from '../hooks/useLikedPokemonContext'
 
 type ButtonProps = {
     clickHandler: () => void
@@ -41,14 +41,28 @@ type PokemonImageProps = {
 function PokemonImage({ pokemonNumber, pokemonInfo }: PokemonImageProps) {
     const isOdd = pokemonNumber % 2 == 1
 
-    const pokemonImageUrl =
+    const pokemonDefaultImageUrl =
         pokemonInfo.sprites.other['official-artwork'].front_default
+    const pokemonShinyImageUrl =
+        pokemonInfo.sprites.other['official-artwork'].front_shiny
 
-    const [isLiked, setIsLiked] = useState(false)
+    const { likedPokemon, setLikedPokemon } = useLikedPokemonContext()
 
     const clickHandler = () => {
-        setIsLiked(currentLiked => !currentLiked)
+        setLikedPokemon(prevLikedPokemon => {
+            if (prevLikedPokemon.some(p => p.id === pokemonInfo.id)) {
+                return prevLikedPokemon.filter(p => p.id !== pokemonInfo.id)
+            } else {
+                return [...prevLikedPokemon, pokemonInfo]
+            }
+        })
     }
+
+    const isLiked = likedPokemon.some(p => p.id === pokemonInfo.id)
+
+    const pokemonImageUrl = isLiked
+        ? pokemonShinyImageUrl
+        : pokemonDefaultImageUrl
 
     return (
         <div

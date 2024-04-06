@@ -1,3 +1,4 @@
+import { useLikedPokemonContext } from '../hooks/useLikedPokemonContext'
 import { FlavorTextEntry, Pokemon } from '../model'
 import { capitalizeText, replaceNewlineAndFormFeed } from '../utils'
 
@@ -30,6 +31,17 @@ function PokemonDetails({ pokemonNumber, pokemonInfo }: PokemonDetailsProps) {
     const pokemonDetailsText = replaceNewlineAndFormFeed(
         findEnglishTextEntry(pokemonInfo.flavor_text_entries)
     )
+
+    const { likedPokemon } = useLikedPokemonContext()
+
+    const isLiked = likedPokemon.some(p => p.id === pokemonInfo.id)
+
+    const frontImageUrl = isLiked
+        ? pokemonInfo.sprites.front_shiny
+        : pokemonInfo.sprites.front_default
+    const backImageUrl = isLiked
+        ? pokemonInfo.sprites.back_shiny
+        : pokemonInfo.sprites.back_default
 
     return (
         <div
@@ -76,12 +88,12 @@ function PokemonDetails({ pokemonNumber, pokemonInfo }: PokemonDetailsProps) {
                 <div className={styles.pokemonImages}>
                     <img
                         className={styles.pokemonImage}
-                        src={pokemonInfo.sprites.front_default}
+                        src={frontImageUrl}
                         alt="Pokemon front view"
                     />
                     <img
                         className={styles.pokemonImage}
-                        src={pokemonInfo.sprites.back_default}
+                        src={backImageUrl}
                         alt="Pokemon back biew"
                     />
                 </div>
