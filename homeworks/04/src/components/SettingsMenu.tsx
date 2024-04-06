@@ -1,4 +1,4 @@
-import { PiCircleLight } from 'react-icons/pi'
+import { PiCircleBold } from 'react-icons/pi'
 import { PiCircleFill } from 'react-icons/pi'
 import { IconContext } from 'react-icons'
 
@@ -16,7 +16,7 @@ function SelectedOptionIcon() {
 function OptionIcon() {
     return (
         <IconContext.Provider value={{ className: styles.optionIcon }}>
-            <PiCircleLight />
+            <PiCircleBold />
         </IconContext.Provider>
     )
 }
