@@ -34,12 +34,8 @@ function SettingsMenu({ settingsMenuRef }: SettingsMenuProps) {
             <div className={styles.themeOptions}>
                 <div
                     className={styles.themeOption}
-                    onClick={() => setTheme(undefined)}>
-                    {theme === undefined ? (
-                        <SelectedOptionIcon />
-                    ) : (
-                        <OptionIcon />
-                    )}
+                    onClick={() => setTheme(null)}>
+                    {theme === null ? <SelectedOptionIcon /> : <OptionIcon />}
                     <span>Auto</span>
                 </div>
                 <div
