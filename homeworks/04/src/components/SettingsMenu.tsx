@@ -4,6 +4,7 @@ import { IconContext } from 'react-icons'
 
 import styles from './styles/SettingsMenu.module.css'
 import { useThemeContext } from '../hooks/useThemeContext'
+import { forwardRef } from 'react'
 
 function SelectedOptionIcon() {
     return (
@@ -21,15 +22,11 @@ function OptionIcon() {
     )
 }
 
-type SettingsMenuProps = {
-    settingsMenuRef: React.RefObject<HTMLDivElement>
-}
-
-function SettingsMenu({ settingsMenuRef }: SettingsMenuProps) {
+const SettingsMenu = forwardRef<HTMLDivElement>((_, ref) => {
     const { theme, setTheme } = useThemeContext()
 
     return (
-        <div className={styles.settingsMenuContainer} ref={settingsMenuRef}>
+        <div className={styles.settingsMenuContainer} ref={ref}>
             <h3 className={styles.settingsHeading}>Theme</h3>
             <div className={styles.themeOptions}>
                 <div
@@ -57,6 +54,6 @@ function SettingsMenu({ settingsMenuRef }: SettingsMenuProps) {
             </div>
         </div>
     )
-}
+})
 
 export default SettingsMenu
