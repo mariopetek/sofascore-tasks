@@ -1,0 +1,24 @@
+.errorContainer {
+    padding: 20px;
+    background-color: var(--error-bg-color);
+    color: var(--error-text-color);
+}
+
+.errorContainer > h2 {
+    font-size: 24px;
+    line-height: 1.2;
+}
+
+.errorContainer > p {
+    font-size: 14px;
+}
+
+@media screen and (max-width: 900px) {
+    .errorContainer {
+        padding: 10px;
+    }
+
+    .errorContainer > h2 {
+        font-size: 16px;
+    }
+}

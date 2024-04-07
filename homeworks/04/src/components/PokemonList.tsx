@@ -2,6 +2,8 @@ import PokemonRow from './PokemonRow'
 import { useFetchPokemon } from '../hooks/useFetchPokemon'
 
 import styles from './styles/PokemonList.module.css'
+import LoadingIndicator from './LoadingIndicator'
+import ErrorMessage from './ErrorMessage'
 
 function PokemonList() {
     const { pokemon, pokemonLoading, morePokemonLoading, pokemonError } =
@@ -9,8 +11,16 @@ function PokemonList() {
 
     return (
         <div className={styles.pokemonListContainer}>
-            {pokemonLoading && <div>Loading...</div>}
-            {pokemonError && <div>Something went wrong. Please try again.</div>}
+            {pokemonLoading && (
+                <div className={styles.loadingWrapper}>
+                    <LoadingIndicator />
+                </div>
+            )}
+            {pokemonError && (
+                <div className={styles.errorWrapper}>
+                    <ErrorMessage text="Something went wrong. Please try again." />
+                </div>
+            )}
             {!pokemonLoading &&
                 !pokemonError &&
                 pokemon.map((pokemonDetails, index) => (
@@ -20,7 +30,11 @@ function PokemonList() {
                         pokemon={pokemonDetails}
                     />
                 ))}
-            {morePokemonLoading && <div>Loading...</div>}
+            {morePokemonLoading && (
+                <div className={styles.loadingWrapper}>
+                    <LoadingIndicator />
+                </div>
+            )}
         </div>
     )
 }

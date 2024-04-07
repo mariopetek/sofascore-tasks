@@ -2,3 +2,25 @@
     background-color: var(--bg-color);
     flex: 1;
 }
+
+.loadingWrapper {
+    padding: 40px 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.errorWrapper {
+    padding: 40px 60px;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 900px) {
+    .loadingWrapper {
+        padding: 15px;
+    }
+
+    .errorWrapper {
+        padding: 10px 15px;
+    }
+}

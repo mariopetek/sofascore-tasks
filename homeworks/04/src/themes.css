@@ -7,6 +7,8 @@
     --text-color: #262626;
     --liked-color: #e3350d;
     --modal-bg-color: #ffffff;
+    --error-bg-color: #ff6969;
+    --error-text-color: #520000;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,6 +20,8 @@
         --text-color: #acacac;
         --liked-color: #4d638c;
         --modal-bg-color: #1f2735;
+        --error-bg-color: #520000;
+        --error-text-color: #ff6969;
     }
 }
 
@@ -29,6 +33,8 @@
     --text-color: #262626;
     --liked-color: #e3350c;
     --modal-bg-color: #ffffff;
+    --error-bg-color: #ff6969;
+    --error-text-color: #520000;
 }
 
 .dark {
@@ -39,4 +45,6 @@
     --text-color: #acacac;
     --liked-color: #4d638c;
     --modal-bg-color: #1f2735;
+    --error-bg-color: #520000;
+    --error-text-color: #ff6969;
 }

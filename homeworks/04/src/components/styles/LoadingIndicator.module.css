@@ -1,0 +1,41 @@
+.loadingContainer {
+    display: flex;
+    gap: 5px;
+}
+
+.loadingBar {
+    width: 10px;
+    height: 45px;
+    background-color: var(--text-color);
+    display: inline-block;
+    animation: bounce 0.8s infinite ease-in-out;
+}
+
+.loadingBar:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.loadingBar:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .loadingContainer {
+        gap: 2px;
+    }
+
+    .loadingBar {
+        width: 5px;
+        height: 20px;
+    }
+}
