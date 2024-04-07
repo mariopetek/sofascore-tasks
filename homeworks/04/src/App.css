@@ -1,12 +1,11 @@
-#root {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-}
-
 body {
     background-color: var(--body-bg-color);
     display: flex;
     min-height: 100vh;
+}
+
+#root {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
