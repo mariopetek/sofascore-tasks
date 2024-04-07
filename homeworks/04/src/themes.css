@@ -5,8 +5,8 @@
     --image-bg-color: #eeeeee;
     --details-bg-color: #ffffff;
     --text-color: #262626;
-    --shadow-color: rgba(0, 0, 0, 0.3);
     --liked-color: #e3350d;
+    --modal-bg-color: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,8 +16,8 @@
         --image-bg-color: #354159;
         --details-bg-color: #1f2735;
         --text-color: #acacac;
-        --shadow-color: rgba(255, 255, 255, 0.3);
         --liked-color: #4d638c;
+        --modal-bg-color: #1f2735;
     }
 }
 
@@ -27,8 +27,8 @@
     --image-bg-color: #eeeeee;
     --details-bg-color: #ffffff;
     --text-color: #262626;
-    --shadow-color: rgba(0, 0, 0, 0.3);
     --liked-color: #e3350c;
+    --modal-bg-color: #ffffff;
 }
 
 .dark {
@@ -37,6 +37,6 @@
     --image-bg-color: #354159;
     --details-bg-color: #1f2735;
     --text-color: #acacac;
-    --shadow-color: rgba(255, 255, 255, 0.3);
     --liked-color: #4d638c;
+    --modal-bg-color: #1f2735;
 }

@@ -1,37 +1,9 @@
-import { PiHeartStraightLight } from 'react-icons/pi'
-import { PiHeartStraightFill } from 'react-icons/pi'
-
-import { IconContext } from 'react-icons'
-
-import styles from './styles/PokemonImage.module.css'
 import { Pokemon } from '../model'
 import { useLikedPokemonContext } from '../hooks/useLikedPokemonContext'
 
-type ButtonProps = {
-    clickHandler: () => void
-}
-
-function LikedButton({ clickHandler }: ButtonProps) {
-    return (
-        <IconContext.Provider
-            value={{
-                className: styles.likedButton
-            }}>
-            <PiHeartStraightFill onClick={clickHandler} />
-        </IconContext.Provider>
-    )
-}
-
-function LikeButton({ clickHandler }: ButtonProps) {
-    return (
-        <IconContext.Provider
-            value={{
-                className: styles.likeButton
-            }}>
-            <PiHeartStraightLight onClick={clickHandler} />
-        </IconContext.Provider>
-    )
-}
+import styles from './styles/PokemonImage.module.css'
+import LikedButton from './LikedButton'
+import LikeButton from './LikeButton'
 
 type PokemonImageProps = {
     pokemonNumber: number
@@ -53,7 +25,10 @@ function PokemonImage({ pokemonNumber, pokemonInfo }: PokemonImageProps) {
             if (prevLikedPokemon.some(p => p.id === pokemonInfo.id)) {
                 return prevLikedPokemon.filter(p => p.id !== pokemonInfo.id)
             } else {
-                return [...prevLikedPokemon, pokemonInfo]
+                return [
+                    ...prevLikedPokemon,
+                    { ...pokemonInfo, number: pokemonNumber }
+                ]
             }
         })
     }
@@ -70,9 +45,19 @@ function PokemonImage({ pokemonNumber, pokemonInfo }: PokemonImageProps) {
                 isOdd ? styles.odd : styles.even
             }`}>
             {isLiked ? (
-                <LikedButton clickHandler={clickHandler} />
+                <LikedButton
+                    clickHandler={clickHandler}
+                    additionalClasses={`${
+                        isOdd ? styles.oddButton : styles.evenButton
+                    }`}
+                />
             ) : (
-                <LikeButton clickHandler={clickHandler} />
+                <LikeButton
+                    clickHandler={clickHandler}
+                    additionalClasses={`${
+                        isOdd ? styles.oddButton : styles.evenButton
+                    }`}
+                />
             )}
             <img
                 className={styles.pokemonImage}

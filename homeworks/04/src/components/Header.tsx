@@ -1,35 +1,19 @@
-import LikeButton from './LikeButton'
+import FavoritesButton from './FavoritesButton'
 import SettingsButton from './SettingsButton'
 import pokeball from '../assets/pokeball.svg'
-
-import styles from './styles/Header.module.css'
 import { useEffect, useRef, useState } from 'react'
 import SettingsMenu from './SettingsMenu'
 import LikedPokemonModal from './LikedPokemonModal'
+
+import styles from './styles/Header.module.css'
 
 function Header() {
     const [showSettingsMenu, setShowSettingsMenu] = useState(false)
     const settingsButtonRef = useRef<HTMLDivElement>(null)
     const settingsMenuRef = useRef<HTMLDivElement>(null)
 
-    const likedPokemonModalRef = useRef<HTMLDialogElement>(null)
-
-    const toggleLikedPokemonModal = () => {
-        if (!likedPokemonModalRef.current) {
-            return
-        }
-        likedPokemonModalRef.current.hasAttribute('open')
-            ? likedPokemonModalRef.current.close()
-            : likedPokemonModalRef.current.showModal()
-    }
-
-    const handlePokemonModalClick = (
-        event: React.MouseEvent<HTMLDialogElement, MouseEvent>
-    ) => {
-        if (event.currentTarget === event.target) {
-            toggleLikedPokemonModal()
-        }
-    }
+    const [showLikedPokemonModal, setShowLikedPokemonModal] = useState(false)
+    const likedPokemonModalRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const handleClickOutsideSettingsMenu = (event: MouseEvent) => {
@@ -44,14 +28,29 @@ function Header() {
             }
         }
 
+        const handleClickOutsidePokemonModal = (event: MouseEvent) => {
+            if (
+                showLikedPokemonModal &&
+                likedPokemonModalRef.current &&
+                !likedPokemonModalRef.current.contains(event.target as Node)
+            ) {
+                setShowLikedPokemonModal(false)
+            }
+        }
+
         window.addEventListener('mousedown', handleClickOutsideSettingsMenu)
+        window.addEventListener('mousedown', handleClickOutsidePokemonModal)
         return () => {
             window.removeEventListener(
                 'mousedown',
                 handleClickOutsideSettingsMenu
             )
+            window.removeEventListener(
+                'mousedown',
+                handleClickOutsidePokemonModal
+            )
         }
-    }, [showSettingsMenu])
+    }, [showSettingsMenu, showLikedPokemonModal])
 
     return (
         <header className={styles.header}>
@@ -64,20 +63,23 @@ function Header() {
                 <span className={styles.headingText}>POKEDEX</span>
             </div>
             <div className={styles.optionsContainer}>
-                <LikeButton clickHandler={() => toggleLikedPokemonModal()} />
+                <div className={styles.likeContainer}>
+                    <FavoritesButton
+                        clickHandler={() => setShowLikedPokemonModal(true)}
+                    />
+                    {showLikedPokemonModal && (
+                        <LikedPokemonModal ref={likedPokemonModalRef} />
+                    )}
+                </div>
                 <div
                     className={styles.settingsContainer}
                     ref={settingsButtonRef}>
                     <SettingsButton
                         clickHandler={() =>
-                            setShowSettingsMenu(!showSettingsMenu)
+                            setShowSettingsMenu(currentShow => !currentShow)
                         }
                     />
                     {showSettingsMenu && <SettingsMenu ref={settingsMenuRef} />}
-                    <LikedPokemonModal
-                        ref={likedPokemonModalRef}
-                        clickHandler={handlePokemonModalClick}
-                    />
                 </div>
             </div>
         </header>

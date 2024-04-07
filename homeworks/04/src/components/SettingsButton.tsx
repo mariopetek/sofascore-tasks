@@ -4,7 +4,7 @@ import { PiGearLight } from 'react-icons/pi'
 import styles from './styles/SettingsButton.module.css'
 
 type SettingsButtonProps = {
-    clickHandler: React.MouseEventHandler<SVGSVGElement>
+    clickHandler: React.MouseEventHandler<SVGElement>
 }
 
 function SettingsButton({ clickHandler }: SettingsButtonProps) {

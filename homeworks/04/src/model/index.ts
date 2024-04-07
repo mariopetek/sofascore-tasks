@@ -49,3 +49,5 @@ export type PokemonInfo = {
 }
 
 export type Pokemon = PokemonInfo & PokemonSpeciesInfo
+
+export type LikedPokemon = Pokemon & { number: number }

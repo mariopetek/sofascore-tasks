@@ -12,42 +12,30 @@
     justify-content: flex-end;
 }
 
-.pokemonImageContainer.odd > .likeButton,
-.pokemonImageContainer.odd > .likedButton {
-    right: 20px;
-}
-
 .pokemonImageContainer.even {
     order: 2;
     justify-content: flex-start;
-}
-
-.pokemonImageContainer.even > .likeButton,
-.pokemonImageContainer.even > .likedButton {
-    left: 20px;
-}
-
-.likeButton,
-.likedButton {
-    position: absolute;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    top: 20px;
-}
-
-.likeButton {
-    color: #ababab;
-}
-
-.likedButton {
-    color: var(--liked-color);
 }
 
 .pokemonImage {
     max-width: 400px;
     width: 100%;
     height: auto;
+}
+
+.oddButton,
+.evenButton {
+    position: absolute;
+}
+
+.oddButton {
+    top: 20px;
+    right: 20px;
+}
+
+.evenButton {
+    top: 20px;
+    left: 20px;
 }
 
 @media screen and (max-width: 900px) {
@@ -70,17 +58,15 @@
         height: auto;
     }
 
-    .likeButton,
-    .likedButton {
-        width: 25px;
-        height: 25px;
+    .oddButton {
         top: auto;
         bottom: 20px;
     }
 
-    .pokemonImageContainer.even > .likeButton,
-    .pokemonImageContainer.even > .likedButton {
+    .evenButton {
         left: auto;
         right: 20px;
+        top: auto;
+        bottom: 20px;
     }
 }

@@ -1,10 +1,10 @@
 import { PiCircleBold } from 'react-icons/pi'
 import { PiCircleFill } from 'react-icons/pi'
 import { IconContext } from 'react-icons'
-
-import styles from './styles/SettingsMenu.module.css'
 import { useThemeContext } from '../hooks/useThemeContext'
 import { forwardRef } from 'react'
+
+import styles from './styles/SettingsMenu.module.css'
 
 function SelectedOptionIcon() {
     return (

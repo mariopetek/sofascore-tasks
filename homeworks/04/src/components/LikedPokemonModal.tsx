@@ -1,22 +1,21 @@
-import { forwardRef, MouseEventHandler } from 'react'
+import { forwardRef } from 'react'
+import { useLikedPokemonContext } from '../hooks/useLikedPokemonContext'
+import LikedPokemonCard from './LikedPokemonCard'
 
-type LikedPokemonModalProps = {
-    clickHandler: MouseEventHandler<HTMLDialogElement>
-}
+import styles from './styles/LikedPokemonModal.module.css'
 
-const LikedPokemonModal = forwardRef<HTMLDialogElement, LikedPokemonModalProps>(
-    ({ clickHandler }, ref) => {
-        return (
-            <dialog ref={ref} onClick={clickHandler}>
-                <h2>Liked Pokemon</h2>
-                <ul>
-                    <li>Pikachu</li>
-                    <li>Bulbasaur</li>
-                    <li>Charmander</li>
-                </ul>
-            </dialog>
-        )
-    }
-)
+const LikedPokemonModal = forwardRef<HTMLDivElement>((_, ref) => {
+    const { likedPokemon } = useLikedPokemonContext()
+
+    return (
+        <div className={styles.pokemonModalContainer}>
+            <div ref={ref} className={styles.pokemonModal}>
+                {likedPokemon.map(pokemon => (
+                    <LikedPokemonCard key={pokemon.id} pokemonInfo={pokemon} />
+                ))}
+            </div>
+        </div>
+    )
+})
 
 export default LikedPokemonModal

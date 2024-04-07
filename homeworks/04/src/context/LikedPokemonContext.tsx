@@ -1,9 +1,9 @@
 import { createContext, PropsWithChildren, useState } from 'react'
-import { Pokemon } from '../model'
+import { LikedPokemon } from '../model'
 
 type LikedPokemonContextType = {
-    likedPokemon: Pokemon[]
-    setLikedPokemon: React.Dispatch<React.SetStateAction<Pokemon[]>>
+    likedPokemon: LikedPokemon[]
+    setLikedPokemon: React.Dispatch<React.SetStateAction<LikedPokemon[]>>
 }
 
 export const LikedPokemonContext =
@@ -12,7 +12,7 @@ export const LikedPokemonContext =
 export default function LikedPokemonContextProvider({
     children
 }: PropsWithChildren) {
-    const [likedPokemon, setLikedPokemon] = useState<Pokemon[]>([])
+    const [likedPokemon, setLikedPokemon] = useState<LikedPokemon[]>([])
 
     return (
         <LikedPokemonContext.Provider value={{ likedPokemon, setLikedPokemon }}>
