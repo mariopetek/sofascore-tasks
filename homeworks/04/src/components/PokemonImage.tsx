@@ -1,9 +1,9 @@
 import { Pokemon } from '../model'
 import { useLikedPokemonContext } from '../hooks/useLikedPokemonContext'
-
-import styles from './styles/PokemonImage.module.css'
 import LikedButton from './LikedButton'
 import LikeButton from './LikeButton'
+
+import styles from './styles/PokemonImage.module.css'
 
 type PokemonImageProps = {
     pokemonNumber: number

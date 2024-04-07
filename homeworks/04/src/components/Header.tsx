@@ -4,9 +4,9 @@ import pokeball from '../assets/pokeball.svg'
 import { useEffect, useRef, useState } from 'react'
 import SettingsMenu from './SettingsMenu'
 import LikedPokemonModal from './LikedPokemonModal'
+import { useLikedPokemonContext } from '../hooks/useLikedPokemonContext'
 
 import styles from './styles/Header.module.css'
-import { useLikedPokemonContext } from '../hooks/useLikedPokemonContext'
 
 function Header() {
     const [showSettingsMenu, setShowSettingsMenu] = useState(false)
@@ -33,7 +33,6 @@ function Header() {
         }
 
         window.addEventListener('mousedown', handleClickOutsideSettingsMenu)
-
         return () => {
             window.removeEventListener(
                 'mousedown',
@@ -107,7 +106,6 @@ function Header() {
                     <SettingsButton
                         clickHandler={() => handleSettingsButtonClick()}
                     />
-
                     {showSettingsMenu && <SettingsMenu ref={settingsMenuRef} />}
                 </div>
             </div>

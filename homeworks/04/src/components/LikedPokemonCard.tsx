@@ -3,9 +3,9 @@ import { capitalizeText } from '../utils'
 import LikedButton from './LikedButton'
 import LikeButton from './LikeButton'
 import { LikedPokemon } from '../model'
+import { useLikedPokemonContext } from '../hooks/useLikedPokemonContext'
 
 import styles from './styles/LikedPokemonCard.module.css'
-import { useLikedPokemonContext } from '../hooks/useLikedPokemonContext'
 
 type LikedPokemonCardProps = {
     pokemonInfo: LikedPokemon

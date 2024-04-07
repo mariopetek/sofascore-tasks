@@ -4,7 +4,7 @@ import { PiHeartStraightFill } from 'react-icons/pi'
 import styles from './styles/HeartButton.module.css'
 
 type LikedButtonProps = {
-    clickHandler: () => void
+    clickHandler: React.MouseEventHandler<SVGElement>
     additionalClasses: string
 }
 

@@ -4,7 +4,7 @@ import { PiHeartStraightLight } from 'react-icons/pi'
 import styles from './styles/HeartButton.module.css'
 
 type LikeButtonProps = {
-    clickHandler: () => void
+    clickHandler: React.MouseEventHandler<SVGElement>
     additionalClasses: string
 }
 
