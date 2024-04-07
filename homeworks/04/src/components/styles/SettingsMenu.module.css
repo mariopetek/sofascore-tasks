@@ -7,7 +7,7 @@
     background-color: var(--bg-color);
     color: var(--text-color);
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow-color) 0px 0px 10px 0px;
+    box-shadow: #00000040 0px 0px 16px 0px;
     display: flex;
     flex-direction: column;
     gap: 5px;
