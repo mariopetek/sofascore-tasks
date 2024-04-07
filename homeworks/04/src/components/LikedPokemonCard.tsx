@@ -5,6 +5,7 @@ import LikeButton from './LikeButton'
 import { LikedPokemon } from '../model'
 
 import styles from './styles/LikedPokemonCard.module.css'
+import { useLikedPokemonContext } from '../hooks/useLikedPokemonContext'
 
 type LikedPokemonCardProps = {
     pokemonInfo: LikedPokemon
@@ -24,6 +25,23 @@ function LikedPokemonCard({ pokemonInfo }: LikedPokemonCardProps) {
 
     const [isPokemonLiked, setIsPokemonLiked] = useState(true)
 
+    const { setPendingPokemon } = useLikedPokemonContext()
+
+    const handleLikeClick = () => {
+        setIsPokemonLiked(true)
+        setPendingPokemon(prevPendingPokemon =>
+            prevPendingPokemon.filter(p => p.id !== pokemonInfo.id)
+        )
+    }
+
+    const handleLikedClick = () => {
+        setIsPokemonLiked(false)
+        setPendingPokemon(prevPendingPokemon => [
+            ...prevPendingPokemon,
+            pokemonInfo
+        ])
+    }
+
     return (
         <div className={styles.pokemonImageContainer}>
             <img
@@ -35,12 +53,12 @@ function LikedPokemonCard({ pokemonInfo }: LikedPokemonCardProps) {
                 <h2 className={styles.pokemonHeading}>{pokemonHeading}</h2>
                 {isPokemonLiked ? (
                     <LikedButton
-                        clickHandler={() => setIsPokemonLiked(false)}
+                        clickHandler={() => handleLikedClick()}
                         additionalClasses={styles.heartButton}
                     />
                 ) : (
                     <LikeButton
-                        clickHandler={() => setIsPokemonLiked(true)}
+                        clickHandler={() => handleLikeClick()}
                         additionalClasses={styles.heartButton}
                     />
                 )}

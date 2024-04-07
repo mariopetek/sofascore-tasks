@@ -6,6 +6,7 @@ import SettingsMenu from './SettingsMenu'
 import LikedPokemonModal from './LikedPokemonModal'
 
 import styles from './styles/Header.module.css'
+import { useLikedPokemonContext } from '../hooks/useLikedPokemonContext'
 
 function Header() {
     const [showSettingsMenu, setShowSettingsMenu] = useState(false)
@@ -14,6 +15,9 @@ function Header() {
 
     const [showLikedPokemonModal, setShowLikedPokemonModal] = useState(false)
     const likedPokemonModalRef = useRef<HTMLDivElement>(null)
+
+    const { setLikedPokemon, pendingPokemon, setPendingPokemon } =
+        useLikedPokemonContext()
 
     useEffect(() => {
         const handleClickOutsideSettingsMenu = (event: MouseEvent) => {
@@ -28,6 +32,17 @@ function Header() {
             }
         }
 
+        window.addEventListener('mousedown', handleClickOutsideSettingsMenu)
+
+        return () => {
+            window.removeEventListener(
+                'mousedown',
+                handleClickOutsideSettingsMenu
+            )
+        }
+    }, [showSettingsMenu])
+
+    useEffect(() => {
         const handleClickOutsidePokemonModal = (event: MouseEvent) => {
             if (
                 showLikedPokemonModal &&
@@ -35,22 +50,27 @@ function Header() {
                 !likedPokemonModalRef.current.contains(event.target as Node)
             ) {
                 setShowLikedPokemonModal(false)
+
+                setLikedPokemon(prevLikedPokemon =>
+                    prevLikedPokemon.filter(p => !pendingPokemon.includes(p))
+                )
+                setPendingPokemon([])
             }
         }
 
-        window.addEventListener('mousedown', handleClickOutsideSettingsMenu)
         window.addEventListener('mousedown', handleClickOutsidePokemonModal)
         return () => {
-            window.removeEventListener(
-                'mousedown',
-                handleClickOutsideSettingsMenu
-            )
             window.removeEventListener(
                 'mousedown',
                 handleClickOutsidePokemonModal
             )
         }
-    }, [showSettingsMenu, showLikedPokemonModal])
+    }, [
+        showLikedPokemonModal,
+        pendingPokemon,
+        setLikedPokemon,
+        setPendingPokemon
+    ])
 
     return (
         <header className={styles.header}>
