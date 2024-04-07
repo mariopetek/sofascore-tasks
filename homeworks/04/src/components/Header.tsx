@@ -49,7 +49,7 @@ function Header() {
                 likedPokemonModalRef.current &&
                 !likedPokemonModalRef.current.contains(event.target as Node)
             ) {
-                document.body.style.overflow = ''
+                document.body.style.overflow = 'visible'
                 setShowLikedPokemonModal(false)
 
                 setLikedPokemon(prevLikedPokemon =>
@@ -78,6 +78,10 @@ function Header() {
         setShowLikedPokemonModal(true)
     }
 
+    const handleSettingsButtonClick = () => {
+        setShowSettingsMenu(prevShowSettingsMenu => !prevShowSettingsMenu)
+    }
+
     return (
         <header className={styles.header}>
             <div className={styles.mainHeading}>
@@ -101,10 +105,9 @@ function Header() {
                     className={styles.settingsContainer}
                     ref={settingsButtonRef}>
                     <SettingsButton
-                        clickHandler={() =>
-                            setShowSettingsMenu(currentShow => !currentShow)
-                        }
+                        clickHandler={() => handleSettingsButtonClick()}
                     />
+
                     {showSettingsMenu && <SettingsMenu ref={settingsMenuRef} />}
                 </div>
             </div>

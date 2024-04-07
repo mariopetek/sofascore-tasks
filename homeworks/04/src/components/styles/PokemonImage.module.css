@@ -21,6 +21,37 @@
     max-width: 400px;
     width: 100%;
     height: auto;
+    opacity: 0;
+}
+
+.pokemonImageContainer.odd .pokemonImage {
+    animation: slide-right 0.5s forwards;
+}
+
+.pokemonImageContainer.even .pokemonImage {
+    animation: slide-left 0.5s forwards;
+}
+
+@keyframes slide-left {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-right {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .oddButton,
