@@ -49,6 +49,7 @@ function Header() {
                 likedPokemonModalRef.current &&
                 !likedPokemonModalRef.current.contains(event.target as Node)
             ) {
+                document.body.style.overflow = ''
                 setShowLikedPokemonModal(false)
 
                 setLikedPokemon(prevLikedPokemon =>
@@ -72,6 +73,11 @@ function Header() {
         setPendingPokemon
     ])
 
+    const handleFavoritesButtonClick = () => {
+        document.body.style.overflow = 'hidden'
+        setShowLikedPokemonModal(true)
+    }
+
     return (
         <header className={styles.header}>
             <div className={styles.mainHeading}>
@@ -85,7 +91,7 @@ function Header() {
             <div className={styles.optionsContainer}>
                 <div className={styles.likeContainer}>
                     <FavoritesButton
-                        clickHandler={() => setShowLikedPokemonModal(true)}
+                        clickHandler={() => handleFavoritesButtonClick()}
                     />
                     {showLikedPokemonModal && (
                         <LikedPokemonModal ref={likedPokemonModalRef} />
