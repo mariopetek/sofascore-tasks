@@ -58,7 +58,7 @@ module.exports = {
      * @param {Object} obj
      */
     deepCopy(obj) {
-        return JSON.parse(JSON.stringify(obj)) // Deep copy: A copy of the object and all its nested objects
+        return structuredClone(obj) // Deep copy: A copy of the object and all its nested objects
     },
 
     /**
@@ -80,7 +80,7 @@ module.exports = {
      * Returns correct sum of a and b.
      */
     safeSum(a, b) {
-        return +a + +b // Unary plus operator converts its operand to a number (same can be achieved using Number() function)
+        return Number(a) + Number(b) // Unary plus operator also converts its operand to a number
     },
 
     /**
@@ -202,7 +202,7 @@ module.exports = {
                         consumer(j)
                     }
                 })(),
-                1000
+                1000 * i
             )
         }
     }
