@@ -146,9 +146,7 @@ function showQuestion(questionData) {
         answerButton.removeEventListener('click', handleAnswerClick)
         answerButton.disabled = true
 
-        document
-            .querySelectorAll('.joker-button')
-            .forEach(jokerButton => (jokerButton.disabled = true))
+        disableJokers()
 
         const options = document.querySelectorAll('input[name="answer"]')
         options.forEach(option => {
@@ -294,7 +292,7 @@ function showQuestion(questionData) {
             joker100Button.classList.add('joker-button', 'joker-button-100')
             joker100Button.innerText = '100%'
             joker100Button.title = 'Joker 100%'
-            joker100Button.addEventListener('click', use100Joker)
+            joker100Button.addEventListener('click', play100Joker)
 
             jokersContainer.appendChild(joker100Button)
         }
@@ -306,7 +304,7 @@ function showQuestion(questionData) {
             joker5050Button.classList.add('joker-button', 'joker-button-5050')
             joker5050Button.innerText = '50:50'
             joker5050Button.title = 'Joker 50:50'
-            joker5050Button.addEventListener('click', use5050Joker)
+            joker5050Button.addEventListener('click', play5050Joker)
 
             jokersContainer.appendChild(joker5050Button)
         }
@@ -315,7 +313,7 @@ function showQuestion(questionData) {
     function removeJokers() {
         document
             .querySelectorAll('.joker-button')
-            ?.forEach(jokerButton => jokerButton.remove())
+            .forEach(jokerButton => jokerButton.remove())
     }
 
     function reRenderJokers() {
@@ -324,7 +322,13 @@ function showQuestion(questionData) {
         show5050Jokers()
     }
 
-    function use100Joker() {
+    function disableJokers() {
+        document
+            .querySelectorAll('.joker-button')
+            .forEach(jokerButton => (jokerButton.disabled = true))
+    }
+
+    function play100Joker() {
         const answerInputs = document.querySelectorAll('input[name="answer"]')
         answerInputs.forEach(answerInput => {
             if (answerInput.value !== questionData.correctAnswer) {
@@ -345,13 +349,14 @@ function showQuestion(questionData) {
 
         numOf100Jokers--
         checkJokers()
+        disableJokers()
     }
 
     let randomIndex
     do {
         randomIndex = Math.floor(Math.random() * 4)
     } while (randomIndex === correctIndex)
-    function use5050Joker() {
+    function play5050Joker() {
         const answerInputs = document.querySelectorAll('input[name="answer"]')
 
         answerInputs.forEach((answerInput, index) => {
@@ -376,6 +381,7 @@ function showQuestion(questionData) {
 
         numOf5050Jokers--
         checkJokers()
+        disableJokers()
     }
 
     function checkJokers() {
