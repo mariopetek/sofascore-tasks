@@ -1,0 +1,23 @@
+.start-container {
+    max-width: var(--content-width);
+    width: 100%;
+    background-color: var(--neutral-color-2);
+    border: 1px solid var(--neutral-color-3);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.info-heading {
+    line-height: 1.2;
+}
+
+.info-paragraph {
+    font-size: 18px;
+    line-height: 1.2;
+    margin: 12px 0;
+}

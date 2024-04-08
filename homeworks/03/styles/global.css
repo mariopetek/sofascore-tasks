@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Martel Sans', sans-serif;
+}
+
+:root {
+    --main-color: #3b82f6;
+    --neutral-color-1: #f1f5f9;
+    --neutral-color-2: #e2e8f0;
+    --neutral-color-3: #cbd5e1;
+    --text-color: #0f172a;
+    --error-color: #b91c1c;
+    --correct-color-1: #86efac;
+    --correct-color-2: #4ade80;
+    --wrong-color-1: #fca5a5;
+    --wrong-color-2: #f87171;
+
+    --content-width: 860px;
+    --border-radius: 8px;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --neutral-color-1: #0f172a;
+        --neutral-color-2: #172030;
+        --neutral-color-3: #334155;
+        --text-color: #f1f5f9;
+        --error-color: #ef4444;
+        --correct-color-1: #166534;
+        --correct-color-2: #22c55e;
+        --wrong-color-1: #991b1b;
+        --wrong-color-2: #ef4444;
+    }
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px 18px;
+    background-color: var(--neutral-color-1);
+    color: var(--text-color);
+}
+
+.main-button {
+    color: #f1f5f9;
+    background-color: var(--main-color);
+    border: 1px solid var(--main-color);
+    border-radius: var(--border-radius);
+    padding: 4px 18px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.main-button:hover {
+    filter: brightness(1.2);
+}
+.main-button:disabled {
+    filter: brightness(1.5);
+    cursor: not-allowed;
+}
+@media (prefers-color-scheme: dark) {
+    .main-button:disabled {
+        filter: brightness(0.5);
+    }
+}
+
+.error-message {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--error-color);
+}
+
+.loading-indicator {
+    --loading-border: 4px;
+    border: var(--loading-border) solid var(--neutral-color-1);
+    border-top: var(--loading-border) solid var(--text-color);
+    border-left: var(--loading-border) solid var(--text-color);
+    border-bottom: var(--loading-border) solid var(--text-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

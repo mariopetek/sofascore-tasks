@@ -1,0 +1,187 @@
+.high-score-text {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    max-width: var(--content-width);
+    width: 100%;
+}
+.high-score-text > span {
+    color: var(--main-color);
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.question-container {
+    max-width: var(--content-width);
+    width: 100%;
+    background-color: var(--neutral-color-2);
+    border: 1px solid var(--neutral-color-3);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.question-content > h2 {
+    line-height: 1.2;
+}
+.question-content > p {
+    font-size: 18px;
+    line-height: 1.2;
+    margin: 12px 0;
+}
+
+.answers-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+@media screen and (max-width: 768px) {
+    .answers-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (max-width: 480px) {
+    .answers-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.answer-card {
+    display: flex;
+}
+.answer-card > input[name='answer'] {
+    display: none;
+}
+.answer-card > label {
+    background-color: var(--neutral-color-3);
+    border: 1px solid var(--neutral-color-3);
+    border-radius: var(--border-radius);
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+    flex: 1;
+    line-height: 1.2;
+}
+.answer-card > label:hover {
+    filter: brightness(0.95);
+}
+.answer-card > input[name='answer']:checked + label {
+    outline: 2px solid var(--main-color);
+    filter: brightness(0.95);
+}
+@media (prefers-color-scheme: dark) {
+    .answer-card > label:hover {
+        filter: brightness(1.15);
+    }
+    .answer-card > input[name='answer']:checked + label {
+        filter: brightness(1.15);
+    }
+}
+.answer-card > input[name='answer']:disabled + label {
+    outline: none;
+    filter: brightness(1);
+    cursor: not-allowed;
+}
+.answer-card > label.correct-answer {
+    background-color: var(--correct-color-1);
+    border-color: var(--correct-color-2);
+}
+.answer-card > label.wrong-answer {
+    background-color: var(--wrong-color-1);
+    border-color: var(--wrong-color-2);
+}
+.answer-card > label.wrong-answer-correct {
+    outline: 2px solid var(--correct-color-2) !important;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.next-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: all 0.2s ease;
+    color: var(--text-color);
+    font-size: 16px;
+    text-decoration: underline;
+    font-weight: 700;
+    line-height: 1.2;
+}
+.next-button:hover {
+    color: var(--main-color);
+}
+
+.jokers-container {
+    max-width: var(--content-width);
+    width: 100%;
+    margin-top: 18px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.joker-button {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 8px 12px;
+    color: var(--text-color);
+    background-color: #f5d0fe;
+    border: 1px solid #e879f9;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.joker-button:hover {
+    filter: brightness(0.95);
+}
+.joker-button:disabled {
+    filter: brightness(1.2);
+    cursor: not-allowed;
+}
+@media (prefers-color-scheme: dark) {
+    .joker-button {
+        background-color: #86198f;
+        border: 1px solid #c026d3;
+    }
+    .joker-button:hover {
+        filter: brightness(1.15);
+    }
+    .joker-button:disabled {
+        filter: brightness(0.5);
+    }
+}
+
+.answer-response-container {
+    max-width: var(--content-width);
+    width: 100%;
+    margin-top: 18px;
+}
+
+.correct-answer-message,
+.wrong-answer-message {
+    padding: 12px;
+    width: fit-content;
+    border-radius: var(--border-radius);
+    line-height: 1.2;
+}
+.correct-answer-message {
+    border: 1px solid var(--correct-color-2);
+    background-color: var(--correct-color-1);
+}
+.wrong-answer-message {
+    border: 1px solid var(--wrong-color-2);
+    background-color: var(--wrong-color-1);
+    margin-bottom: 18px;
+}
