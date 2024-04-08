@@ -147,7 +147,19 @@
 }
 
 .bug {
-    background-color: #f54040;
+    background-color: #a8b820;
+}
+
+.rock {
+    background-color: #6d6868;
+}
+
+.dragon {
+    background-color: #7038f8;
+}
+
+.dark {
+    background-color: #705848;
 }
 
 @media screen and (max-width: 900px) {
