@@ -94,7 +94,7 @@ function PokemonDetails({ pokemonNumber, pokemonInfo }: PokemonDetailsProps) {
                     <img
                         className={styles.pokemonImage}
                         src={backImageUrl}
-                        alt="Pokemon back biew"
+                        alt="Pokemon back view"
                     />
                 </div>
             </div>
