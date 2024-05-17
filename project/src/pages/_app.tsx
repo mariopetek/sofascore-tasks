@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import { ThemeContextProvider } from '@/context/ThemeContext'
 import type { AppProps } from 'next/app'
 import { SWRConfig } from 'swr'
+import AppLayout from '@/modules/AppLayout'
 import { Roboto } from 'next/font/google'
 
 const roboto = Roboto({
@@ -24,12 +25,14 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <SWRConfig value={{ fetcher }}>
       <ThemeContextProvider>
-        <style jsx global>{`
-          html {
-            font-family: ${roboto.style.fontFamily};
-          }
-        `}</style>
-        <Component {...pageProps} />
+        <AppLayout>
+          <style jsx global>{`
+            html {
+              font-family: ${roboto.style.fontFamily};
+            }
+          `}</style>
+          <Component {...pageProps} />
+        </AppLayout>
       </ThemeContextProvider>
     </SWRConfig>
   )
