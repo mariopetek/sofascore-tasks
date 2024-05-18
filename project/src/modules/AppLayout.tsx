@@ -1,10 +1,15 @@
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 import { Box } from '@kuma-ui/core'
+import Header from './Header'
+import Footer from './Footer'
 
 export default function AppLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <Box as="main">{children}</Box>
+      <Header />
+      <Box as="main" flex="1">
+        {children}
+      </Box>
     </>
   )
 }
