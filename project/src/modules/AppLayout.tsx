@@ -10,6 +10,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
       <Box as="main" flex="1">
         {children}
       </Box>
+      <Footer />
     </>
   )
 }
