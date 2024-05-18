@@ -27,11 +27,11 @@ export default function Header() {
       <Box height="64px" display="flex" justifyContent="center" alignItems="center">
         <Link href="/">
           <Box
-            maskSize="132px 29px"
+            maskSize="132px 20px"
             maskImage="url(/graphics/sofascore_lockup.svg)"
             backgroundColor="colors.surface.s1"
-            height="29px"
             width="132px"
+            height="20px"
           ></Box>
         </Link>
       </Box>
@@ -48,11 +48,11 @@ export default function Header() {
               position="relative"
             >
               <Box
-                maskSize="cover"
+                maskSize="16px 16px"
                 maskImage={`url(${SPORTS_ICONS_URLS[sport.slug]})`}
                 backgroundColor="colors.surface.s1"
-                height="16px"
                 width="16px"
+                height="16px"
               ></Box>
               <Box color="colors.surface.s1" fontSize="fontSizes.sm">
                 {sport.name}
