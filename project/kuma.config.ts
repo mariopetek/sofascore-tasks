@@ -54,6 +54,9 @@ const theme = createTheme({
     lg: '20px',
     xl: '24px',
   },
+  radii: {
+    lg: '16px',
+  },
 })
 
 type UserTheme = typeof theme
