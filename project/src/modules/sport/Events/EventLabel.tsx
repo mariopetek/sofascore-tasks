@@ -64,6 +64,7 @@ export default function EventLabel({ event }: EventLabelProps) {
                 : 'colors.onSurface.lv2'
               : 'colors.onSurface.lv1'
           }
+          textAlign="right"
         >
           {homeTeamScore}
         </Box>
@@ -75,6 +76,7 @@ export default function EventLabel({ event }: EventLabelProps) {
                 : 'colors.onSurface.lv2'
               : 'colors.onSurface.lv1'
           }
+          textAlign="right"
         >
           {awayTeamScore}
         </Box>
