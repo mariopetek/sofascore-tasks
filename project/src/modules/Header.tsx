@@ -22,7 +22,7 @@ export default function Header() {
   if (!sports) return <Box>Loading...</Box>
 
   return (
-    <Box as="header" position="sticky" top={0} backgroundColor="colors.primary.default">
+    <Box as="header" position="sticky" top={0} backgroundColor="colors.primary.default" zIndex={1}>
       <Button onClick={() => setIsDark(v => !v)}>Theme</Button>
       <Box height="64px" display="flex" justifyContent="center" alignItems="center">
         <Link href="/">
