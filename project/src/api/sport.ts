@@ -1,8 +1,11 @@
+import { Event } from '@/model/event'
 import { Sport } from '@/model/sport'
 import { Tournament } from '@/model/tournament'
+import { formatDate } from '@/utils/date'
 import useSWR from 'swr'
 
 const SPORTS_URL = '/api/sports'
+const SPORT_URL = '/api/sport'
 
 export function getSports() {
   const { data, error } = useSWR<Sport[]>(SPORTS_URL)
@@ -18,4 +21,14 @@ export async function getSportTournaments(sportSlug: Sport['slug']) {
   const tournaments = (await response.json()) as Tournament[]
 
   return tournaments
+}
+
+export function getSportEventsByDate(sportSlug: Sport['slug'], date: Date) {
+  const formattedDate = formatDate(date)
+  const { data, error } = useSWR<Event[]>(`${SPORT_URL}/${sportSlug}/events/${formattedDate}`)
+
+  return {
+    sportEvents: data,
+    sportEventsError: error,
+  }
 }

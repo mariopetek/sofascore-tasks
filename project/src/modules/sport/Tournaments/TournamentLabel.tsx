@@ -1,7 +1,7 @@
 import { TournamentWithLogo } from '@/model/tournament'
 import { Box, Image } from '@kuma-ui/core'
 
-type TournamentLabelProps = {
+interface TournamentLabelProps {
   tournament: TournamentWithLogo
 }
 

@@ -64,7 +64,8 @@ export default function Header() {
                   backgroundColor="colors.surface.s1"
                   position="absolute"
                   bottom="0"
-                  borderRadius="2px 2px 0 0"
+                  borderTopLeftRadius="radii.xs"
+                  borderTopRightRadius="radii.xs"
                 />
               )}
             </Box>

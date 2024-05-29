@@ -1,9 +1,5 @@
+import { Country } from './country'
 import { Sport } from './sport'
-
-interface Country {
-  id: number
-  name: string
-}
 
 export interface Tournament {
   id: number

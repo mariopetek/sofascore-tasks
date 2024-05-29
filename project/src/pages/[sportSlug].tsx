@@ -8,9 +8,10 @@ import Head from 'next/head'
 interface SportPageProps {
   tournamentsWithLogo: TournamentWithLogo[]
   sportName: string
+  sportSlug: string
 }
 
-export default function SportPage({ tournamentsWithLogo, sportName }: SportPageProps) {
+export default function SportPage({ tournamentsWithLogo, sportName, sportSlug }: SportPageProps) {
   return (
     <>
       <Head>
@@ -18,7 +19,7 @@ export default function SportPage({ tournamentsWithLogo, sportName }: SportPageP
       </Head>
       <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
         <TournamentsPanel tournaments={tournamentsWithLogo} />
-        <EventsPanel />
+        <EventsPanel sportSlug={sportSlug} />
       </Box>
     </>
   )
@@ -40,6 +41,7 @@ export async function getServerSideProps(context: { params: { sportSlug: string 
     props: {
       tournamentsWithLogo,
       sportName,
+      sportSlug,
     },
   }
 }
