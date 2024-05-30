@@ -11,3 +11,12 @@ export function getEventDetails(eventId: Event['id']) {
     eventLoading: isLoading,
   }
 }
+
+export function getEventIncidents(eventId: Event['id']) {
+  const { data, error, isLoading } = useSWR(`${EVENT_URL}/${eventId}/incidents`)
+  return {
+    incidents: data,
+    incidentsError: error,
+    incidentsLoading: isLoading,
+  }
+}

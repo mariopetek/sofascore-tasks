@@ -5,9 +5,10 @@ import { getSportEventsByDate } from '@/api/sport'
 import EventsContainer from './EventsContainer'
 import Loader from '@/components/Loader'
 import ErrorMessage from '@/components/ErrorMessage'
+import { Sport } from '@/model/sport'
 
 interface EventsPanelProps {
-  sportSlug: string
+  sportSlug: Sport['slug']
 }
 
 export default function EventsPanel({ sportSlug }: EventsPanelProps) {
@@ -25,6 +26,7 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
       minHeight="448px"
       display="flex"
       flexDirection="column"
+      paddingBottom="spacings.lg"
     >
       <Box
         height="48px"
@@ -126,8 +128,14 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
           <Loader />
         </Box>
       ) : sportEvents ? (
-        <Box paddingY="spacings.xl">
-          <Box display="flex" justifyContent="space-between" paddingX="spacings.lg">
+        <Box>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            paddingX="spacings.lg"
+            paddingTop="spacings.xl"
+            paddingBottom="spacings.sm"
+          >
             <Box fontSize="fontSizes.xs" fontWeight="fontWeights.bold" color="colors.onSurface.lv1">
               {new Date(selectedDate).toDateString() === new Date().toDateString()
                 ? 'Today'

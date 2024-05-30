@@ -1,9 +1,9 @@
-import { Tournament, TournamentWithLogo } from '@/model/tournament'
+import { Tournament } from '@/model/tournament'
 import { Box, Heading } from '@kuma-ui/core'
 import TournamentLabel from './TournamentLabel'
 
 interface TournamentsPanelProps {
-  tournaments: TournamentWithLogo[]
+  tournaments: Tournament[]
 }
 
 export default function TournamentsPanel({ tournaments }: TournamentsPanelProps) {

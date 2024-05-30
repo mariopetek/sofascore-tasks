@@ -8,7 +8,3 @@ export interface Tournament {
   sport: Sport
   country: Country
 }
-
-export interface TournamentWithLogo extends Tournament {
-  logo: string
-}

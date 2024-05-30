@@ -1,8 +1,8 @@
-import { TournamentWithLogo } from '@/model/tournament'
+import { Tournament } from '@/model/tournament'
 import { Box, Image } from '@kuma-ui/core'
 
 interface TournamentLabelProps {
-  tournament: TournamentWithLogo
+  tournament: Tournament
 }
 
 export default function TournamentLabel({ tournament }: TournamentLabelProps) {
@@ -15,7 +15,12 @@ export default function TournamentLabel({ tournament }: TournamentLabelProps) {
       gap="16px"
       paddingTop="spacings.sm"
     >
-      <Image src={tournament.logo} alt={tournament.name} width={40} height={40} />
+      <Image
+        src={`https://academy-backend.sofascore.dev/tournament/${tournament.id}/image`}
+        alt={tournament.name}
+        width={40}
+        height={40}
+      />
       <Box as="span" color="colors.onSurface.lv1" fontSize="fontSizes.sm" fontWeight="fontWeights.bold">
         {tournament.name}
       </Box>

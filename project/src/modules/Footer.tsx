@@ -1,4 +1,4 @@
-import { Box, Image } from '@kuma-ui/core'
+import { Box } from '@kuma-ui/core'
 
 export default function Footer() {
   return (

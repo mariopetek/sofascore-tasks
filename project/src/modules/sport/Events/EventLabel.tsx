@@ -1,7 +1,7 @@
 import { useEventDetailsContext } from '@/context/EventDetailsContext'
 import { Event } from '@/model/event'
 import { formatDateWithDayMonthAndYear } from '@/utils/date'
-import { Box } from '@kuma-ui/core'
+import { Box, Image } from '@kuma-ui/core'
 
 interface EventLabelProps {
   event: Event
@@ -12,6 +12,9 @@ export default function EventLabel({ event }: EventLabelProps) {
 
   const startTime = new Date(event.startDate).toLocaleTimeString('hr-HR', { hour: '2-digit', minute: '2-digit' })
   const startDate = new Date(event.startDate)
+
+  const homeTeamLogo = `https://academy-backend.sofascore.dev/team/${event.homeTeam.id}/image`
+  const awayTeamLogo = `https://academy-backend.sofascore.dev/team/${event.awayTeam.id}/image`
 
   const homeTeamName = event.homeTeam.name
   const awayTeamName = event.awayTeam.name
@@ -31,7 +34,8 @@ export default function EventLabel({ event }: EventLabelProps) {
       display="flex"
       alignItems="center"
       justifyContent="space-between"
-      paddingY="10px"
+      paddingY="spacings.sm"
+      paddingX="spacings.lg"
       cursor="pointer"
       onClick={handleEventClick}
     >
@@ -53,30 +57,38 @@ export default function EventLabel({ event }: EventLabelProps) {
           </Box>
         </Box>
         <Box width="1px" bg="colors.onSurface.lv4"></Box>
-        <Box>
-          <Box
-            fontSize="fontSizes.sm"
-            color={
-              homeTeamScore !== undefined && awayTeamScore !== undefined
-                ? homeTeamScore > awayTeamScore
-                  ? 'colors.onSurface.lv1'
-                  : 'colors.onSurface.lv2'
-                : 'colors.onSurface.lv1'
-            }
-          >
-            {homeTeamName}
+        <Box display="flex" flexDirection="column" gap="4px">
+          <Box display="flex" alignItems="center" gap="spacings.sm">
+            <Image src={homeTeamLogo} alt={homeTeamName} width={16} height={16} />
+            <Box
+              as="span"
+              fontSize="fontSizes.sm"
+              color={
+                homeTeamScore !== undefined && awayTeamScore !== undefined
+                  ? homeTeamScore > awayTeamScore
+                    ? 'colors.onSurface.lv1'
+                    : 'colors.onSurface.lv2'
+                  : 'colors.onSurface.lv1'
+              }
+            >
+              {homeTeamName}
+            </Box>
           </Box>
-          <Box
-            fontSize="fontSizes.sm"
-            color={
-              awayTeamScore !== undefined && homeTeamScore !== undefined
-                ? awayTeamScore > homeTeamScore
-                  ? 'colors.onSurface.lv1'
-                  : 'colors.onSurface.lv2'
-                : 'colors.onSurface.lv1'
-            }
-          >
-            {awayTeamName}
+          <Box display="flex" alignItems="center" gap="spacings.sm">
+            <Image src={awayTeamLogo} alt={awayTeamName} width={16} height={16} />
+            <Box
+              as="span"
+              fontSize="fontSizes.sm"
+              color={
+                awayTeamScore !== undefined && homeTeamScore !== undefined
+                  ? awayTeamScore > homeTeamScore
+                    ? 'colors.onSurface.lv1'
+                    : 'colors.onSurface.lv2'
+                  : 'colors.onSurface.lv1'
+              }
+            >
+              {awayTeamName}
+            </Box>
           </Box>
         </Box>
       </Box>
