@@ -1,6 +1,6 @@
 import { Box, Button } from '@kuma-ui/core'
 import { useState } from 'react'
-import { formatDate, formatDateWithNoSpaces, getDatesAroundToday } from '@/utils/date'
+import { formatDateWithDashes, formatDateWithDayAndMonth, getDatesAroundToday } from '@/utils/date'
 import { getSportEventsByDate } from '@/api/sport'
 import EventsContainer from './EventsContainer'
 import Loader from '@/components/Loader'
@@ -11,7 +11,7 @@ interface EventsPanelProps {
 }
 
 export default function EventsPanel({ sportSlug }: EventsPanelProps) {
-  const [selectedDate, setSelectedDate] = useState(formatDate(new Date()))
+  const [selectedDate, setSelectedDate] = useState(formatDateWithDashes(new Date()))
   const datesAroundToday = getDatesAroundToday(3)
 
   const { sportEvents, sportEventsError, sportEventsLoading } = getSportEventsByDate(sportSlug, new Date(selectedDate))
@@ -78,7 +78,7 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
                   : new Date(date).toLocaleString('en-US', { weekday: 'short' }).toUpperCase()}
               </Box>
               <Box as="span" fontSize="fontSizes.xs">
-                {formatDateWithNoSpaces(new Date(date))}
+                {formatDateWithDayAndMonth(new Date(date))}
               </Box>
             </Box>
             {selectedDate === date && (

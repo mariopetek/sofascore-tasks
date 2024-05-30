@@ -1,4 +1,5 @@
 import { Event } from '@/model/event'
+import { formatDateWithDayMonthAndYear } from '@/utils/date'
 import { Box } from '@kuma-ui/core'
 
 interface EventLabelProps {
@@ -7,6 +8,7 @@ interface EventLabelProps {
 
 export default function EventLabel({ event }: EventLabelProps) {
   const startTime = new Date(event.startDate).toLocaleTimeString('hr-HR', { hour: '2-digit', minute: '2-digit' })
+  const startDate = new Date(event.startDate)
 
   const homeTeamName = event.homeTeam.name
   const awayTeamName = event.awayTeam.name
@@ -21,10 +23,18 @@ export default function EventLabel({ event }: EventLabelProps) {
       <Box display="flex" gap="spacings.lg">
         <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
           <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs">
-            {startTime}
+            {startDate.toDateString() !== new Date().toDateString() && eventStatus === 'notstarted'
+              ? formatDateWithDayMonthAndYear(startDate)
+              : startTime}
           </Box>
           <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs">
-            {eventStatus === 'finished' ? 'FT' : eventStatus === 'notstarted' ? '-' : 'Live'}
+            {eventStatus === 'finished'
+              ? 'FT'
+              : startDate.toDateString() !== new Date().toDateString() && eventStatus === 'notstarted'
+              ? startTime
+              : eventStatus === 'notstarted'
+              ? '-'
+              : eventStatus}
           </Box>
         </Box>
         <Box width="1px" bg="colors.onSurface.lv4"></Box>

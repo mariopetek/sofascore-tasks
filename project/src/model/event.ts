@@ -2,7 +2,7 @@ import { Score } from './score'
 import { Team } from './team'
 import { Tournament } from './tournament'
 
-type EventStatus = 'notstarted' | 'finished'
+type EventStatus = 'notstarted' | 'finished' | 'live'
 
 export interface Event {
   id: number

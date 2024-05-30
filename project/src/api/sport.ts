@@ -1,7 +1,7 @@
 import { Event } from '@/model/event'
 import { Sport } from '@/model/sport'
 import { Tournament } from '@/model/tournament'
-import { formatDate } from '@/utils/date'
+import { formatDateWithDashes } from '@/utils/date'
 import useSWR from 'swr'
 
 const SPORTS_URL = '/api/sports'
@@ -24,11 +24,12 @@ export async function getSportTournaments(sportSlug: Sport['slug']) {
 }
 
 export function getSportEventsByDate(sportSlug: Sport['slug'], date: Date) {
-  const formattedDate = formatDate(date)
-  const { data, error } = useSWR<Event[]>(`${SPORT_URL}/${sportSlug}/events/${formattedDate}`)
+  const formattedDate = formatDateWithDashes(date)
+  const { data, error, isLoading } = useSWR<Event[]>(`${SPORT_URL}/${sportSlug}/events/${formattedDate}`)
 
   return {
     sportEvents: data,
     sportEventsError: error,
+    sportEventsLoading: isLoading,
   }
 }
