@@ -18,7 +18,7 @@ export default function SportPage({ tournaments, sportSlug, sportName }: SportPa
   return (
     <>
       <Head>
-        <title>{sportName} | Sofascore</title>
+        <title>{`${sportName} | Mini Sofascore`}</title>
       </Head>
       <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
         <TournamentsPanel tournaments={tournaments} />
