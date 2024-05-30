@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { formatDate, formatDateWithNoSpaces, getDatesAroundToday } from '@/utils/date'
 import { getSportEventsByDate } from '@/api/sport'
 import EventsContainer from './EventsContainer'
+import Loader from '@/components/Loader'
+import ErrorMessage from '@/components/ErrorMessage'
 
 interface EventsPanelProps {
   sportSlug: string
@@ -12,10 +14,7 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
   const [selectedDate, setSelectedDate] = useState(formatDate(new Date()))
   const datesAroundToday = getDatesAroundToday(3)
 
-  const { sportEvents, sportEventsError } = getSportEventsByDate(sportSlug, new Date(selectedDate))
-
-  if (sportEventsError) return <Box>Error</Box>
-  if (!sportEvents) return <Box>Loading...</Box>
+  const { sportEvents, sportEventsError, sportEventsLoading } = getSportEventsByDate(sportSlug, new Date(selectedDate))
 
   return (
     <Box
@@ -24,7 +23,9 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
       borderRadius="radii.lg"
       maxWidth="448px"
       width="100%"
-      height="100%"
+      minHeight="448px"
+      display="flex"
+      flexDirection="column"
     >
       <Box
         height="48px"
@@ -120,19 +121,31 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
           ></Box>
         </Button>
       </Box>
-      <Box paddingY="spacings.xl">
-        <Box display="flex" justifyContent="space-between" paddingX="spacings.lg">
-          <Box fontSize="fontSizes.xs" fontWeight="fontWeights.bold" color="colors.onSurface.lv1">
-            {new Date(selectedDate).toDateString() === new Date().toDateString()
-              ? 'Today'
-              : new Date(selectedDate).toLocaleString('en-US', { weekday: 'long' })}
-          </Box>
-          <Box fontSize="fontSizes.xs" fontWeight="fontWeights.bold" color="colors.onSurface.lv2">
-            {sportEvents.length} {sportEvents.length === 1 ? 'Event' : 'Events'}
-          </Box>
+
+      {sportEventsLoading ? (
+        <Box flex="1" display="flex" justifyContent="center" alignItems="center" padding="spacings.lg">
+          <Loader />
         </Box>
-        <EventsContainer sportEvents={sportEvents} />
-      </Box>
+      ) : sportEvents ? (
+        <Box paddingY="spacings.xl">
+          <Box display="flex" justifyContent="space-between" paddingX="spacings.lg">
+            <Box fontSize="fontSizes.xs" fontWeight="fontWeights.bold" color="colors.onSurface.lv1">
+              {new Date(selectedDate).toDateString() === new Date().toDateString()
+                ? 'Today'
+                : new Date(selectedDate).toLocaleString('en-US', { weekday: 'long' })}
+            </Box>
+            <Box fontSize="fontSizes.xs" fontWeight="fontWeights.bold" color="colors.onSurface.lv2">
+              {sportEvents.length} {sportEvents.length === 1 ? 'Event' : 'Events'}
+            </Box>
+          </Box>
+          <EventsContainer sportEvents={sportEvents} />
+        </Box>
+      ) : null}
+      {!sportEvents && sportEventsError ? (
+        <Box flex="1" display="flex" justifyContent="center" alignItems="center" padding="spacings.lg">
+          <ErrorMessage message="Error loading events" />
+        </Box>
+      ) : null}
     </Box>
   )
 }
