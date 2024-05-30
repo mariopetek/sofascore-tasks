@@ -1,5 +1,5 @@
 import { Box, Button } from '@kuma-ui/core'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { formatDateWithDashes, formatDateWithDayAndMonth, getDatesAroundToday } from '@/utils/date'
 import { getSportEventsByDate } from '@/api/sport'
 import EventsContainer from './EventsContainer'
@@ -15,7 +15,6 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
   const datesAroundToday = getDatesAroundToday(3)
 
   const { sportEvents, sportEventsError, sportEventsLoading } = getSportEventsByDate(sportSlug, new Date(selectedDate))
-
   return (
     <Box
       backgroundColor="colors.surface.s1"

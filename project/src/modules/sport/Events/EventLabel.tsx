@@ -1,3 +1,4 @@
+import { useEventDetailsContext } from '@/context/EventDetailsContext'
 import { Event } from '@/model/event'
 import { formatDateWithDayMonthAndYear } from '@/utils/date'
 import { Box } from '@kuma-ui/core'
@@ -7,6 +8,8 @@ interface EventLabelProps {
 }
 
 export default function EventLabel({ event }: EventLabelProps) {
+  const { setSelectedEventId, setIsDetailsPanelOpen } = useEventDetailsContext()
+
   const startTime = new Date(event.startDate).toLocaleTimeString('hr-HR', { hour: '2-digit', minute: '2-digit' })
   const startDate = new Date(event.startDate)
 
@@ -18,8 +21,20 @@ export default function EventLabel({ event }: EventLabelProps) {
 
   const eventStatus = event.status
 
+  function handleEventClick() {
+    setIsDetailsPanelOpen(true)
+    setSelectedEventId(event.id)
+  }
+
   return (
-    <Box display="flex" alignItems="center" justifyContent="space-between" paddingY="10px">
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+      paddingY="10px"
+      cursor="pointer"
+      onClick={handleEventClick}
+    >
       <Box display="flex" gap="spacings.lg">
         <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
           <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs">

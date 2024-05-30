@@ -1,5 +1,7 @@
 import { getSportTournaments } from '@/api/sport'
+import { EventDetailsContextProvider } from '@/context/EventDetailsContext'
 import { TournamentWithLogo } from '@/model/tournament'
+import EventDetailsPanel from '@/modules/sport/Events/Details/EventDetailsPanel'
 import EventsPanel from '@/modules/sport/Events/EventsPanel'
 import TournamentsPanel from '@/modules/sport/Tournaments/TournamentsPanel'
 import { Box } from '@kuma-ui/core'
@@ -19,7 +21,10 @@ export default function SportPage({ tournamentsWithLogo, sportName, sportSlug }:
       </Head>
       <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
         <TournamentsPanel tournaments={tournamentsWithLogo} />
-        <EventsPanel sportSlug={sportSlug} />
+        <EventDetailsContextProvider>
+          <EventsPanel sportSlug={sportSlug} />
+          <EventDetailsPanel />
+        </EventDetailsContextProvider>
       </Box>
     </>
   )
