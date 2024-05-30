@@ -6,6 +6,7 @@ import EventsContainer from './EventsContainer'
 import Loader from '@/components/Loader'
 import ErrorMessage from '@/components/ErrorMessage'
 import { Sport } from '@/model/sport'
+import { useEventDetailsContext } from '@/context/EventDetailsContext'
 
 interface EventsPanelProps {
   sportSlug: Sport['slug']
@@ -13,9 +14,17 @@ interface EventsPanelProps {
 
 export default function EventsPanel({ sportSlug }: EventsPanelProps) {
   const [selectedDate, setSelectedDate] = useState(formatDateWithDashes(new Date()))
-  const datesAroundToday = getDatesAroundToday(3)
+  const { setSelectedEventId, setIsDetailsPanelOpen } = useEventDetailsContext()
 
   const { sportEvents, sportEventsError, sportEventsLoading } = getSportEventsByDate(sportSlug, new Date(selectedDate))
+
+  useEffect(() => {
+    setSelectedEventId(null)
+    setIsDetailsPanelOpen(false)
+  }, [sportSlug, selectedDate])
+
+  const datesAroundToday = getDatesAroundToday(3)
+
   return (
     <Box
       backgroundColor="colors.surface.s1"

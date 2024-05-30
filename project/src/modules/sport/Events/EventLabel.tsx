@@ -8,7 +8,7 @@ interface EventLabelProps {
 }
 
 export default function EventLabel({ event }: EventLabelProps) {
-  const { setSelectedEventId, setIsDetailsPanelOpen } = useEventDetailsContext()
+  const { selectedEventId, setSelectedEventId, setIsDetailsPanelOpen } = useEventDetailsContext()
 
   const startTime = new Date(event.startDate).toLocaleTimeString('hr-HR', { hour: '2-digit', minute: '2-digit' })
   const startDate = new Date(event.startDate)
@@ -38,6 +38,8 @@ export default function EventLabel({ event }: EventLabelProps) {
       paddingX="spacings.lg"
       cursor="pointer"
       onClick={handleEventClick}
+      bg={selectedEventId === event.id ? 'colors.primary.highlight' : 'colors.surface.s1'}
+      _hover={{ bg: 'colors.surface.s2' }}
     >
       <Box display="flex" gap="spacings.lg">
         <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">

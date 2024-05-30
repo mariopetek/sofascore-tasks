@@ -42,6 +42,8 @@ export default function EventDetailsPanel() {
           </Box>
         </Link>
       </Box>
+      <Box padding="spacings.lg"></Box>
+      <Box></Box>
     </Box>
   )
 }
