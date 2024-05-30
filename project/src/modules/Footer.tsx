@@ -21,7 +21,7 @@ export default function Footer() {
         height="20px"
       ></Box>
       <Box as="span" fontSize="fontSizes.xs" color="colors.onSurface.lv2">
-        © 2023 Sofascore – All Rights Reserved.
+        © 2024 Sofascore – All Rights Reserved.
       </Box>
     </Box>
   )
