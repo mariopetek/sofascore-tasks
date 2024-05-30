@@ -48,7 +48,7 @@ export default function EventLabel({ event }: EventLabelProps) {
               ? formatDateWithDayMonthAndYear(startDate)
               : startTime}
           </Box>
-          <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs">
+          <Box color={eventStatus === 'live' ? 'colors.live' : 'colors.onSurface.lv2'} fontSize="fontSizes.xs">
             {eventStatus === 'finished'
               ? 'FT'
               : startDate.toDateString() !== new Date().toDateString() && eventStatus === 'notstarted'
@@ -98,7 +98,9 @@ export default function EventLabel({ event }: EventLabelProps) {
         <Box
           color={
             homeTeamScore !== undefined && awayTeamScore !== undefined
-              ? homeTeamScore > awayTeamScore
+              ? eventStatus === 'live'
+                ? 'colors.live'
+                : homeTeamScore > awayTeamScore
                 ? 'colors.onSurface.lv1'
                 : 'colors.onSurface.lv2'
               : 'colors.onSurface.lv1'
@@ -110,7 +112,9 @@ export default function EventLabel({ event }: EventLabelProps) {
         <Box
           color={
             awayTeamScore !== undefined && homeTeamScore !== undefined
-              ? awayTeamScore > homeTeamScore
+              ? eventStatus === 'live'
+                ? 'colors.live'
+                : awayTeamScore > homeTeamScore
                 ? 'colors.onSurface.lv1'
                 : 'colors.onSurface.lv2'
               : 'colors.onSurface.lv1'

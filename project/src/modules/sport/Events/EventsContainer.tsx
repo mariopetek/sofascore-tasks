@@ -14,7 +14,7 @@ export default function EventsContainer({ sportEvents }: EventContainerProps) {
     }
     acc[event.tournament.id].push(event)
     return acc
-  }, {} as Record<number, Event[]>)
+  }, {} as Record<Tournament['id'], Event[]>)
 
   const tournamentIds = Object.keys(sportEventsGroupedByTournament) as unknown as Tournament['id'][]
 
