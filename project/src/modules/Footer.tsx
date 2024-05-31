@@ -10,7 +10,7 @@ export default function Footer() {
       flexDir="column"
       justifyContent="center"
       alignItems="center"
-      gap="24px"
+      gap="spacings.xl"
       boxShadow="0 2px 16px 0 rgba(0, 0, 0, 0.12)"
     >
       <Box

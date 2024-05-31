@@ -59,7 +59,7 @@ export default function EventLabel({ event }: EventLabelProps) {
           </Box>
         </Box>
         <Box width="1px" bg="colors.onSurface.lv4"></Box>
-        <Box display="flex" flexDirection="column" gap="4px">
+        <Box display="flex" flexDirection="column" gap="spacings.xs">
           <Box display="flex" alignItems="center" gap="spacings.sm">
             <Image src={homeTeamLogo} alt={homeTeamName} width={16} height={16} />
             <Box

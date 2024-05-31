@@ -20,12 +20,12 @@ export default function EventsContainer({ sportEvents }: EventContainerProps) {
 
   return tournamentIds.map((tournamentId, idx) => (
     <Box key={tournamentId}>
-      <Box display="flex" alignItems="center" paddingX="spacings.lg" paddingY="spacings.md" gap="32px">
+      <Box display="flex" alignItems="center" paddingX="spacings.lg" paddingY="spacings.md" gap="spacings.xxl">
         <Image
           src={`https://academy-backend.sofascore.dev/tournament/${tournamentId}/image`}
           alt={sportEventsGroupedByTournament[tournamentId][0].tournament.name}
-          width={32}
-          height={32}
+          width="32px"
+          height="32px"
         />
         <Box display="flex" alignItems="center">
           <Box as="span" color="colors.onSurface.lv1" fontSize="fontSizes.sm" fontWeight="fontWeights.bold">

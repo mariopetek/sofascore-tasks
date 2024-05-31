@@ -25,6 +25,22 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
 
   const datesAroundToday = getDatesAroundToday(3)
 
+  function handleLeftButtonClick() {
+    setSelectedDate(currentSelected => {
+      const currentIndex = datesAroundToday.indexOf(currentSelected)
+      if (currentIndex === 0) return currentSelected
+      return datesAroundToday[currentIndex - 1]
+    })
+  }
+
+  function handleRightButtonClick() {
+    setSelectedDate(currentSelected => {
+      const currentIndex = datesAroundToday.indexOf(currentSelected)
+      if (currentIndex === datesAroundToday.length - 1) return currentSelected
+      return datesAroundToday[currentIndex + 1]
+    })
+  }
+
   return (
     <Box
       backgroundColor="colors.surface.s1"
@@ -43,9 +59,9 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
         borderTopLeftRadius="radii.lg"
         borderTopRightRadius="radii.lg"
         paddingTop="spacings.sm"
+        paddingX="spacings.sm"
         display="flex"
         gap="spacings.sm"
-        justifyContent="space-evenly"
       >
         <Button
           height="32px"
@@ -57,13 +73,7 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          onClick={() => {
-            setSelectedDate(currentSelected => {
-              const currentIndex = datesAroundToday.indexOf(currentSelected)
-              if (currentIndex === 0) return currentSelected
-              return datesAroundToday[currentIndex - 1]
-            })
-          }}
+          onClick={handleLeftButtonClick}
         >
           <Box
             maskSize="24px 24px"
@@ -73,37 +83,39 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
             height="24px"
           ></Box>
         </Button>
-        {datesAroundToday.map(date => (
-          <Box
-            key={date}
-            color="colors.surface.s1"
-            cursor="pointer"
-            onClick={() => setSelectedDate(date)}
-            position="relative"
-          >
-            <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-              <Box as="span" fontSize="fontSizes.xs" fontWeight="fontWeights.normal">
-                {new Date(date).toDateString() === new Date().toDateString()
-                  ? 'TODAY'
-                  : new Date(date).toLocaleString('en-US', { weekday: 'short' }).toUpperCase()}
+        <Box display="flex" flex="1" justifyContent="space-between" overflowX="hidden" overflowY="hidden">
+          {datesAroundToday.map(date => (
+            <Box
+              key={date}
+              color="colors.surface.s1"
+              cursor="pointer"
+              onClick={() => setSelectedDate(date)}
+              position="relative"
+            >
+              <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+                <Box as="span" fontSize="fontSizes.xs" fontWeight="fontWeights.normal">
+                  {new Date(date).toDateString() === new Date().toDateString()
+                    ? 'TODAY'
+                    : new Date(date).toLocaleString('en-US', { weekday: 'short' }).toUpperCase()}
+                </Box>
+                <Box as="span" fontSize="fontSizes.xs">
+                  {formatDateWithDayAndMonth(new Date(date))}
+                </Box>
               </Box>
-              <Box as="span" fontSize="fontSizes.xs">
-                {formatDateWithDayAndMonth(new Date(date))}
-              </Box>
+              {selectedDate === date && (
+                <Box
+                  height="4px"
+                  width="100%"
+                  backgroundColor="colors.surface.s1"
+                  position="absolute"
+                  bottom="0"
+                  borderTopLeftRadius="radii.xs"
+                  borderTopRightRadius="radii.xs"
+                />
+              )}
             </Box>
-            {selectedDate === date && (
-              <Box
-                height="4px"
-                width="100%"
-                backgroundColor="colors.surface.s1"
-                position="absolute"
-                bottom="0"
-                borderTopLeftRadius="radii.xs"
-                borderTopRightRadius="radii.xs"
-              />
-            )}
-          </Box>
-        ))}
+          ))}
+        </Box>
         <Button
           height="32px"
           width="32px"
@@ -114,13 +126,7 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          onClick={() => {
-            setSelectedDate(currentSelected => {
-              const currentIndex = datesAroundToday.indexOf(currentSelected)
-              if (currentIndex === datesAroundToday.length - 1) return currentSelected
-              return datesAroundToday[currentIndex + 1]
-            })
-          }}
+          onClick={handleRightButtonClick}
         >
           <Box
             maskSize="24px 24px"

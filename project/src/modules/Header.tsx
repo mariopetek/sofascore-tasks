@@ -51,7 +51,7 @@ export default function Header() {
           ></Box>
         </Link>
       </Box>
-      <Box height="48px" display="flex" justifyContent="center" gap="16px">
+      <Box height="48px" display="flex" justifyContent="center" gap="spacings.lg">
         {SPORTS.map(sport => (
           <Link href={sport.slug} key={sport.slug}>
             <Box
@@ -59,8 +59,8 @@ export default function Header() {
               alignItems="center"
               justifyContent="center"
               height="100%"
-              gap="4px"
-              padding="0 4px"
+              gap="spacings.xs"
+              paddingX="spacings.xs"
               position="relative"
             >
               <Box
