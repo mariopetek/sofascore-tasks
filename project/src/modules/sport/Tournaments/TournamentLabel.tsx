@@ -9,17 +9,21 @@ export default function TournamentLabel({ tournament }: TournamentLabelProps) {
   return (
     <Box
       key={tournament.id}
-      marginBottom="spacings.lg"
       display="flex"
       alignItems="center"
-      gap="16px"
-      paddingTop="spacings.sm"
+      gap="spacings.lg"
+      paddingX="spacings.lg"
+      paddingY="spacings.sm"
+      cursor="pointer"
+      _hover={{
+        bg: 'colors.surface.s2',
+      }}
     >
       <Image
         src={`https://academy-backend.sofascore.dev/tournament/${tournament.id}/image`}
         alt={tournament.name}
-        width={40}
-        height={40}
+        width="40px"
+        height="40px"
       />
       <Box as="span" color="colors.onSurface.lv1" fontSize="fontSizes.sm" fontWeight="fontWeights.bold">
         {tournament.name}
