@@ -29,6 +29,8 @@ export default function EventLabel({ event }: EventLabelProps) {
     setSelectedEventId(event.id)
   }
 
+  const isActive = () => selectedEventId === event.id
+
   return (
     <Box
       display="flex"
@@ -38,8 +40,8 @@ export default function EventLabel({ event }: EventLabelProps) {
       paddingX="spacings.lg"
       cursor="pointer"
       onClick={handleEventClick}
-      bg={selectedEventId === event.id ? 'colors.primary.highlight' : 'colors.surface.s1'}
-      _hover={{ bg: 'colors.surface.s2' }}
+      bg={isActive() ? 'colors.primary.highlight' : 'colors.surface.s1'}
+      _hover={{ bg: isActive() ? 'colors.primary.highlight' : 'colors.surface.s2' }}
     >
       <Box display="flex" gap="spacings.lg">
         <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">

@@ -19,7 +19,7 @@ interface SportPageProps {
 export default function SportTodayPage({ tournaments, todayEvents, todayDate, sportSlug }: SportPageProps) {
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={tournaments} />
+      <TournamentsPanel tournaments={tournaments} sportSlug={sportSlug} />
       <EventDetailsContextProvider>
         <EventsPanel events={todayEvents} selectedDate={todayDate} sportSlug={sportSlug} />
         <EventDetailsPanel />
@@ -34,7 +34,7 @@ export async function getServerSideProps(context: { params: { sportSlug: Sport['
 
   const tournaments = await getSportTournaments(sportSlug)
 
-  const todayDate = new Date('2024-06-01')
+  const todayDate = new Date()
   const todayEvents = await getSportEventsByDate(sportSlug, todayDate)
 
   return {

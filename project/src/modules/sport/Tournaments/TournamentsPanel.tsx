@@ -1,12 +1,14 @@
 import { Tournament } from '@/model/tournament'
 import { Box, Heading } from '@kuma-ui/core'
 import TournamentLabel from './TournamentLabel'
+import { Sport } from '@/model/sport'
 
 interface TournamentsPanelProps {
   tournaments: Tournament[]
+  sportSlug: Sport['slug']
 }
 
-export default function TournamentsPanel({ tournaments }: TournamentsPanelProps) {
+export default function TournamentsPanel({ tournaments, sportSlug }: TournamentsPanelProps) {
   return (
     <Box
       backgroundColor="colors.surface.s1"
@@ -28,7 +30,7 @@ export default function TournamentsPanel({ tournaments }: TournamentsPanelProps)
       </Heading>
       <Box display="flex" flexDirection="column">
         {tournaments.map(tournament => (
-          <TournamentLabel key={tournament.id} tournament={tournament} />
+          <TournamentLabel key={tournament.id} tournament={tournament} sportSlug={sportSlug} />
         ))}
       </Box>
     </Box>

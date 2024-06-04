@@ -56,9 +56,11 @@ const theme = createTheme({
     md: '16px',
     lg: '20px',
     xl: '24px',
+    xxl: '32px',
   },
   radii: {
     xs: '2px',
+    sm: '4px',
     lg: '16px',
   },
 })
