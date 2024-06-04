@@ -1,45 +1,39 @@
 import { Box, Button } from '@kuma-ui/core'
-import { useEffect, useState } from 'react'
-import { formatDateWithDashes, formatDateWithDayAndMonth, getDatesAroundToday } from '@/utils/date'
-import { getSportEventsByDate } from '@/api/sport'
+import { datesAroundDate, europeanDayMonthDateFormat, isoDateFormat } from '@/utils/date'
 import EventsContainer from './EventsContainer'
-import Loader from '@/components/Loader'
-import ErrorMessage from '@/components/ErrorMessage'
-import { Sport } from '@/model/sport'
 import { useEventDetailsContext } from '@/context/EventDetailsContext'
+import { Event } from '@/model/event'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
+import { Sport } from '@/model/sport'
 
 interface EventsPanelProps {
+  events: Event[]
+  selectedDate: string
   sportSlug: Sport['slug']
 }
 
-export default function EventsPanel({ sportSlug }: EventsPanelProps) {
-  const [selectedDate, setSelectedDate] = useState(formatDateWithDashes(new Date()))
+export default function EventsPanel({ events, selectedDate, sportSlug }: EventsPanelProps) {
   const { setSelectedEventId, setIsDetailsPanelOpen } = useEventDetailsContext()
-
-  const { sportEvents, sportEventsError, sportEventsLoading } = getSportEventsByDate(sportSlug, new Date(selectedDate))
+  const pathname = usePathname()
+  const pathnameSegments = pathname.split('/').filter(Boolean)
+  const firstPathnameSegment = pathnameSegments[0]
 
   useEffect(() => {
     setSelectedEventId(null)
     setIsDetailsPanelOpen(false)
-  }, [sportSlug, selectedDate])
+  }, [selectedDate, sportSlug])
 
-  const datesAroundToday = getDatesAroundToday(3)
+  const datesAroundSelectedDate = datesAroundDate(new Date(selectedDate), 3)
 
-  function handleLeftButtonClick() {
-    setSelectedDate(currentSelected => {
-      const currentIndex = datesAroundToday.indexOf(currentSelected)
-      if (currentIndex === 0) return currentSelected
-      return datesAroundToday[currentIndex - 1]
-    })
-  }
+  const nextDate = new Date(selectedDate)
+  nextDate.setDate(nextDate.getDate() + 1)
 
-  function handleRightButtonClick() {
-    setSelectedDate(currentSelected => {
-      const currentIndex = datesAroundToday.indexOf(currentSelected)
-      if (currentIndex === datesAroundToday.length - 1) return currentSelected
-      return datesAroundToday[currentIndex + 1]
-    })
-  }
+  const previousDate = new Date(selectedDate)
+  previousDate.setDate(previousDate.getDate() - 1)
+
+  const todayDate = new Date()
 
   return (
     <Box
@@ -63,111 +57,96 @@ export default function EventsPanel({ sportSlug }: EventsPanelProps) {
         display="flex"
         gap="spacings.sm"
       >
-        <Button
-          height="32px"
-          width="32px"
-          bg="colors.surface.s1"
-          borderRadius="radii.xs"
-          border="none"
-          cursor="pointer"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          onClick={handleLeftButtonClick}
-        >
+        <Link href={`/${firstPathnameSegment}/${isoDateFormat(previousDate)}`}>
           <Box
-            maskSize="24px 24px"
-            maskImage="url(/icons/system/ic_chevron_left.svg)"
-            backgroundColor="colors.primary.default"
-            width="24px"
-            height="24px"
-          ></Box>
-        </Button>
-        <Box display="flex" flex="1" justifyContent="space-between" overflowX="hidden" overflowY="hidden">
-          {datesAroundToday.map(date => (
+            height="32px"
+            width="32px"
+            bg="colors.surface.s1"
+            borderRadius="radii.xs"
+            border="none"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
             <Box
-              key={date}
-              color="colors.surface.s1"
-              cursor="pointer"
-              onClick={() => setSelectedDate(date)}
-              position="relative"
-            >
-              <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-                <Box as="span" fontSize="fontSizes.xs" fontWeight="fontWeights.normal">
-                  {new Date(date).toDateString() === new Date().toDateString()
-                    ? 'TODAY'
-                    : new Date(date).toLocaleString('en-US', { weekday: 'short' }).toUpperCase()}
+              maskSize="24px 24px"
+              maskImage="url(/icons/system/ic_chevron_left.svg)"
+              backgroundColor="colors.primary.default"
+              width="24px"
+              height="24px"
+            ></Box>
+          </Box>
+        </Link>
+
+        <Box display="flex" flex="1" justifyContent="space-between" overflowX="hidden" overflowY="hidden">
+          {datesAroundSelectedDate.map(date => (
+            <Link key={date} href={`/${firstPathnameSegment}/${date}`}>
+              <Box color="colors.surface.s1" position="relative" height="100%">
+                <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+                  <Box as="span" fontSize="fontSizes.xs" fontWeight="fontWeights.normal">
+                    {isoDateFormat(new Date(date)) === isoDateFormat(todayDate)
+                      ? 'TODAY'
+                      : new Date(date).toLocaleString('en-US', { weekday: 'short' }).toUpperCase()}
+                  </Box>
+                  <Box as="span" fontSize="fontSizes.xs">
+                    {europeanDayMonthDateFormat(new Date(date))}
+                  </Box>
                 </Box>
-                <Box as="span" fontSize="fontSizes.xs">
-                  {formatDateWithDayAndMonth(new Date(date))}
-                </Box>
+                {isoDateFormat(new Date(selectedDate)) === date ? (
+                  <Box
+                    height="4px"
+                    width="100%"
+                    backgroundColor="colors.surface.s1"
+                    position="absolute"
+                    bottom="0"
+                    borderTopLeftRadius="radii.xs"
+                    borderTopRightRadius="radii.xs"
+                  ></Box>
+                ) : null}
               </Box>
-              {selectedDate === date && (
-                <Box
-                  height="4px"
-                  width="100%"
-                  backgroundColor="colors.surface.s1"
-                  position="absolute"
-                  bottom="0"
-                  borderTopLeftRadius="radii.xs"
-                  borderTopRightRadius="radii.xs"
-                />
-              )}
-            </Box>
+            </Link>
           ))}
         </Box>
-        <Button
-          height="32px"
-          width="32px"
-          bg="colors.surface.s1"
-          borderRadius="radii.xs"
-          border="none"
-          cursor="pointer"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          onClick={handleRightButtonClick}
-        >
+        <Link href={`/${firstPathnameSegment}/${isoDateFormat(nextDate)}`}>
           <Box
-            maskSize="24px 24px"
-            maskImage="url(/icons/system/ic_chevron_right.svg)"
-            backgroundColor="colors.primary.default"
-            width="24px"
-            height="24px"
-          ></Box>
-        </Button>
-      </Box>
-
-      {sportEventsLoading ? (
-        <Box flex="1" display="flex" justifyContent="center" alignItems="center" padding="spacings.lg">
-          <Loader />
-        </Box>
-      ) : sportEvents ? (
-        <Box>
-          <Box
+            height="32px"
+            width="32px"
+            bg="colors.surface.s1"
+            borderRadius="radii.xs"
+            border="none"
             display="flex"
-            justifyContent="space-between"
-            paddingX="spacings.lg"
-            paddingTop="spacings.xl"
-            paddingBottom="spacings.sm"
+            justifyContent="center"
+            alignItems="center"
           >
-            <Box fontSize="fontSizes.xs" fontWeight="fontWeights.bold" color="colors.onSurface.lv1">
-              {new Date(selectedDate).toDateString() === new Date().toDateString()
-                ? 'Today'
-                : new Date(selectedDate).toLocaleString('en-US', { weekday: 'long' })}
-            </Box>
-            <Box fontSize="fontSizes.xs" fontWeight="fontWeights.bold" color="colors.onSurface.lv2">
-              {sportEvents.length} {sportEvents.length === 1 ? 'Event' : 'Events'}
-            </Box>
+            <Box
+              maskSize="24px 24px"
+              maskImage="url(/icons/system/ic_chevron_right.svg)"
+              backgroundColor="colors.primary.default"
+              width="24px"
+              height="24px"
+            ></Box>
           </Box>
-          <EventsContainer sportEvents={sportEvents} />
+        </Link>
+      </Box>
+      <Box>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          paddingX="spacings.lg"
+          paddingTop="spacings.xl"
+          paddingBottom="spacings.sm"
+        >
+          <Box fontSize="fontSizes.xs" fontWeight="fontWeights.bold" color="colors.onSurface.lv1">
+            {isoDateFormat(new Date(selectedDate)) === isoDateFormat(new Date())
+              ? 'Today'
+              : new Date(selectedDate).toLocaleString('en-US', { weekday: 'long' })}
+          </Box>
+          <Box fontSize="fontSizes.xs" fontWeight="fontWeights.bold" color="colors.onSurface.lv2">
+            {events.length} {events.length === 1 ? 'Event' : 'Events'}
+          </Box>
         </Box>
-      ) : null}
-      {!sportEvents && sportEventsError ? (
-        <Box flex="1" display="flex" justifyContent="center" alignItems="center" padding="spacings.lg">
-          <ErrorMessage message="Error loading events" />
-        </Box>
-      ) : null}
+        <EventsContainer events={events} />
+      </Box>
     </Box>
   )
 }

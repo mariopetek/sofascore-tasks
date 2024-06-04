@@ -22,7 +22,7 @@ const SPORTS = [
 ]
 
 export default function Header() {
-  const { isDark, setIsDark } = useThemeContext()
+  const { setIsDark } = useThemeContext()
 
   const router = useRouter()
   const isActive = (href: string) => router.asPath.startsWith(href)
@@ -53,7 +53,7 @@ export default function Header() {
       </Box>
       <Box height="48px" display="flex" justifyContent="center" gap="spacings.lg">
         {SPORTS.map(sport => (
-          <Link href={sport.slug} key={sport.slug}>
+          <Link href={`/${sport.slug}`} key={sport.slug}>
             <Box
               display="flex"
               alignItems="center"

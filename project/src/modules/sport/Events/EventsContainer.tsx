@@ -4,11 +4,11 @@ import EventLabel from './EventLabel'
 import { Tournament } from '@/model/tournament'
 
 interface EventContainerProps {
-  sportEvents: Event[]
+  events: Event[]
 }
 
-export default function EventsContainer({ sportEvents }: EventContainerProps) {
-  const sportEventsGroupedByTournament = sportEvents.reduce((acc, event) => {
+export default function EventsContainer({ events }: EventContainerProps) {
+  const sportEventsGroupedByTournament = events.reduce((acc, event) => {
     if (!acc[event.tournament.id]) {
       acc[event.tournament.id] = []
     }

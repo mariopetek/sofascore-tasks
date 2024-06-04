@@ -1,10 +1,7 @@
 import { Event } from '@/model/event'
 import { Sport } from '@/model/sport'
 import { Tournament } from '@/model/tournament'
-import { formatDateWithDashes } from '@/utils/date'
-import useSWR from 'swr'
-
-const SPORT_URL = '/api/sport'
+import { isoDateFormat } from '@/utils/date'
 
 export async function getSports() {
   const response = await fetch('https://academy-backend.sofascore.dev/sports')
@@ -20,13 +17,10 @@ export async function getSportTournaments(sportSlug: Sport['slug']) {
   return tournaments
 }
 
-export function getSportEventsByDate(sportSlug: Sport['slug'], date: Date) {
-  const formattedDate = formatDateWithDashes(date)
-  const { data, error, isLoading } = useSWR<Event[]>(`${SPORT_URL}/${sportSlug}/events/${formattedDate}`)
+export async function getSportEventsByDate(sportSlug: Sport['slug'], date: Date) {
+  const isoDate = isoDateFormat(date)
+  const response = await fetch(`https://academy-backend.sofascore.dev/sport/${sportSlug}/events/${isoDate}`)
+  const events = (await response.json()) as Event[]
 
-  return {
-    sportEvents: data,
-    sportEventsError: error,
-    sportEventsLoading: isLoading,
-  }
+  return events
 }

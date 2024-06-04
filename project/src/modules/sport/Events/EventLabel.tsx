@@ -1,6 +1,6 @@
 import { useEventDetailsContext } from '@/context/EventDetailsContext'
 import { Event } from '@/model/event'
-import { formatDateWithDayMonthAndYear } from '@/utils/date'
+import { europeanDateFormat, isoDateFormat } from '@/utils/date'
 import { Box, Image } from '@kuma-ui/core'
 
 interface EventLabelProps {
@@ -44,14 +44,14 @@ export default function EventLabel({ event }: EventLabelProps) {
       <Box display="flex" gap="spacings.lg">
         <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
           <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs">
-            {startDate.toDateString() !== new Date().toDateString() && eventStatus === 'notstarted'
-              ? formatDateWithDayMonthAndYear(startDate)
+            {isoDateFormat(startDate) !== isoDateFormat(new Date()) && eventStatus === 'notstarted'
+              ? europeanDateFormat(startDate)
               : startTime}
           </Box>
           <Box color={eventStatus === 'live' ? 'colors.live' : 'colors.onSurface.lv2'} fontSize="fontSizes.xs">
             {eventStatus === 'finished'
               ? 'FT'
-              : startDate.toDateString() !== new Date().toDateString() && eventStatus === 'notstarted'
+              : isoDateFormat(startDate) !== isoDateFormat(new Date()) && eventStatus === 'notstarted'
               ? startTime
               : eventStatus === 'notstarted'
               ? '-'
@@ -94,7 +94,7 @@ export default function EventLabel({ event }: EventLabelProps) {
           </Box>
         </Box>
       </Box>
-      <Box>
+      <Box display="flex" flexDirection="column">
         <Box
           color={
             homeTeamScore !== undefined && awayTeamScore !== undefined
