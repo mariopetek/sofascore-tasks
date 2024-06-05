@@ -10,17 +10,17 @@ export interface Tournament {
   country: Country
 }
 
-interface StandingRow {
+export interface StandingRow {
   id: number
   team: Team
-  points: number
+  points: number | null
   scoresFor: number
   scoresAgainst: number
   played: number
   wins: number
   draws: number
   losses: number
-  percentage: number
+  percentage: number | null
 }
 
 type StandingsType = 'total' | 'home' | 'away'

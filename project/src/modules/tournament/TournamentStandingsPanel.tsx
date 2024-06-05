@@ -1,8 +1,8 @@
-import { TournamentStanding } from '@/model/tournament'
+import { StandingRow, TournamentStanding } from '@/model/tournament'
 import { Box } from '@kuma-ui/core'
 
 interface TournamentStandingsPanelProps {
-  standings: TournamentStanding[]
+  standings: StandingRow[]
 }
 
 export default function TournamentStandingsPanel({ standings }: TournamentStandingsPanelProps) {
@@ -40,11 +40,11 @@ export default function TournamentStandingsPanel({ standings }: TournamentStandi
             Goals
           </Box>
           <Box as="span" maxWidth="62px" width="100%">
-            PTS
+            {standings[0].points ? 'PTS' : standings[0].percentage ? 'PCT' : null}
           </Box>
         </Box>
       </Box>
-      {standings[2].sortedStandingsRows.map((standingRow, index) => (
+      {standings.map((standingRow, index) => (
         <Box
           key={standingRow.id}
           padding="spacings.lg"
@@ -83,7 +83,11 @@ export default function TournamentStandingsPanel({ standings }: TournamentStandi
               {standingRow.scoresFor}:{standingRow.scoresAgainst}
             </Box>
             <Box as="span" maxWidth="62px" width="100%">
-              {standingRow.points}
+              {standingRow.points
+                ? standingRow.points
+                : standingRow.percentage
+                ? standingRow.percentage.toFixed(3)
+                : null}
             </Box>
           </Box>
         </Box>

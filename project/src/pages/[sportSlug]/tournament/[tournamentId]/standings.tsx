@@ -1,7 +1,7 @@
 import { getSportTournaments } from '@/api/sport'
 import { getTournamentDetails, getTournamentStandings } from '@/api/tournament'
 import { Sport } from '@/model/sport'
-import { Tournament, TournamentStanding } from '@/model/tournament'
+import { StandingRow, Tournament, TournamentStanding } from '@/model/tournament'
 import TournamentsPanel from '@/modules/sport/Tournaments/TournamentsPanel'
 import TournamentHeadingPanel from '@/modules/tournament/TournamentHeadingPanel'
 import TournamentStandingsPanel from '@/modules/tournament/TournamentStandingsPanel'
@@ -11,7 +11,7 @@ interface TournamentDetailsPageProps {
   tournaments: Tournament[]
   sportSlug: Sport['slug']
   tournamentDetails: Tournament
-  tournamentStandings: TournamentStanding[]
+  tournamentStandings: StandingRow[]
 }
 
 export default function TournamentDetailsStandingsPage({
@@ -43,12 +43,14 @@ export async function getServerSideProps(context: {
 
   const tournamentStandings = await getTournamentStandings(tournamentId)
 
+  const tournamentStandingsTotal = tournamentStandings.find(standing => standing.type === 'total')!.sortedStandingsRows
+
   return {
     props: {
       tournaments,
       sportSlug,
       tournamentDetails,
-      tournamentStandings,
+      tournamentStandings: tournamentStandingsTotal,
     },
   }
 }
