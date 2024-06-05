@@ -46,7 +46,8 @@ export default function EventLabel({ event }: EventLabelProps) {
       <Box display="flex" gap="spacings.lg">
         <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
           <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs">
-            {isoDateFormat(startDate) !== isoDateFormat(new Date()) && eventStatus === 'notstarted'
+            {(isoDateFormat(startDate) !== isoDateFormat(new Date()) && eventStatus === 'notstarted') ||
+            eventStatus === 'finished'
               ? europeanDateFormat(startDate)
               : startTime}
           </Box>

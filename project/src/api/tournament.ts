@@ -1,3 +1,4 @@
+import { Event } from '@/model/event'
 import { Tournament, TournamentStanding } from '@/model/tournament'
 
 export async function getTournamentDetails(tournamentId: Tournament['id']) {
@@ -5,6 +6,15 @@ export async function getTournamentDetails(tournamentId: Tournament['id']) {
   const sports = (await response.json()) as Tournament
 
   return sports
+}
+
+export async function getTournamentEvents(tournamentId: Tournament['id'], span: 'last' | 'next', page: number) {
+  const response = await fetch(
+    `https://academy-backend.sofascore.dev/tournament/${tournamentId}/events/${span}/${page}`
+  )
+  const events = (await response.json()) as Event[]
+
+  return events
 }
 
 export async function getTournamentStandings(tournamentId: Tournament['id']) {
