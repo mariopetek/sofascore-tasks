@@ -2,8 +2,6 @@ import { Score } from './score'
 import { Team } from './team'
 import { Tournament } from './tournament'
 
-type EventStatus = 'notstarted' | 'finished' | 'live'
-
 export interface Event {
   id: number
   slug: string
@@ -17,3 +15,5 @@ export interface Event {
   winnerCode: string
   round: number
 }
+
+type EventStatus = 'notstarted' | 'finished' | 'inprogress'

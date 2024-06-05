@@ -50,7 +50,7 @@ export default function EventLabel({ event }: EventLabelProps) {
               ? europeanDateFormat(startDate)
               : startTime}
           </Box>
-          <Box color={eventStatus === 'live' ? 'colors.live' : 'colors.onSurface.lv2'} fontSize="fontSizes.xs">
+          <Box color={eventStatus === 'inprogress' ? 'colors.live' : 'colors.onSurface.lv2'} fontSize="fontSizes.xs">
             {eventStatus === 'finished'
               ? 'FT'
               : isoDateFormat(startDate) !== isoDateFormat(new Date()) && eventStatus === 'notstarted'
@@ -100,7 +100,7 @@ export default function EventLabel({ event }: EventLabelProps) {
         <Box
           color={
             homeTeamScore !== undefined && awayTeamScore !== undefined
-              ? eventStatus === 'live'
+              ? eventStatus === 'inprogress'
                 ? 'colors.live'
                 : homeTeamScore > awayTeamScore
                 ? 'colors.onSurface.lv1'
@@ -114,7 +114,7 @@ export default function EventLabel({ event }: EventLabelProps) {
         <Box
           color={
             awayTeamScore !== undefined && homeTeamScore !== undefined
-              ? eventStatus === 'live'
+              ? eventStatus === 'inprogress'
                 ? 'colors.live'
                 : awayTeamScore > homeTeamScore
                 ? 'colors.onSurface.lv1'
