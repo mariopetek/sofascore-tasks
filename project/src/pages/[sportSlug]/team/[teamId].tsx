@@ -1,5 +1,5 @@
 import { getSportTournaments } from '@/api/sport'
-import { getTeamDetails, getTeamPlayers } from '@/api/team'
+import { getTeamDetails, getTeamPlayers, getTeamTournaments } from '@/api/team'
 import { Player } from '@/model/player'
 import { Sport } from '@/model/sport'
 import { TeamDetails } from '@/model/team'
@@ -13,16 +13,23 @@ import TeamVenuePanel from '@/modules/team/TeamVenuePanel'
 import { Box } from '@kuma-ui/core'
 
 interface TeamDetailsPageProps {
-  tournaments: Tournament[]
+  sportTournaments: Tournament[]
   sportSlug: Sport['slug']
   teamDetails: TeamDetails
   teamPlayers: Player[]
+  teamTournaments: Tournament[]
 }
 
-export default function TeamDetailsPage({ tournaments, sportSlug, teamDetails, teamPlayers }: TeamDetailsPageProps) {
+export default function TeamDetailsPage({
+  sportTournaments,
+  sportSlug,
+  teamDetails,
+  teamPlayers,
+  teamTournaments,
+}: TeamDetailsPageProps) {
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={tournaments} sportSlug={sportSlug} />
+      <TournamentsPanel tournaments={sportTournaments} sportSlug={sportSlug} />
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TeamHeadingPanel team={teamDetails} sportSlug={sportSlug} />
         <Box display="flex" gap="spacings.xl">
@@ -31,7 +38,7 @@ export default function TeamDetailsPage({ tournaments, sportSlug, teamDetails, t
             <TeamVenuePanel teamVenue={teamDetails.venue} />
           </Box>
           <Box display="flex" flexDirection="column" gap="spacings.md" maxWidth="100%" width="100%">
-            <TeamTournamentsPanel />
+            <TeamTournamentsPanel tournaments={teamTournaments} />
             <TeamNextMatchPanel />
           </Box>
         </Box>
@@ -44,18 +51,21 @@ export async function getServerSideProps(context: { params: { sportSlug: Sport['
   const { params } = context
   const { sportSlug, teamId } = params
 
-  const tournaments = await getSportTournaments(sportSlug)
+  const sportTournaments = await getSportTournaments(sportSlug)
 
   const teamDetails = await getTeamDetails(teamId)
 
   const teamPlayers = await getTeamPlayers(teamId)
 
+  const teamTournaments = await getTeamTournaments(teamId)
+
   return {
     props: {
-      tournaments,
+      sportTournaments,
       sportSlug,
       teamDetails,
       teamPlayers,
+      teamTournaments,
     },
   }
 }

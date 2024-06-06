@@ -38,7 +38,8 @@ const theme = createTheme({
     md: '12px',
     lg: '16px',
     xl: '24px',
-    xxl: '32px',
+    xxl: '28px',
+    xxxl: '32px',
   },
   breakpoints: {
     sm: '400px',

@@ -18,7 +18,7 @@ export default function TeamVenuePanel({ teamVenue }: TeamVenuePanelProps) {
         as="h2"
         textAlign="center"
         paddingY="spacings.lg"
-        paddingX="spacings.xxl"
+        paddingX="spacings.xxxl"
         fontSize="fontSizes.md"
         fontWeight="fontWeights.bold"
       >

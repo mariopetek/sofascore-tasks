@@ -18,11 +18,11 @@ export default function TeamInfoPanel({ team, players }: TeamInfoPanelProps) {
       bg="colors.surface.s1"
       boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)"
       borderRadius="radii.lg"
-      paddingBottom="spacings.xl"
+      paddingBottom="spacings.xxl"
     >
       <Heading
         as="h2"
-        paddingX="spacings.xxl"
+        paddingX="spacings.xxxl"
         paddingTop="spacings.lg"
         paddingBottom="spacings.md"
         textAlign="center"
@@ -46,7 +46,7 @@ export default function TeamInfoPanel({ team, players }: TeamInfoPanelProps) {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          gap="spacings.sm"
+          gap="spacings.md"
           flex="1"
         >
           <Box
