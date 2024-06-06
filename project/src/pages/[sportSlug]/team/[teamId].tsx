@@ -28,7 +28,7 @@ export default function TeamDetailsPage({ tournaments, sportSlug, teamDetails, t
         <Box display="flex" gap="spacings.xl">
           <Box display="flex" flexDirection="column" gap="spacings.md" maxWidth="448px" width="100%">
             <TeamInfoPanel team={teamDetails} players={teamPlayers} />
-            <TeamVenuePanel />
+            <TeamVenuePanel teamVenue={teamDetails.venue} />
           </Box>
           <Box display="flex" flexDirection="column" gap="spacings.md" maxWidth="100%" width="100%">
             <TeamTournamentsPanel />
