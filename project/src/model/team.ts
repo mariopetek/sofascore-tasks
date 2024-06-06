@@ -5,3 +5,8 @@ export interface Team {
   name: string
   country: Country
 }
+
+export interface TeamDetails extends Team {
+  managerName: string
+  venue: string
+}

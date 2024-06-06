@@ -25,7 +25,7 @@ export default function TournamentDetailsStandingsPage({
       <TournamentsPanel tournaments={tournaments} sportSlug={sportSlug} />
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TournamentHeadingPanel tournament={tournamentDetails} sportSlug={sportSlug} />
-        <TournamentStandingsPanel standings={tournamentStandings} />
+        <TournamentStandingsPanel standings={tournamentStandings} sportSlug={sportSlug} />
       </Box>
     </Box>
   )

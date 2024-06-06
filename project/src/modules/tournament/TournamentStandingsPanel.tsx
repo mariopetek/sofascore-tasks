@@ -1,11 +1,14 @@
+import { Sport } from '@/model/sport'
 import { StandingRow, TournamentStanding } from '@/model/tournament'
 import { Box } from '@kuma-ui/core'
+import Link from 'next/link'
 
 interface TournamentStandingsPanelProps {
   standings: StandingRow[]
+  sportSlug: Sport['slug']
 }
 
-export default function TournamentStandingsPanel({ standings }: TournamentStandingsPanelProps) {
+export default function TournamentStandingsPanel({ standings, sportSlug }: TournamentStandingsPanelProps) {
   return (
     <Box
       maxWidth="920px"
@@ -45,52 +48,54 @@ export default function TournamentStandingsPanel({ standings }: TournamentStandi
         </Box>
       </Box>
       {standings.map((standingRow, index) => (
-        <Box
-          key={standingRow.id}
-          padding="spacings.lg"
-          display="flex"
-          justifyContent="space-between"
-          color="colors.onSurface.lv1"
-        >
-          <Box display="flex" alignItems="center" gap="spacings.lg" flex="2">
-            <Box
-              as="span"
-              width="24px"
-              height="24px"
-              padding="spacings.xs"
-              bg="colors.secondary.default"
-              textAlign="center"
-              borderRadius="50%"
-            >
-              {index + 1}
+        <Link key={standingRow.id} href={`/${sportSlug}/team/${standingRow.team.id}`}>
+          <Box
+            padding="spacings.lg"
+            display="flex"
+            justifyContent="space-between"
+            color="colors.onSurface.lv1"
+            _hover={{ bg: 'colors.surface.s2' }}
+          >
+            <Box display="flex" alignItems="center" gap="spacings.lg" flex="2">
+              <Box
+                as="span"
+                width="24px"
+                height="24px"
+                padding="spacings.xs"
+                bg="colors.secondary.default"
+                textAlign="center"
+                borderRadius="50%"
+              >
+                {index + 1}
+              </Box>
+              <Box as="span">{standingRow.team.name}</Box>
             </Box>
-            <Box as="span">{standingRow.team.name}</Box>
+            <Box flex="3" display="flex" justifyContent="space-between" textAlign="center">
+              <Box as="span" maxWidth="62px" width="100%">
+                {standingRow.played}
+              </Box>
+              <Box as="span" maxWidth="62px" width="100%">
+                {standingRow.wins}
+              </Box>
+              <Box as="span" maxWidth="62px" width="100%">
+                {standingRow.draws}
+              </Box>
+              <Box as="span" maxWidth="62px" width="100%">
+                {standingRow.losses}
+              </Box>
+              <Box as="span" maxWidth="62px" width="100%">
+                {standingRow.scoresFor}:{standingRow.scoresAgainst}
+              </Box>
+              <Box as="span" maxWidth="62px" width="100%">
+                {standingRow.points
+                  ? standingRow.points
+                  : standingRow.percentage
+                  ? standingRow.percentage.toFixed(3)
+                  : null}
+              </Box>
+            </Box>
           </Box>
-          <Box flex="3" display="flex" justifyContent="space-between" textAlign="center">
-            <Box as="span" maxWidth="62px" width="100%">
-              {standingRow.played}
-            </Box>
-            <Box as="span" maxWidth="62px" width="100%">
-              {standingRow.wins}
-            </Box>
-            <Box as="span" maxWidth="62px" width="100%">
-              {standingRow.draws}
-            </Box>
-            <Box as="span" maxWidth="62px" width="100%">
-              {standingRow.losses}
-            </Box>
-            <Box as="span" maxWidth="62px" width="100%">
-              {standingRow.scoresFor}:{standingRow.scoresAgainst}
-            </Box>
-            <Box as="span" maxWidth="62px" width="100%">
-              {standingRow.points
-                ? standingRow.points
-                : standingRow.percentage
-                ? standingRow.percentage.toFixed(3)
-                : null}
-            </Box>
-          </Box>
-        </Box>
+        </Link>
       ))}
     </Box>
   )
