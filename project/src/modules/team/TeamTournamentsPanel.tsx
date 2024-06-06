@@ -28,7 +28,7 @@ export default function TeamTournamentsPanel({ tournaments }: TeamTournamentsPan
       </Heading>
       <Box display="grid" gridTemplateColumns="1fr 1fr 1fr">
         {tournaments.map(tournament => (
-          <Box display="flex" flexDirection="column" alignItems="center" padding="spacings.md">
+          <Box key={tournament.id} display="flex" flexDirection="column" alignItems="center" padding="spacings.md">
             <Image
               src={`https://academy-backend.sofascore.dev/tournament/${tournament.id}/image`}
               alt={tournament.name}

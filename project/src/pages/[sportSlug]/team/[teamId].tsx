@@ -3,7 +3,7 @@ import { getTeamDetails, getTeamEvents, getTeamPlayers, getTeamTournaments } fro
 import { Event } from '@/model/event'
 import { Player } from '@/model/player'
 import { Sport } from '@/model/sport'
-import { TeamDetails } from '@/model/team'
+import { Team, TeamDetails } from '@/model/team'
 import { Tournament } from '@/model/tournament'
 import TournamentsPanel from '@/modules/sport/Tournaments/TournamentsPanel'
 import TeamHeadingPanel from '@/modules/team/TeamHeadingPanel'
@@ -50,7 +50,7 @@ export default function TeamDetailsPage({
   )
 }
 
-export async function getServerSideProps(context: { params: { sportSlug: Sport['slug']; teamId: TeamDetails['id'] } }) {
+export async function getServerSideProps(context: { params: { sportSlug: Sport['slug']; teamId: Team['id'] } }) {
   const { params } = context
   const { sportSlug, teamId } = params
 
