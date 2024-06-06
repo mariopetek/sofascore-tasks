@@ -1,5 +1,6 @@
 import { getSportTournaments } from '@/api/sport'
-import { getTeamDetails, getTeamPlayers, getTeamTournaments } from '@/api/team'
+import { getTeamDetails, getTeamEvents, getTeamPlayers, getTeamTournaments } from '@/api/team'
+import { Event } from '@/model/event'
 import { Player } from '@/model/player'
 import { Sport } from '@/model/sport'
 import { TeamDetails } from '@/model/team'
@@ -7,7 +8,7 @@ import { Tournament } from '@/model/tournament'
 import TournamentsPanel from '@/modules/sport/Tournaments/TournamentsPanel'
 import TeamHeadingPanel from '@/modules/team/TeamHeadingPanel'
 import TeamInfoPanel from '@/modules/team/TeamInfoPanel'
-import TeamNextMatchPanel from '@/modules/team/TeamNextMatchPanel'
+import TeamNextEventPanel from '@/modules/team/TeamNextEventPanel'
 import TeamTournamentsPanel from '@/modules/team/TeamTournamentsPanel'
 import TeamVenuePanel from '@/modules/team/TeamVenuePanel'
 import { Box } from '@kuma-ui/core'
@@ -18,6 +19,7 @@ interface TeamDetailsPageProps {
   teamDetails: TeamDetails
   teamPlayers: Player[]
   teamTournaments: Tournament[]
+  nextTeamEvent: Event
 }
 
 export default function TeamDetailsPage({
@@ -26,6 +28,7 @@ export default function TeamDetailsPage({
   teamDetails,
   teamPlayers,
   teamTournaments,
+  nextTeamEvent,
 }: TeamDetailsPageProps) {
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
@@ -39,7 +42,7 @@ export default function TeamDetailsPage({
           </Box>
           <Box display="flex" flexDirection="column" gap="spacings.md" maxWidth="100%" width="100%">
             <TeamTournamentsPanel tournaments={teamTournaments} />
-            <TeamNextMatchPanel />
+            <TeamNextEventPanel nextEvent={nextTeamEvent} />
           </Box>
         </Box>
       </Box>
@@ -59,6 +62,10 @@ export async function getServerSideProps(context: { params: { sportSlug: Sport['
 
   const teamTournaments = await getTeamTournaments(teamId)
 
+  const upcomingTeamEvents = await getTeamEvents(teamId, 'next', 0)
+
+  const nextTeamEvent = upcomingTeamEvents[0]
+
   return {
     props: {
       sportTournaments,
@@ -66,6 +73,7 @@ export async function getServerSideProps(context: { params: { sportSlug: Sport['
       teamDetails,
       teamPlayers,
       teamTournaments,
+      nextTeamEvent,
     },
   }
 }
