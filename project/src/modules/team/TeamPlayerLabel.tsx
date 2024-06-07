@@ -6,7 +6,7 @@ import { Player } from '@/model/player'
 import { Sport } from '@/model/sport'
 import { Team } from '@/model/team'
 import { useState } from 'react'
-import ImagePlaceholder from '../ImagePlaceholder'
+import ImagePlaceholder from '../../components/ImagePlaceholder'
 
 interface TeamPlayerLabelProps {
   player: Player

@@ -1,5 +1,6 @@
 import { Event } from '@/model/event'
 import { Tournament, TournamentStanding } from '@/model/tournament'
+import useSWR from 'swr'
 
 export async function getTournamentDetails(tournamentId: Tournament['id']) {
   const response = await fetch(`https://academy-backend.sofascore.dev/tournament/${tournamentId}`)
@@ -22,4 +23,13 @@ export async function getTournamentStandings(tournamentId: Tournament['id']) {
   const standings = (await response.json()) as TournamentStanding[]
 
   return standings
+}
+
+export function getTournamentStandingsClient(tournamentId: Tournament['id']) {
+  const { data, isLoading } = useSWR<TournamentStanding[]>(`/api/tournament/${tournamentId}/standings`)
+
+  return {
+    standings: data,
+    standingsLoading: isLoading,
+  }
 }
