@@ -2,6 +2,7 @@ import { Event } from '@/model/event'
 import { Box, Image } from '@kuma-ui/core'
 import EventLabel from './EventLabel'
 import { Tournament } from '@/model/tournament'
+import Separator from '@/components/Separator'
 
 interface EventContainerProps {
   events: Event[]
@@ -49,9 +50,7 @@ export default function EventsContainer({ events }: EventContainerProps) {
         ))}
       </Box>
 
-      {idx < tournamentIds.length - 1 ? (
-        <Box height="1px" bg="colors.onSurface.lv4" marginTop="spacings.sm"></Box>
-      ) : null}
+      {idx < tournamentIds.length - 1 ? <Separator /> : null}
     </Box>
   ))
 }

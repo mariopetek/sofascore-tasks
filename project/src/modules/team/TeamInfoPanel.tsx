@@ -1,3 +1,5 @@
+import ImagePlaceholder from '@/components/ImagePlaceholder'
+import Separator from '@/components/Separator'
 import { Player } from '@/model/player'
 import { TeamDetails } from '@/model/team'
 import { Box, Heading } from '@kuma-ui/core'
@@ -33,12 +35,12 @@ export default function TeamInfoPanel({ team, players }: TeamInfoPanelProps) {
         Team Info
       </Heading>
       <Box paddingX="spacings.lg" paddingY="spacings.sm" display="flex" alignItems="center" gap="spacings.lg">
-        <Box as="span" height="40px" width="40px" borderRadius="50%" bg="colors.secondary.default"></Box>
+        <ImagePlaceholder />
         <Box as="span" fontSize="fontSizes.sm" color="colors.onSurface.lv1">
           Coach: {team.managerName}
         </Box>
       </Box>
-      <Box height="1px" bg="colors.onSurface.lv4" marginTop="spacings.sm"></Box>
+      <Separator />
       <Box display="flex">
         <Box
           paddingX="spacings.md"
