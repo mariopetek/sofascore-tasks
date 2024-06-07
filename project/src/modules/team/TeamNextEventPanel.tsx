@@ -28,7 +28,6 @@ export default function TeamNextEventPanel({ nextEvent }: TeamNextEventPanelProp
     <Box
       bg="colors.surface.s1"
       boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)"
-      color="colors.onSurface.lv1"
       paddingBottom="spacings.lg"
       borderRadius="radii.lg"
     >
@@ -69,6 +68,7 @@ export default function TeamNextEventPanel({ nextEvent }: TeamNextEventPanelProp
         justifyContent="space-between"
         paddingY="spacings.sm"
         paddingX="spacings.lg"
+        color="colors.onSurface.lv1"
       >
         <Box display="flex" gap="spacings.lg">
           <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
