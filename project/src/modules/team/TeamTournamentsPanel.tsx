@@ -1,5 +1,6 @@
 import { Tournament } from '@/model/tournament'
 import { Box, Heading, Image } from '@kuma-ui/core'
+import Link from 'next/link'
 
 interface TeamTournamentsPanelProps {
   tournaments: Tournament[]
@@ -27,23 +28,31 @@ export default function TeamTournamentsPanel({ tournaments }: TeamTournamentsPan
       </Heading>
       <Box display="grid" gridTemplateColumns="1fr 1fr 1fr">
         {tournaments.map(tournament => (
-          <Box key={tournament.id} display="flex" flexDirection="column" alignItems="center" padding="spacings.md">
-            <Image
-              src={`https://academy-backend.sofascore.dev/tournament/${tournament.id}/image`}
-              alt={tournament.name}
-              width="40px"
-              height="40px"
-            />
+          <Link href={`/${tournament.sport.slug}/tournament/${tournament.id}`} key={tournament.id}>
             <Box
-              as="span"
-              color="colors.onSurface.lv2"
-              fontSize="fontSizes.xs"
-              paddingY="spacings.md"
-              textAlign="center"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              padding="spacings.md"
+              _hover={{ bg: 'colors.surface.s2' }}
             >
-              {tournament.name}
+              <Image
+                src={`https://academy-backend.sofascore.dev/tournament/${tournament.id}/image`}
+                alt={tournament.name}
+                width="40px"
+                height="40px"
+              />
+              <Box
+                as="span"
+                color="colors.onSurface.lv2"
+                fontSize="fontSizes.xs"
+                paddingY="spacings.md"
+                textAlign="center"
+              >
+                {tournament.name}
+              </Box>
             </Box>
-          </Box>
+          </Link>
         ))}
       </Box>
     </Box>
