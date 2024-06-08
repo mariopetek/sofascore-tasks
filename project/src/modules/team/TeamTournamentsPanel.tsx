@@ -34,7 +34,8 @@ export default function TeamTournamentsPanel({ tournaments }: TeamTournamentsPan
               flexDirection="column"
               alignItems="center"
               padding="spacings.md"
-              _hover={{ bg: 'colors.surface.s2' }}
+              color="colors.onSurface.lv2"
+              _hover={{ color: 'colors.onSurface.lv3' }}
             >
               <Image
                 src={`https://academy-backend.sofascore.dev/tournament/${tournament.id}/image`}
@@ -42,13 +43,7 @@ export default function TeamTournamentsPanel({ tournaments }: TeamTournamentsPan
                 width="40px"
                 height="40px"
               />
-              <Box
-                as="span"
-                color="colors.onSurface.lv2"
-                fontSize="fontSizes.xs"
-                paddingY="spacings.md"
-                textAlign="center"
-              >
+              <Box as="span" fontSize="fontSizes.xs" paddingY="spacings.md" textAlign="center">
                 {tournament.name}
               </Box>
             </Box>

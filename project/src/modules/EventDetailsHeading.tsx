@@ -1,6 +1,7 @@
 import { Event } from '@/model/event'
 import { isoDateFormat } from '@/utils/date'
 import { Box, Heading, Image } from '@kuma-ui/core'
+import Link from 'next/link'
 
 interface EventDetailsHeadingProps {
   event: Event
@@ -15,24 +16,27 @@ export default function EventDetailsHeading({ event }: EventDetailsHeadingProps)
 
   return (
     <Box padding="spacings.lg" display="flex" justifyContent="space-between">
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        gap="spacings.sm"
-        maxWidth="96px"
-        width="100%"
-        textAlign="center"
-      >
-        <Image
-          src={`https://academy-backend.sofascore.dev/team/${event.homeTeam.id}/image`}
-          width="40px"
-          height="40px"
-        />
-        <Box as="span" color="colors.onSurface.lv1" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
-          {event.homeTeam.name}
+      <Link href={`/${event.tournament.sport.slug}/team/${event.homeTeam.id}`}>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          gap="spacings.sm"
+          width="96px"
+          textAlign="center"
+          color="colors.onSurface.lv1"
+          _hover={{ color: 'colors.onSurface.lv2' }}
+        >
+          <Image
+            src={`https://academy-backend.sofascore.dev/team/${event.homeTeam.id}/image`}
+            width="40px"
+            height="40px"
+          />
+          <Box as="span" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
+            {event.homeTeam.name}
+          </Box>
         </Box>
-      </Box>
+      </Link>
       <Box flex="1" display="flex" flexDirection="column" alignItems="center" gap="spacings.xs">
         {event.status === 'notstarted' ? (
           <>
@@ -91,24 +95,27 @@ export default function EventDetailsHeading({ event }: EventDetailsHeadingProps)
           </>
         ) : null}
       </Box>
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        gap="spacings.sm"
-        maxWidth="96px"
-        width="100%"
-        textAlign="center"
-      >
-        <Image
-          src={`https://academy-backend.sofascore.dev/team/${event.awayTeam.id}/image`}
-          width="40px"
-          height="40px"
-        />
-        <Box as="span" color="colors.onSurface.lv1" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
-          {event.awayTeam.name}
+      <Link href={`/${event.tournament.sport.slug}/team/${event.awayTeam.id}`}>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          gap="spacings.sm"
+          width="96px"
+          textAlign="center"
+          color="colors.onSurface.lv1"
+          _hover={{ color: 'colors.onSurface.lv2' }}
+        >
+          <Image
+            src={`https://academy-backend.sofascore.dev/team/${event.awayTeam.id}/image`}
+            width="40px"
+            height="40px"
+          />
+          <Box as="span" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
+            {event.awayTeam.name}
+          </Box>
         </Box>
-      </Box>
+      </Link>
     </Box>
   )
 }
