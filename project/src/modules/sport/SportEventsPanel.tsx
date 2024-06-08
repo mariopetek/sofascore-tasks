@@ -42,7 +42,6 @@ export default function SportEventsPanel({ events, selectedDate, sportSlug }: Sp
       borderRadius="radii.lg"
       maxWidth="448px"
       width="100%"
-      minHeight="448px"
       display="flex"
       flexDirection="column"
       paddingBottom="spacings.lg"

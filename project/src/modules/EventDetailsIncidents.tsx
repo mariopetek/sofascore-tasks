@@ -89,8 +89,8 @@ export default function EventDetailsIncidents({ incidents, event }: EventDetails
               <>
                 <BasketballIncident incident={incident} />
                 {incident.type !== 'period' &&
-                incidents[index + 1] !== undefined &&
-                incidents[index + 1].type !== 'period' ? (
+                newestIncidents[index + 1] !== undefined &&
+                newestIncidents[index + 1].type !== 'period' ? (
                   <Box display="flex" justifyContent="center">
                     <Box bg="colors.onSurface.lv2" height="1px" width="24px"></Box>
                   </Box>

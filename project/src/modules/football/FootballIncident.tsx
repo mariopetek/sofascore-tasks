@@ -93,7 +93,7 @@ export default function FootballIncident({ incident }: FootballIncidentProps) {
               {incident.player.name}
             </Box>
             <Box as="span" color="colors.onSurface.lv2" fontSize="fontSizes.xs">
-              {incident.type}
+              {incident.color}
             </Box>
           </Box>
         </Box>
