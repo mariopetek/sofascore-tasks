@@ -4,9 +4,9 @@ import { Player } from '@/model/player'
 import { Sport } from '@/model/sport'
 import { Team, TeamDetails } from '@/model/team'
 import { Tournament } from '@/model/tournament'
-import TournamentsPanel from '@/modules/sport/Tournaments/TournamentsPanel'
 import TeamHeadingPanel from '@/modules/team/TeamHeadingPanel'
 import TeamSquadPanel from '@/modules/team/TeamSquadPanel'
+import TournamentsPanel from '@/modules/TournamentsPanel'
 import { Box } from '@kuma-ui/core'
 
 interface TeamSquadPageProps {

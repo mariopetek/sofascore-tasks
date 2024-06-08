@@ -3,9 +3,9 @@ import { getTeamDetails, getTeamTournaments } from '@/api/team'
 import { Sport } from '@/model/sport'
 import { Team, TeamDetails } from '@/model/team'
 import { Tournament } from '@/model/tournament'
-import TournamentsPanel from '@/modules/sport/Tournaments/TournamentsPanel'
 import TeamHeadingPanel from '@/modules/team/TeamHeadingPanel'
 import TeamStandingsPanel from '@/modules/team/TeamStandingsPanel'
+import TournamentsPanel from '@/modules/TournamentsPanel'
 import { Box } from '@kuma-ui/core'
 
 interface TeamStandingsPageProps {

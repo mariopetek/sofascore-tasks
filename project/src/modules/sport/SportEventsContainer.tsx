@@ -1,14 +1,15 @@
 import { Event } from '@/model/event'
 import { Box, Image } from '@kuma-ui/core'
-import EventLabel from './EventLabel'
+import EventLabel from '../EventLabel'
 import { Tournament } from '@/model/tournament'
 import Separator from '@/components/Separator'
+import Link from 'next/link'
 
-interface EventContainerProps {
+interface SportEventContainerProps {
   events: Event[]
 }
 
-export default function EventsContainer({ events }: EventContainerProps) {
+export default function SportEventsContainer({ events }: SportEventContainerProps) {
   const sportEventsGroupedByTournament = events.reduce((acc, event) => {
     if (!acc[event.tournament.id]) {
       acc[event.tournament.id] = []
@@ -39,9 +40,19 @@ export default function EventsContainer({ events }: EventContainerProps) {
             width="24px"
             height="24px"
           ></Box>
-          <Box as="span" color="colors.onSurface.lv2" fontSize="fontSizes.sm" fontWeight="fontWeights.bold">
-            {sportEventsGroupedByTournament[tournamentId][0].tournament.name}
-          </Box>
+          <Link
+            href={`/${sportEventsGroupedByTournament[tournamentId][0].tournament.sport.slug}/tournament/${sportEventsGroupedByTournament[tournamentId][0].tournament.id}`}
+          >
+            <Box
+              as="span"
+              color="colors.onSurface.lv2"
+              fontSize="fontSizes.sm"
+              fontWeight="fontWeights.bold"
+              _hover={{ color: 'colors.onSurface.lv3' }}
+            >
+              {sportEventsGroupedByTournament[tournamentId][0].tournament.name}
+            </Box>
+          </Link>
         </Box>
       </Box>
       <Box>

@@ -1,20 +1,20 @@
-import { Box, Button } from '@kuma-ui/core'
+import { Box } from '@kuma-ui/core'
 import { datesAroundDate, europeanDayMonthDateFormat, isoDateFormat } from '@/utils/date'
-import EventsContainer from './EventsContainer'
 import { useEventDetailsContext } from '@/context/EventDetailsContext'
 import { Event } from '@/model/event'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 import { Sport } from '@/model/sport'
+import SportEventsContainer from './SportEventsContainer'
 
-interface EventsPanelProps {
+interface SportEventsPanelProps {
   events: Event[]
   selectedDate: string
   sportSlug: Sport['slug']
 }
 
-export default function EventsPanel({ events, selectedDate, sportSlug }: EventsPanelProps) {
+export default function SportEventsPanel({ events, selectedDate, sportSlug }: SportEventsPanelProps) {
   const { setSelectedEventId, setIsDetailsPanelOpen } = useEventDetailsContext()
   const pathname = usePathname()
   const pathnameSegments = pathname.split('/').filter(Boolean)
@@ -145,7 +145,7 @@ export default function EventsPanel({ events, selectedDate, sportSlug }: EventsP
             {events.length} {events.length === 1 ? 'Event' : 'Events'}
           </Box>
         </Box>
-        <EventsContainer events={events} />
+        <SportEventsContainer events={events} />
       </Box>
     </Box>
   )

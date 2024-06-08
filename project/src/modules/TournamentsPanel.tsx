@@ -1,7 +1,7 @@
 import { Tournament } from '@/model/tournament'
 import { Box, Heading } from '@kuma-ui/core'
-import TournamentLabel from './TournamentLabel'
 import { Sport } from '@/model/sport'
+import TournamentLabel from './TournamentLabel'
 
 interface TournamentsPanelProps {
   tournaments: Tournament[]

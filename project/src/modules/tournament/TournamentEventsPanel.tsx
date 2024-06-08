@@ -1,6 +1,6 @@
 import { Event } from '@/model/event'
 import { Box, Button } from '@kuma-ui/core'
-import EventLabel from '../sport/Events/EventLabel'
+import EventLabel from '../EventLabel'
 import { useState } from 'react'
 import { Tournament } from '@/model/tournament'
 

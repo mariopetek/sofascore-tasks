@@ -1,6 +1,7 @@
 import { Event } from '@/model/event'
 import { europeanDateFormat, isoDateFormat } from '@/utils/date'
 import { Box, Heading, Image } from '@kuma-ui/core'
+import EventLabel from '../EventLabel'
 
 interface TeamNextEventPanelProps {
   nextEvent: Event
@@ -62,44 +63,7 @@ export default function TeamNextEventPanel({ nextEvent }: TeamNextEventPanelProp
         </Box>
       </Box>
 
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        paddingY="spacings.sm"
-        paddingX="spacings.lg"
-        color="colors.onSurface.lv1"
-      >
-        <Box display="flex" gap="spacings.lg">
-          <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
-            <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs">
-              {isoDateFormat(startDate) === isoDateFormat(todayDate)
-                ? 'Today'
-                : isoDateFormat(startDate) === isoDateFormat(tomorrowDate)
-                ? 'Tomorrow'
-                : europeanDateFormat(startDate)}
-            </Box>
-            <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs">
-              {startTime}
-            </Box>
-          </Box>
-          <Box width="1px" bg="colors.onSurface.lv4"></Box>
-          <Box display="flex" flexDirection="column" gap="spacings.xs">
-            <Box display="flex" alignItems="center" gap="spacings.sm">
-              <Image src={homeTeamLogo} alt={homeTeamName} width="16px" height="16px" />
-              <Box as="span" fontSize="fontSizes.sm" color="'colors.onSurface.lv1'">
-                {homeTeamName}
-              </Box>
-            </Box>
-            <Box display="flex" alignItems="center" gap="spacings.sm">
-              <Image src={awayTeamLogo} alt={awayTeamName} width="16px" height="16px" />
-              <Box as="span" fontSize="fontSizes.sm" color="'colors.onSurface.lv1'">
-                {awayTeamName}
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
+      <EventLabel event={nextEvent} />
     </Box>
   )
 }

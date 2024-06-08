@@ -3,12 +3,12 @@ import { getTournamentDetails, getTournamentEvents } from '@/api/tournament'
 import { EventDetailsContextProvider } from '@/context/EventDetailsContext'
 import { Sport } from '@/model/sport'
 import { Tournament } from '@/model/tournament'
-import EventDetailsPanel from '@/modules/sport/Events/Details/EventDetailsPanel'
-import TournamentsPanel from '@/modules/sport/Tournaments/TournamentsPanel'
 import TournamentHeadingPanel from '@/modules/tournament/TournamentHeadingPanel'
 import TournamentEventsPanel from '@/modules/tournament/TournamentEventsPanel'
 import { Box } from '@kuma-ui/core'
 import { Event } from '@/model/event'
+import EventDetailsWidget from '@/modules/EventDetailsWidget'
+import TournamentsPanel from '@/modules/TournamentsPanel'
 
 interface TournamentDetailsPageProps {
   tournaments: Tournament[]
@@ -33,7 +33,7 @@ export default function TournamentDetailsMatchesPage({
         <Box display="flex" gap="spacings.xl">
           <EventDetailsContextProvider>
             <TournamentEventsPanel events={tournamentEvents} tournamentId={tournamentId} />
-            <EventDetailsPanel />
+            <EventDetailsWidget />
           </EventDetailsContextProvider>
         </Box>
       </Box>

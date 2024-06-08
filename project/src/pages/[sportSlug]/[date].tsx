@@ -3,9 +3,9 @@ import { EventDetailsContextProvider } from '@/context/EventDetailsContext'
 import { Event } from '@/model/event'
 import { Sport } from '@/model/sport'
 import { Tournament } from '@/model/tournament'
-import EventDetailsPanel from '@/modules/sport/Events/Details/EventDetailsPanel'
-import EventsPanel from '@/modules/sport/Events/EventsPanel'
-import TournamentsPanel from '@/modules/sport/Tournaments/TournamentsPanel'
+import EventDetailsWidget from '@/modules/EventDetailsWidget'
+import SportEventsPanel from '@/modules/sport/SportEventsPanel'
+import TournamentsPanel from '@/modules/TournamentsPanel'
 import { isoDateFormat } from '@/utils/date'
 import { Box } from '@kuma-ui/core'
 
@@ -21,8 +21,8 @@ export default function SportDatePage({ tournaments, dateEvents, selectedDate, s
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
       <TournamentsPanel tournaments={tournaments} sportSlug={sportSlug} />
       <EventDetailsContextProvider>
-        <EventsPanel events={dateEvents} selectedDate={selectedDate} sportSlug={sportSlug} />
-        <EventDetailsPanel />
+        <SportEventsPanel events={dateEvents} selectedDate={selectedDate} sportSlug={sportSlug} />
+        <EventDetailsWidget />
       </EventDetailsContextProvider>
     </Box>
   )

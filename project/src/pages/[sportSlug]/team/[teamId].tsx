@@ -5,12 +5,12 @@ import { Player } from '@/model/player'
 import { Sport } from '@/model/sport'
 import { Team, TeamDetails } from '@/model/team'
 import { Tournament } from '@/model/tournament'
-import TournamentsPanel from '@/modules/sport/Tournaments/TournamentsPanel'
 import TeamHeadingPanel from '@/modules/team/TeamHeadingPanel'
 import TeamInfoPanel from '@/modules/team/TeamInfoPanel'
 import TeamNextEventPanel from '@/modules/team/TeamNextEventPanel'
 import TeamTournamentsPanel from '@/modules/team/TeamTournamentsPanel'
 import TeamVenuePanel from '@/modules/team/TeamVenuePanel'
+import TournamentsPanel from '@/modules/TournamentsPanel'
 import { Box } from '@kuma-ui/core'
 
 interface TeamDetailsPageProps {

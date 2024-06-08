@@ -13,6 +13,12 @@ export default function EventLabel({ event }: EventLabelProps) {
   const startTime = new Date(event.startDate).toLocaleTimeString('hr-HR', { hour: '2-digit', minute: '2-digit' })
   const startDate = new Date(event.startDate)
 
+  const todayDate = new Date()
+  const tomorrowDate = new Date()
+  tomorrowDate.setDate(todayDate.getDate() + 1)
+  const yesterdayDate = new Date()
+  yesterdayDate.setDate(todayDate.getDate() - 1)
+
   const homeTeamLogo = `https://academy-backend.sofascore.dev/team/${event.homeTeam.id}/image`
   const awayTeamLogo = `https://academy-backend.sofascore.dev/team/${event.awayTeam.id}/image`
 
@@ -46,15 +52,19 @@ export default function EventLabel({ event }: EventLabelProps) {
       <Box display="flex" gap="spacings.lg">
         <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
           <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs">
-            {(isoDateFormat(startDate) !== isoDateFormat(new Date()) && eventStatus === 'notstarted') ||
-            eventStatus === 'finished'
+            {isoDateFormat(startDate) === isoDateFormat(tomorrowDate)
+              ? 'Tomorrow'
+              : isoDateFormat(startDate) === isoDateFormat(yesterdayDate)
+              ? 'Yesterday'
+              : (isoDateFormat(startDate) !== isoDateFormat(todayDate) && eventStatus === 'notstarted') ||
+                eventStatus === 'finished'
               ? europeanDateFormat(startDate)
               : startTime}
           </Box>
           <Box color={eventStatus === 'inprogress' ? 'colors.live' : 'colors.onSurface.lv2'} fontSize="fontSizes.xs">
             {eventStatus === 'finished'
               ? 'FT'
-              : isoDateFormat(startDate) !== isoDateFormat(new Date()) && eventStatus === 'notstarted'
+              : isoDateFormat(startDate) !== isoDateFormat(todayDate) && eventStatus === 'notstarted'
               ? startTime
               : eventStatus === 'notstarted'
               ? '-'

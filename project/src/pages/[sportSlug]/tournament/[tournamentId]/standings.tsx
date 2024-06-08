@@ -2,9 +2,9 @@ import { getSportTournaments } from '@/api/sport'
 import { getTournamentDetails, getTournamentStandings } from '@/api/tournament'
 import { Sport } from '@/model/sport'
 import { StandingRow, Tournament, TournamentStanding } from '@/model/tournament'
-import TournamentsPanel from '@/modules/sport/Tournaments/TournamentsPanel'
 import TournamentHeadingPanel from '@/modules/tournament/TournamentHeadingPanel'
 import TournamentStandingsPanel from '@/modules/tournament/TournamentStandingsPanel'
+import TournamentsPanel from '@/modules/TournamentsPanel'
 import { Box } from '@kuma-ui/core'
 
 interface TournamentDetailsPageProps {

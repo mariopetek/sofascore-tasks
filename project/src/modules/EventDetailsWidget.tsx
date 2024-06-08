@@ -2,7 +2,7 @@ import { useEventDetailsContext } from '@/context/EventDetailsContext'
 import { Box, Button } from '@kuma-ui/core'
 import Link from 'next/link'
 
-export default function EventDetailsPanel() {
+export default function EventDetailsWidget() {
   const { selectedEventId, setSelectedEventId, isDetailsPanelOpen, setIsDetailsPanelOpen } = useEventDetailsContext()
 
   function handleCloseEventClick() {

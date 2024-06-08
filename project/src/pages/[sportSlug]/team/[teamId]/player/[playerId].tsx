@@ -6,7 +6,7 @@ import { Sport } from '@/model/sport'
 import { Team, TeamDetails } from '@/model/team'
 import { Tournament } from '@/model/tournament'
 import PlayerHeadingPanel from '@/modules/player/PlayerHeadingPanel'
-import TournamentsPanel from '@/modules/sport/Tournaments/TournamentsPanel'
+import TournamentsPanel from '@/modules/TournamentsPanel'
 import { Box } from '@kuma-ui/core'
 
 interface PlayerPageProps {
