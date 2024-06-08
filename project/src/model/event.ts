@@ -23,9 +23,9 @@ type IncidentType = 'card' | 'goal' | 'period'
 
 type IncidentSide = 'home' | 'away'
 
-type CardIncidentColor = 'yellow' | 'yellowred' | 'red'
+export type CardIncidentColor = 'yellow' | 'yellowred' | 'red'
 
-type GoalIncidentGoalType =
+export type GoalIncidentGoalType =
   | 'regular'
   | 'owngoal'
   | 'penalty'
@@ -37,19 +37,19 @@ type GoalIncidentGoalType =
   | 'fieldgoal'
   | 'extrapoint'
 
-interface IncidentCommon {
+type IncidentCommon = {
   id: number
   time: number
   type: IncidentType
 }
 
-interface CardIncident extends IncidentCommon {
+type CardIncident = IncidentCommon & {
   player: Player
   teamSide: IncidentSide
   color: CardIncidentColor
 }
 
-interface GoalIncident extends IncidentCommon {
+type GoalIncident = IncidentCommon & {
   player: Player
   scoringTeam: IncidentSide
   homeScore: number
@@ -57,8 +57,20 @@ interface GoalIncident extends IncidentCommon {
   goalType: GoalIncidentGoalType
 }
 
-interface PeriodIncident extends IncidentCommon {
+type PeriodIncident = IncidentCommon & {
   text: string
 }
 
 export type Incident = CardIncident | GoalIncident | PeriodIncident
+
+export function isCardIncident(incident: Incident): incident is CardIncident {
+  return incident.type === 'card'
+}
+
+export function isGoalIncident(incident: Incident): incident is GoalIncident {
+  return incident.type === 'goal'
+}
+
+export function isPeriodIncident(incident: Incident): incident is PeriodIncident {
+  return incident.type === 'period'
+}

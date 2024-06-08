@@ -11,10 +11,9 @@ interface EventIncidentsWrapperProps {
 
 export default function EventIncidentsWrapper({ event }: EventIncidentsWrapperProps) {
   const { incidents, incidentsError, incidentsLoading } = getEventIncidentsClient(event.id)
-
   return (
     <>
-      {incidents ? <EventDetailsIncidents incidents={incidents} tournament={event.tournament} /> : null}
+      {incidents ? <EventDetailsIncidents incidents={incidents} event={event} /> : null}
       {incidentsLoading ? (
         <Box display="flex" justifyContent="center" padding="spacings.xxxl">
           <Loader />

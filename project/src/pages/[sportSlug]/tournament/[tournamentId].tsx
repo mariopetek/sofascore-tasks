@@ -23,7 +23,6 @@ export default function TournamentDetailsMatchesPage({
   sportSlug,
   tournamentDetails,
   tournamentEvents,
-  tournamentId,
 }: TournamentDetailsPageProps) {
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
@@ -32,7 +31,7 @@ export default function TournamentDetailsMatchesPage({
         <TournamentHeadingPanel tournament={tournamentDetails} sportSlug={sportSlug} />
         <Box display="flex" gap="spacings.xl" alignItems="flex-start">
           <EventDetailsContextProvider>
-            <TournamentEventsPanel events={tournamentEvents} tournamentId={tournamentId} />
+            <TournamentEventsPanel events={tournamentEvents} tournamentId={tournamentDetails.id} />
             <EventDetailsWidget />
           </EventDetailsContextProvider>
         </Box>
@@ -72,7 +71,6 @@ export async function getServerSideProps(context: {
       sportSlug,
       tournamentDetails,
       tournamentEvents,
-      tournamentId,
     },
   }
 }

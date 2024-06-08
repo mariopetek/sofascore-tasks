@@ -1,8 +1,9 @@
 import { Event } from '@/model/event'
 import { Box, Button } from '@kuma-ui/core'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Tournament } from '@/model/tournament'
 import EventLabelButton from '../EventLabelButton'
+import { useEventDetailsContext } from '@/context/EventDetailsContext'
 
 interface TournamentEventsPanelProps {
   events: Event[]
@@ -10,8 +11,14 @@ interface TournamentEventsPanelProps {
 }
 
 export default function TournamentEventsPanel({ events, tournamentId }: TournamentEventsPanelProps) {
+  const { setSelectedEvent, setIsDetailsPanelOpen } = useEventDetailsContext()
   const [span, setSpan] = useState<'last' | 'next'>('next')
   const [page, setPage] = useState(0)
+
+  useEffect(() => {
+    setSelectedEvent(null)
+    setIsDetailsPanelOpen(false)
+  }, [tournamentId])
 
   const groupedEventsByRound = events.reduce((acc, event) => {
     if (!acc[event.round]) {

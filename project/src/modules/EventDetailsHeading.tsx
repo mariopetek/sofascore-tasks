@@ -1,5 +1,5 @@
 import { Event } from '@/model/event'
-import { isoDateFormat } from '@/utils/date'
+import { europeanDateFormat, isoDateFormat } from '@/utils/date'
 import { Box, Heading, Image } from '@kuma-ui/core'
 import Link from 'next/link'
 
@@ -45,7 +45,7 @@ export default function EventDetailsHeading({ event }: EventDetailsHeadingProps)
                 ? 'Today'
                 : isoDateFormat(tommorowDate) === isoDateFormat(startDate)
                 ? 'Tommorow'
-                : isoDateFormat(startDate)}
+                : europeanDateFormat(startDate)}
             </Box>
             <Box as="span" color="colors.onSurface.lv1" fontSize="fontSizes.xs">
               {startTime}
