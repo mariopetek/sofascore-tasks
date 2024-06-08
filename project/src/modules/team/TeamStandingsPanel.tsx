@@ -88,7 +88,7 @@ export default function TeamStandingsPanel({ tournaments, teamId }: TeamStanding
                     borderRadius="radii.md"
                     zIndex="1"
                   >
-                    {tournaments.map(tournament => (
+                    {tournaments.map((tournament, index) => (
                       <Box
                         key={tournament.id}
                         paddingX="spacings.md"
@@ -97,7 +97,10 @@ export default function TeamStandingsPanel({ tournaments, teamId }: TeamStanding
                         display="flex"
                         alignItems="center"
                         gap="spacings.sm"
-                        borderRadius="radii.md"
+                        borderTopLeftRadius={index === 0 ? 'radii.md' : '0px'}
+                        borderTopRightRadius={index === 0 ? 'radii.md' : '0px'}
+                        borderBottomLeftRadius={index === tournaments.length - 1 ? 'radii.md' : '0px'}
+                        borderBottomRightRadius={index === tournaments.length - 1 ? 'radii.md' : '0px'}
                         onClick={() => {
                           setSelectedTournament(tournament)
                           setIsTournamentsMenuOpen(false)

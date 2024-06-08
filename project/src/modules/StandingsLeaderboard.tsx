@@ -11,7 +11,6 @@ interface StandingsLeaderboardProps {
 }
 
 export default function StandingsLeaderboard({ standings, sportSlug, teamId }: StandingsLeaderboardProps) {
-  console.log(teamId)
   return (
     <>
       <Box padding="spacings.lg" display="flex" justifyContent="space-evenly" color="colors.onSurface.lv2">
@@ -58,7 +57,7 @@ export default function StandingsLeaderboard({ standings, sportSlug, teamId }: S
                 width="24px"
                 height="24px"
                 padding="spacings.xs"
-                bg="colors.secondary.default"
+                bg={teamId === standingRow.team.id ? 'colors.surface.s1' : 'colors.secondary.default'}
                 textAlign="center"
                 borderRadius="50%"
               >
