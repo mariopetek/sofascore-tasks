@@ -6,15 +6,14 @@ import { useRouter } from 'next/router'
 
 interface TournamentLabelProps {
   tournament: Tournament
-  sportSlug: Sport['slug']
 }
 
-export default function TournamentLabel({ tournament, sportSlug }: TournamentLabelProps) {
+export default function TournamentLabel({ tournament }: TournamentLabelProps) {
   const router = useRouter()
-  const isActive = () => router.asPath.startsWith(`/${sportSlug}/tournament/${tournament.id}`)
+  const isActive = () => router.asPath.startsWith(`/${tournament.sport.slug}/tournament/${tournament.id}`)
 
   return (
-    <Link href={`/${sportSlug}/tournament/${tournament.id}`}>
+    <Link href={`/${tournament.sport.slug}/tournament/${tournament.id}`}>
       <Box
         display="flex"
         alignItems="center"

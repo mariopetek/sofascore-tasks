@@ -5,10 +5,9 @@ import TournamentLabel from './TournamentLabel'
 
 interface TournamentsPanelProps {
   tournaments: Tournament[]
-  sportSlug: Sport['slug']
 }
 
-export default function TournamentsPanel({ tournaments, sportSlug }: TournamentsPanelProps) {
+export default function TournamentsPanel({ tournaments }: TournamentsPanelProps) {
   return (
     <Box
       backgroundColor="colors.surface.s1"
@@ -30,7 +29,7 @@ export default function TournamentsPanel({ tournaments, sportSlug }: Tournaments
       </Heading>
       <Box display="flex" flexDirection="column">
         {tournaments.map(tournament => (
-          <TournamentLabel key={tournament.id} tournament={tournament} sportSlug={sportSlug} />
+          <TournamentLabel key={tournament.id} tournament={tournament} />
         ))}
       </Box>
     </Box>

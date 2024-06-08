@@ -23,7 +23,7 @@ export default function TeamStandingsPage({
 }: TeamStandingsPageProps) {
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={sportTournaments} sportSlug={sportSlug} />
+      <TournamentsPanel tournaments={sportTournaments} />
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TeamHeadingPanel team={teamDetails} sportSlug={sportSlug} />
         <TeamStandingsPanel tournaments={teamTournaments} teamId={teamDetails.id} />

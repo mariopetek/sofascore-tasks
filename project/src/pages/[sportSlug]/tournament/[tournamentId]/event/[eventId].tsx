@@ -9,15 +9,14 @@ import { Box } from '@kuma-ui/core'
 
 interface EventPageProps {
   tournaments: Tournament[]
-  sportSlug: Sport['slug']
   eventDetails: Event
   eventIncidents: Incident[]
 }
 
-export default function EventPage({ tournaments, sportSlug, eventDetails, eventIncidents }: EventPageProps) {
+export default function EventPage({ tournaments, eventDetails, eventIncidents }: EventPageProps) {
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={tournaments} sportSlug={sportSlug} />
+      <TournamentsPanel tournaments={tournaments} />
       <EventDetailsPanel event={eventDetails} incidents={eventIncidents} />
     </Box>
   )
@@ -27,7 +26,7 @@ export async function getServerSideProps(context: {
   params: { sportSlug: Sport['slug']; tournamentId: Tournament['id']; eventId: Event['id'] }
 }) {
   const { params } = context
-  const { sportSlug, tournamentId, eventId } = params
+  const { sportSlug, eventId } = params
 
   const tournaments = await getSportTournaments(sportSlug)
 
@@ -38,7 +37,6 @@ export async function getServerSideProps(context: {
   return {
     props: {
       tournaments,
-      sportSlug,
       eventDetails,
       eventIncidents,
     },

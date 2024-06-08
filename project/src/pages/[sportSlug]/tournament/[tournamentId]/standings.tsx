@@ -22,9 +22,9 @@ export default function TournamentDetailsStandingsPage({
 }: TournamentDetailsPageProps) {
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={tournaments} sportSlug={sportSlug} />
+      <TournamentsPanel tournaments={tournaments} />
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
-        <TournamentHeadingPanel tournament={tournamentDetails} sportSlug={sportSlug} />
+        <TournamentHeadingPanel tournament={tournamentDetails} />
         <TournamentStandingsPanel standings={tournamentStandings} sportSlug={sportSlug} />
       </Box>
     </Box>

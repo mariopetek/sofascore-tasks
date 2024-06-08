@@ -19,7 +19,7 @@ interface SportPageProps {
 export default function SportTodayPage({ tournaments, todayEvents, todayDate, sportSlug }: SportPageProps) {
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={tournaments} sportSlug={sportSlug} />
+      <TournamentsPanel tournaments={tournaments} />
       <EventDetailsContextProvider>
         <SportEventsPanel events={todayEvents} selectedDate={todayDate} sportSlug={sportSlug} />
         <EventDetailsWidget />

@@ -1,4 +1,3 @@
-import { Sport } from '@/model/sport'
 import { Tournament } from '@/model/tournament'
 import { getCountryCodeByName } from '@/utils/country/country'
 import { Box, Heading, Image } from '@kuma-ui/core'
@@ -7,7 +6,6 @@ import { useRouter } from 'next/router'
 
 interface TournamentHeadingPanelProps {
   tournament: Tournament
-  sportSlug: Sport['slug']
 }
 
 const LINKS = [
@@ -15,10 +13,10 @@ const LINKS = [
   { name: 'Standings', path: '/standings' },
 ]
 
-export default function TournamentHeadingPanel({ tournament, sportSlug }: TournamentHeadingPanelProps) {
+export default function TournamentHeadingPanel({ tournament }: TournamentHeadingPanelProps) {
   const router = useRouter()
 
-  const isActive = (path: string) => router.asPath === `/${sportSlug}/tournament/${tournament.id}${path}`
+  const isActive = (path: string) => router.asPath === `/${tournament.sport.slug}/tournament/${tournament.id}${path}`
   return (
     <Box bg="colors.surface.s1" borderRadius="radii.lg" boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)">
       <Box padding="spacings.lg" display="flex" alignItems="center" gap="spacings.xl">
@@ -55,7 +53,7 @@ export default function TournamentHeadingPanel({ tournament, sportSlug }: Tourna
       </Box>
       <Box paddingX="spacings.lg" display="flex">
         {LINKS.map(link => (
-          <Link key={link.path} href={`/${sportSlug}/tournament/${tournament.id}${link.path}`}>
+          <Link key={link.path} href={`/${tournament.sport.slug}/tournament/${tournament.id}${link.path}`}>
             <Box position="relative" paddingY="spacings.lg" marginX="spacings.sm">
               <Box
                 as="span"

@@ -1,12 +1,12 @@
 import { Sport } from '@/model/sport'
-import { Team } from '@/model/team'
+import { TeamDetails } from '@/model/team'
 import { getCountryCodeByName } from '@/utils/country/country'
 import { Box, Heading, Image } from '@kuma-ui/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 interface TeamHeadingPanelProps {
-  team: Team
+  team: TeamDetails
   sportSlug: Sport['slug']
 }
 

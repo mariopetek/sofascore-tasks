@@ -11,15 +11,14 @@ import { Box } from '@kuma-ui/core'
 
 interface PlayerPageProps {
   sportTournaments: Tournament[]
-  sportSlug: Sport['slug']
   teamDetails: TeamDetails
   playerDetails: Player
 }
 
-export default function PlayerPage({ sportTournaments, sportSlug, teamDetails, playerDetails }: PlayerPageProps) {
+export default function PlayerPage({ sportTournaments, teamDetails, playerDetails }: PlayerPageProps) {
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={sportTournaments} sportSlug={sportSlug} />
+      <TournamentsPanel tournaments={sportTournaments} />
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <PlayerHeadingPanel player={playerDetails} team={teamDetails} />
       </Box>
@@ -42,7 +41,6 @@ export async function getServerSideProps(context: {
   return {
     props: {
       sportTournaments,
-      sportSlug,
       teamDetails,
       playerDetails,
     },

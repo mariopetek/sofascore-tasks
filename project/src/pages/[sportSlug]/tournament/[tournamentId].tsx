@@ -4,11 +4,11 @@ import { EventDetailsContextProvider } from '@/context/EventDetailsContext'
 import { Sport } from '@/model/sport'
 import { Tournament } from '@/model/tournament'
 import TournamentHeadingPanel from '@/modules/tournament/TournamentHeadingPanel'
-import TournamentEventsPanel from '@/modules/tournament/TournamentEventsPanel'
 import { Box } from '@kuma-ui/core'
 import { Event } from '@/model/event'
 import EventDetailsWidget from '@/modules/EventDetailsWidget'
 import TournamentsPanel from '@/modules/TournamentsPanel'
+import EventsPanelRounds from '@/modules/EventsPanelRounds'
 
 interface TournamentDetailsPageProps {
   tournaments: Tournament[]
@@ -26,12 +26,12 @@ export default function TournamentDetailsMatchesPage({
 }: TournamentDetailsPageProps) {
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={tournaments} sportSlug={sportSlug} />
+      <TournamentsPanel tournaments={tournaments} />
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
-        <TournamentHeadingPanel tournament={tournamentDetails} sportSlug={sportSlug} />
+        <TournamentHeadingPanel tournament={tournamentDetails} />
         <Box display="flex" gap="spacings.xl" alignItems="flex-start">
           <EventDetailsContextProvider>
-            <TournamentEventsPanel events={tournamentEvents} tournamentId={tournamentDetails.id} />
+            <EventsPanelRounds events={tournamentEvents} tournamentId={tournamentDetails.id} />
             <EventDetailsWidget />
           </EventDetailsContextProvider>
         </Box>

@@ -19,7 +19,7 @@ interface SportDatePageProps {
 export default function SportDatePage({ tournaments, dateEvents, selectedDate, sportSlug }: SportDatePageProps) {
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={tournaments} sportSlug={sportSlug} />
+      <TournamentsPanel tournaments={tournaments} />
       <EventDetailsContextProvider>
         <SportEventsPanel events={dateEvents} selectedDate={selectedDate} sportSlug={sportSlug} />
         <EventDetailsWidget />
