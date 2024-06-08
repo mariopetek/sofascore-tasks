@@ -1,5 +1,10 @@
 import { Box } from '@kuma-ui/core'
 
-export default function ImagePlaceholder() {
-  return <Box width="40px" height="40px" borderRadius="50%" bg="colors.secondary.default"></Box>
+interface ImagePlaceholderProps {
+  height: string
+  width: string
+}
+
+export default function ImagePlaceholder({ height, width }: ImagePlaceholderProps) {
+  return <Box width={width} height={height} borderRadius="50%" bg="colors.secondary.default"></Box>
 }

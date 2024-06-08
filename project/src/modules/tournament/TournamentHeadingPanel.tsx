@@ -22,16 +22,20 @@ export default function TournamentHeadingPanel({ tournament, sportSlug }: Tourna
   return (
     <Box bg="colors.surface.s1" borderRadius="radii.lg" boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)">
       <Box padding="spacings.lg" display="flex" alignItems="center" gap="spacings.xl">
-        <Image
-          src={`https://academy-backend.sofascore.dev/tournament/${tournament.id}/image`}
-          alt={tournament.name}
+        <Box
           border="1px solid"
           borderColor="colors.onSurface.lv3"
           borderRadius="radii.sm"
           height="80px"
           width="80px"
           padding="spacings.md"
-        />
+        >
+          <Image
+            src={`https://academy-backend.sofascore.dev/tournament/${tournament.id}/image`}
+            alt={tournament.name}
+            width="100%"
+          />
+        </Box>
         <Box display="flex" flexDirection="column" gap="spacings.sm" justifyContent="center">
           <Heading as="h1" color="colors.onSurface.lv1" fontSize="fontSizes.xxl">
             {tournament.name}

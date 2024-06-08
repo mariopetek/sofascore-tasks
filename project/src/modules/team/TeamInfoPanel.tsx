@@ -35,7 +35,7 @@ export default function TeamInfoPanel({ team, players }: TeamInfoPanelProps) {
         Team Info
       </Heading>
       <Box paddingX="spacings.lg" paddingY="spacings.sm" display="flex" alignItems="center" gap="spacings.lg">
-        <ImagePlaceholder />
+        <ImagePlaceholder width="40px" height="40px" />
         <Box as="span" fontSize="fontSizes.sm" color="colors.onSurface.lv1">
           Coach: {team.managerName}
         </Box>

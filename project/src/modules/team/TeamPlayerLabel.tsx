@@ -37,7 +37,7 @@ export default function TeamPlayerLabel({ player, sportSlug, teamId }: TeamPlaye
             onError={() => setIsImageLoaded(false)}
           />
         ) : (
-          <ImagePlaceholder />
+          <ImagePlaceholder width="40px" height="40px" />
         )}
 
         <Box display="flex" flexDirection="column" gap="spacings.xs">

@@ -33,7 +33,7 @@ export default function TeamSquadPanel({ players, teamDetails, sportSlug }: Team
         Coach
       </Heading>
       <Box paddingY="spacings.sm" paddingX="spacings.lg" display="flex" alignItems="center" gap="spacings.lg">
-        <ImagePlaceholder />
+        <ImagePlaceholder width="40px" height="40px" />
         <Box as="span" color="colors.onSurface.lv1" fontSize="fontSizes.sm">
           {teamDetails.managerName}
         </Box>
