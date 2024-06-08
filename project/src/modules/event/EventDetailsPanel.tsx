@@ -2,6 +2,7 @@ import { Event, Incident } from '@/model/event'
 import { Box } from '@kuma-ui/core'
 import EventDetailsHeading from '../EventDetailsHeading'
 import EventDetailsIncidents from '../EventDetailsIncidents'
+import Separator from '@/components/Separator'
 
 interface EventDetailsPanelProps {
   event: Event
@@ -18,6 +19,7 @@ export default function EventDetailsPanel({ event, incidents }: EventDetailsPane
       borderRadius="radii.lg"
     >
       <EventDetailsHeading event={event} />
+      <Separator />
       <EventDetailsIncidents incidents={incidents} event={event} />
     </Box>
   )

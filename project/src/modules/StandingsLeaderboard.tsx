@@ -11,6 +11,11 @@ interface StandingsLeaderboardProps {
 }
 
 export default function StandingsLeaderboard({ standings, sportSlug, teamId }: StandingsLeaderboardProps) {
+  function calculateGamesBehind(leaderWins: number, leaderLosses: number, teamWins: number, teamLosses: number) {
+    const gamesBehind = (leaderWins - teamWins + (teamLosses - leaderLosses)) / 2
+    return gamesBehind
+  }
+
   return (
     <>
       <Box padding="spacings.lg" display="flex" justifyContent="space-evenly" color="colors.onSurface.lv2">
@@ -35,9 +40,6 @@ export default function StandingsLeaderboard({ standings, sportSlug, teamId }: S
           </Box>
           <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
             DIFF
-          </Box>
-          <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
-            Str
           </Box>
           <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
             GB
@@ -96,10 +98,14 @@ export default function StandingsLeaderboard({ standings, sportSlug, teamId }: S
                 {standingRow.scoresFor - standingRow.scoresAgainst}
               </Box>
               <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
-                {`4`}
-              </Box>
-              <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
-                {`16.0`}
+                {index === 0
+                  ? '-'
+                  : calculateGamesBehind(
+                      standings[0].wins,
+                      standings[0].losses,
+                      standingRow.wins,
+                      standingRow.losses
+                    ).toFixed(1)}
               </Box>
               <Box
                 as="span"

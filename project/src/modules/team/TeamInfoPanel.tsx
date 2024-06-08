@@ -50,7 +50,7 @@ export default function TeamInfoPanel({ team, players }: TeamInfoPanelProps) {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          gap="spacings.md"
+          gap="spacings.sm"
           flex="1"
         >
           <Box
