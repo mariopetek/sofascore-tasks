@@ -61,7 +61,11 @@ export default function SportEventsContainer({ events }: SportEventContainerProp
         ))}
       </Box>
 
-      {idx < tournamentIds.length - 1 ? <Separator /> : null}
+      {idx < tournamentIds.length - 1 ? (
+        <Box marginTop="spacings.sm">
+          <Separator />
+        </Box>
+      ) : null}
     </Box>
   ))
 }

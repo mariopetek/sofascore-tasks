@@ -30,7 +30,7 @@ export default function TournamentDetailsMatchesPage({
       <TournamentsPanel tournaments={tournaments} sportSlug={sportSlug} />
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TournamentHeadingPanel tournament={tournamentDetails} sportSlug={sportSlug} />
-        <Box display="flex" gap="spacings.xl">
+        <Box display="flex" gap="spacings.xl" alignItems="flex-start">
           <EventDetailsContextProvider>
             <TournamentEventsPanel events={tournamentEvents} tournamentId={tournamentId} />
             <EventDetailsWidget />

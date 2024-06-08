@@ -38,7 +38,9 @@ export default function TeamSquadPanel({ players, teamDetails, sportSlug }: Team
           {teamDetails.managerName}
         </Box>
       </Box>
-      <Separator />
+      <Box marginTop="spacings.sm">
+        <Separator />
+      </Box>
       <Heading
         as="h2"
         fontSize="fontSizes.xs"
@@ -53,7 +55,11 @@ export default function TeamSquadPanel({ players, teamDetails, sportSlug }: Team
       {players.map((player, index) => (
         <Fragment key={player.id}>
           <TeamPlayerLabel key={player.id} player={player} sportSlug={sportSlug} teamId={teamDetails.id} />
-          {index !== players.length - 1 ? <Separator /> : null}
+          {index !== players.length - 1 ? (
+            <Box marginTop="spacings.sm">
+              <Separator />
+            </Box>
+          ) : null}
         </Fragment>
       ))}
     </Box>

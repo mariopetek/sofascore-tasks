@@ -7,8 +7,8 @@ interface EventLabelProps {
 }
 
 export default function EventLabel({ event }: EventLabelProps) {
-  const startTime = new Date(event.startDate).toLocaleTimeString('hr-HR', { hour: '2-digit', minute: '2-digit' })
   const startDate = new Date(event.startDate)
+  const startTime = startDate.toLocaleTimeString('hr-HR', { hour: '2-digit', minute: '2-digit' })
 
   const todayDate = new Date()
   const tomorrowDate = new Date()

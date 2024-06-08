@@ -1,6 +1,9 @@
 import { useEventDetailsContext } from '@/context/EventDetailsContext'
 import { Box, Button } from '@kuma-ui/core'
 import Link from 'next/link'
+import EventDetailsHeading from './EventDetailsHeading'
+import Separator from '@/components/Separator'
+import EventIncidentsWrapper from './EventIncidentsWrapper'
 
 export default function EventDetailsWidget() {
   const { selectedEvent, setSelectedEvent, isDetailsPanelOpen, setIsDetailsPanelOpen } = useEventDetailsContext()
@@ -44,8 +47,13 @@ export default function EventDetailsWidget() {
           </Box>
         </Link>
       </Box>
-      <Box padding="spacings.lg"></Box>
-      <Box></Box>
+      {selectedEvent === null ? null : (
+        <>
+          <EventDetailsHeading event={selectedEvent} />
+          <Separator />
+          <EventIncidentsWrapper event={selectedEvent} />
+        </>
+      )}
     </Box>
   )
 }

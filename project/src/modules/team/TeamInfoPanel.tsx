@@ -40,7 +40,9 @@ export default function TeamInfoPanel({ team, players }: TeamInfoPanelProps) {
           Coach: {team.managerName}
         </Box>
       </Box>
-      <Separator />
+      <Box marginTop="spacings.sm">
+        <Separator />
+      </Box>
       <Box display="flex">
         <Box
           paddingX="spacings.md"
