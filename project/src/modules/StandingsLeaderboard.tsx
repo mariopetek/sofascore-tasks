@@ -27,13 +27,27 @@ export default function StandingsLeaderboard({ standings, sportSlug, teamId }: S
           <Box as="span" maxWidth="62px" width="100%">
             W
           </Box>
-          <Box as="span" maxWidth="62px" width="100%">
+          <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'none' : 'inline'}>
             D
           </Box>
           <Box as="span" maxWidth="62px" width="100%">
             L
           </Box>
-          <Box as="span" maxWidth="62px" width="100%">
+          <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
+            DIFF
+          </Box>
+          <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
+            Str
+          </Box>
+          <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
+            GB
+          </Box>
+          <Box
+            as="span"
+            maxWidth="62px"
+            width="100%"
+            display={sportSlug === 'basketball' || sportSlug === 'american-football' ? 'none' : 'inline'}
+          >
             Goals
           </Box>
           <Box as="span" maxWidth="62px" width="100%">
@@ -72,13 +86,27 @@ export default function StandingsLeaderboard({ standings, sportSlug, teamId }: S
               <Box as="span" maxWidth="62px" width="100%">
                 {standingRow.wins}
               </Box>
-              <Box as="span" maxWidth="62px" width="100%">
+              <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'none' : 'inline'}>
                 {standingRow.draws}
               </Box>
               <Box as="span" maxWidth="62px" width="100%">
                 {standingRow.losses}
               </Box>
-              <Box as="span" maxWidth="62px" width="100%">
+              <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
+                {standingRow.scoresFor - standingRow.scoresAgainst}
+              </Box>
+              <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
+                {`4`}
+              </Box>
+              <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
+                {`16.0`}
+              </Box>
+              <Box
+                as="span"
+                maxWidth="62px"
+                width="100%"
+                display={sportSlug === 'basketball' || sportSlug === 'american-football' ? 'none' : 'inline'}
+              >
                 {standingRow.scoresFor}:{standingRow.scoresAgainst}
               </Box>
               <Box as="span" maxWidth="62px" width="100%">
