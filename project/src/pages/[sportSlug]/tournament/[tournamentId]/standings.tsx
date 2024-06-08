@@ -1,7 +1,7 @@
 import { getSportTournaments } from '@/api/sport'
 import { getTournamentDetails, getTournamentStandings } from '@/api/tournament'
 import { Sport } from '@/model/sport'
-import { StandingRow, Tournament, TournamentStanding } from '@/model/tournament'
+import { StandingRow, Tournament } from '@/model/tournament'
 import TournamentHeadingPanel from '@/modules/tournament/TournamentHeadingPanel'
 import TournamentStandingsPanel from '@/modules/tournament/TournamentStandingsPanel'
 import TournamentsPanel from '@/modules/TournamentsPanel'

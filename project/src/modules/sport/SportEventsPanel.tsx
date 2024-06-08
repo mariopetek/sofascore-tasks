@@ -15,13 +15,13 @@ interface SportEventsPanelProps {
 }
 
 export default function SportEventsPanel({ events, selectedDate, sportSlug }: SportEventsPanelProps) {
-  const { setSelectedEventId, setIsDetailsPanelOpen } = useEventDetailsContext()
+  const { setSelectedEvent, setIsDetailsPanelOpen } = useEventDetailsContext()
   const pathname = usePathname()
   const pathnameSegments = pathname.split('/').filter(Boolean)
   const firstPathnameSegment = pathnameSegments[0]
 
   useEffect(() => {
-    setSelectedEventId(null)
+    setSelectedEvent(null)
     setIsDetailsPanelOpen(false)
   }, [selectedDate, sportSlug])
 

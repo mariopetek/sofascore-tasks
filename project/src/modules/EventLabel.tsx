@@ -1,4 +1,3 @@
-import { useEventDetailsContext } from '@/context/EventDetailsContext'
 import { Event } from '@/model/event'
 import { europeanDateFormat, isoDateFormat } from '@/utils/date'
 import { Box, Image } from '@kuma-ui/core'
@@ -8,8 +7,6 @@ interface EventLabelProps {
 }
 
 export default function EventLabel({ event }: EventLabelProps) {
-  const { selectedEventId, setSelectedEventId, setIsDetailsPanelOpen } = useEventDetailsContext()
-
   const startTime = new Date(event.startDate).toLocaleTimeString('hr-HR', { hour: '2-digit', minute: '2-digit' })
   const startDate = new Date(event.startDate)
 
@@ -30,13 +27,6 @@ export default function EventLabel({ event }: EventLabelProps) {
 
   const eventStatus = event.status
 
-  function handleEventClick() {
-    setIsDetailsPanelOpen(true)
-    setSelectedEventId(event.id)
-  }
-
-  const isActive = () => selectedEventId === event.id
-
   return (
     <Box
       display="flex"
@@ -45,9 +35,6 @@ export default function EventLabel({ event }: EventLabelProps) {
       paddingY="spacings.sm"
       paddingX="spacings.lg"
       cursor="pointer"
-      onClick={handleEventClick}
-      bg={isActive() ? 'colors.primary.highlight' : 'colors.surface.s1'}
-      _hover={{ bg: isActive() ? 'colors.primary.highlight' : 'colors.surface.s2' }}
     >
       <Box display="flex" gap="spacings.lg">
         <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">

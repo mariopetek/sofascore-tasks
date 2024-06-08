@@ -3,11 +3,11 @@ import { Box, Button } from '@kuma-ui/core'
 import Link from 'next/link'
 
 export default function EventDetailsWidget() {
-  const { selectedEventId, setSelectedEventId, isDetailsPanelOpen, setIsDetailsPanelOpen } = useEventDetailsContext()
+  const { selectedEvent, setSelectedEvent, isDetailsPanelOpen, setIsDetailsPanelOpen } = useEventDetailsContext()
 
   function handleCloseEventClick() {
     setIsDetailsPanelOpen(false)
-    setSelectedEventId(null)
+    setSelectedEvent(null)
   }
 
   return !isDetailsPanelOpen ? null : (
@@ -27,7 +27,9 @@ export default function EventDetailsWidget() {
           height="24px"
           onClick={handleCloseEventClick}
         ></Button>
-        <Link href="#">
+        <Link
+          href={`/${selectedEvent?.tournament.sport.slug}/tournament/${selectedEvent?.tournament.id}/event/${selectedEvent?.id}`}
+        >
           <Box display="flex" alignItems="center">
             <Box color="colors.primary.default" fontSize="fontSizes.md" fontWeight="fontWeights.bold">
               View Full Page

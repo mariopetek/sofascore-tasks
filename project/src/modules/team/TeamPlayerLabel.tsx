@@ -1,5 +1,4 @@
 import { Box, Image } from '@kuma-ui/core'
-
 import { getCountryCodeByName } from '@/utils/country/country'
 import Link from 'next/link'
 import { Player } from '@/model/player'
@@ -44,7 +43,7 @@ export default function TeamPlayerLabel({ player, sportSlug, teamId }: TeamPlaye
           <Box as="span" color="colors.onSurface.lv1" fontSize="fontSizes.sm">
             {player.name}
           </Box>
-          <Box display="flex" alignItems="cemter" gap="spacings.xs">
+          <Box display="flex" alignItems="center" gap="spacings.xs">
             <Image
               src={`https://www.sofascore.com/static/images/flags/${getCountryCodeByName(player.country.name)}.png`}
               alt={player.country.name}

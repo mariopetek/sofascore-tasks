@@ -1,7 +1,7 @@
 import { Event } from '@/model/event'
-import { europeanDateFormat, isoDateFormat } from '@/utils/date'
 import { Box, Heading, Image } from '@kuma-ui/core'
-import EventLabel from '../EventLabel'
+import EventLabelLink from '../EventLabelLink'
+import Link from 'next/link'
 
 interface TeamNextEventPanelProps {
   nextEvent: Event
@@ -11,19 +11,6 @@ export default function TeamNextEventPanel({ nextEvent }: TeamNextEventPanelProp
   const tournamentLogo = `https://academy-backend.sofascore.dev/tournament/${nextEvent.tournament.id}/image`
   const tournamentCountry = nextEvent.tournament.country.name
   const tournamentName = nextEvent.tournament.name
-
-  const startTime = new Date(nextEvent.startDate).toLocaleTimeString('hr-HR', { hour: '2-digit', minute: '2-digit' })
-  const startDate = new Date(nextEvent.startDate)
-
-  const todayDate = new Date()
-  const tomorrowDate = new Date()
-  tomorrowDate.setDate(todayDate.getDate() + 1)
-
-  const homeTeamLogo = `https://academy-backend.sofascore.dev/team/${nextEvent.homeTeam.id}/image`
-  const awayTeamLogo = `https://academy-backend.sofascore.dev/team/${nextEvent.awayTeam.id}/image`
-
-  const homeTeamName = nextEvent.homeTeam.name
-  const awayTeamName = nextEvent.awayTeam.name
 
   return (
     <Box
@@ -57,13 +44,15 @@ export default function TeamNextEventPanel({ nextEvent }: TeamNextEventPanelProp
             width="24px"
             height="24px"
           ></Box>
-          <Box as="span" color="colors.onSurface.lv2">
-            {tournamentName}
-          </Box>
+          <Link href={`/${nextEvent.tournament.sport.slug}/tournament/${nextEvent.tournament.id}`}>
+            <Box as="span" color="colors.onSurface.lv2" _hover={{ color: 'colors.onSurface.lv3' }}>
+              {tournamentName}
+            </Box>
+          </Link>
         </Box>
       </Box>
 
-      <EventLabel event={nextEvent} />
+      <EventLabelLink event={nextEvent} />
     </Box>
   )
 }

@@ -1,9 +1,9 @@
 import { Event } from '@/model/event'
 import { Box, Image } from '@kuma-ui/core'
-import EventLabel from '../EventLabel'
 import { Tournament } from '@/model/tournament'
 import Separator from '@/components/Separator'
 import Link from 'next/link'
+import EventLabelButton from '../EventLabelButton'
 
 interface SportEventContainerProps {
   events: Event[]
@@ -57,7 +57,7 @@ export default function SportEventsContainer({ events }: SportEventContainerProp
       </Box>
       <Box>
         {sportEventsGroupedByTournament[tournamentId].map(event => (
-          <EventLabel event={event} key={event.id} />
+          <EventLabelButton event={event} key={event.id} />
         ))}
       </Box>
 

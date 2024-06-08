@@ -1,8 +1,8 @@
 import { Event } from '@/model/event'
 import { Box, Button } from '@kuma-ui/core'
-import EventLabel from '../EventLabel'
 import { useState } from 'react'
 import { Tournament } from '@/model/tournament'
+import EventLabelButton from '../EventLabelButton'
 
 interface TournamentEventsPanelProps {
   events: Event[]
@@ -116,7 +116,7 @@ export default function TournamentEventsPanel({ events, tournamentId }: Tourname
             Round {round}
           </Box>
           {groupedEventsByRound[round].map(event => (
-            <EventLabel key={event.id} event={event} />
+            <EventLabelButton key={event.id} event={event} />
           ))}
         </Box>
       ))}

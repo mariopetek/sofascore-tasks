@@ -2,8 +2,8 @@ import { Event } from '@/model/event'
 import { createContext, PropsWithChildren, useContext, useState } from 'react'
 
 interface ContextValue {
-  selectedEventId: Event['id'] | null
-  setSelectedEventId: React.Dispatch<React.SetStateAction<Event['id'] | null>>
+  selectedEvent: Event | null
+  setSelectedEvent: React.Dispatch<React.SetStateAction<Event | null>>
   isDetailsPanelOpen: boolean
   setIsDetailsPanelOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -11,12 +11,12 @@ interface ContextValue {
 const EventDetailsContext = createContext<ContextValue>({} as ContextValue)
 
 export const EventDetailsContextProvider = ({ children }: PropsWithChildren) => {
-  const [selectedEventId, setSelectedEventId] = useState<Event['id'] | null>(null)
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
   const [isDetailsPanelOpen, setIsDetailsPanelOpen] = useState(false)
 
   return (
     <EventDetailsContext.Provider
-      value={{ selectedEventId, setSelectedEventId, isDetailsPanelOpen, setIsDetailsPanelOpen }}
+      value={{ selectedEvent, setSelectedEvent, isDetailsPanelOpen, setIsDetailsPanelOpen }}
     >
       {children}
     </EventDetailsContext.Provider>
