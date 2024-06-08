@@ -4,6 +4,7 @@ import { StandingRow, Tournament } from '@/model/tournament'
 import StandingsLeaderboard from '../StandingsLeaderboard'
 import { Box } from '@kuma-ui/core'
 import { Team } from '@/model/team'
+import ErrorMessage from '@/components/ErrorMessage'
 
 interface TeamStandingsLeaderboardProps {
   tournament: Tournament
@@ -11,7 +12,7 @@ interface TeamStandingsLeaderboardProps {
 }
 
 export default function TeamStandingsLeaderboard({ tournament, teamId }: TeamStandingsLeaderboardProps) {
-  const { standings, standingsLoading } = getTournamentStandingsClient(tournament.id)
+  const { standings, standingsLoading, standingsError } = getTournamentStandingsClient(tournament.id)
 
   let totalStandings = [] as StandingRow[]
   if (standings) {
@@ -26,6 +27,11 @@ export default function TeamStandingsLeaderboard({ tournament, teamId }: TeamSta
       {standingsLoading ? (
         <Box display="flex" justifyContent="center" padding="spacings.xxxl">
           <Loader />
+        </Box>
+      ) : null}
+      {standingsError ? (
+        <Box display="flex" justifyContent="center" padding="spacings.xxxl">
+          <ErrorMessage message="Failed to load standings" />
         </Box>
       ) : null}
     </>

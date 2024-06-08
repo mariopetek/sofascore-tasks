@@ -16,12 +16,12 @@ export default function EventIncidentsWrapper({ event }: EventIncidentsWrapperPr
     <>
       {incidents ? <EventDetailsIncidents incidents={incidents} tournament={event.tournament} /> : null}
       {incidentsLoading ? (
-        <Box display="flex" alignItems="center" justifyContent="center" padding="spacings.xxxl">
+        <Box display="flex" justifyContent="center" padding="spacings.xxxl">
           <Loader />
         </Box>
       ) : null}
       {incidentsError ? (
-        <Box display="flex" alignItems="center" justifyContent="center" padding="spacings.xxxl">
+        <Box display="flex" justifyContent="center" padding="spacings.xxxl">
           <ErrorMessage message="Failed to load incidents" />
         </Box>
       ) : null}

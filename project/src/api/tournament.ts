@@ -26,10 +26,11 @@ export async function getTournamentStandings(tournamentId: Tournament['id']) {
 }
 
 export function getTournamentStandingsClient(tournamentId: Tournament['id']) {
-  const { data, isLoading } = useSWR<TournamentStanding[]>(`/api/tournament/${tournamentId}/standings`)
+  const { data, isLoading, error } = useSWR<TournamentStanding[]>(`/api/tournament/${tournamentId}/standings`)
 
   return {
     standings: data,
+    standingsError: error,
     standingsLoading: isLoading,
   }
 }
