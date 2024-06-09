@@ -9,13 +9,14 @@ export async function getTournamentDetails(tournamentId: Tournament['id']) {
   return sports
 }
 
-export async function getTournamentEvents(tournamentId: Tournament['id'], span: 'last' | 'next', page: number) {
-  const response = await fetch(
-    `https://academy-backend.sofascore.dev/tournament/${tournamentId}/events/${span}/${page}`
-  )
-  const events = (await response.json()) as Event[]
+export function getTournamentEventsClient(tournamentId: Tournament['id'], span: 'last' | 'next', page: number) {
+  const { data, isLoading, error } = useSWR<Event[]>(`/api/tournament/${tournamentId}/events/${span}/${page}`)
 
-  return events
+  return {
+    events: data,
+    eventsError: error,
+    eventsLoading: isLoading,
+  }
 }
 
 export async function getTournamentStandings(tournamentId: Tournament['id']) {

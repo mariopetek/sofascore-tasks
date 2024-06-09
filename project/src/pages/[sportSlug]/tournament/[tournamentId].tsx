@@ -1,5 +1,5 @@
 import { getSportTournaments } from '@/api/sport'
-import { getTournamentDetails, getTournamentEvents } from '@/api/tournament'
+import { getTournamentDetails } from '@/api/tournament'
 import { EventDetailsContextProvider } from '@/context/EventDetailsContext'
 import { Sport } from '@/model/sport'
 import { Tournament } from '@/model/tournament'
@@ -8,7 +8,7 @@ import { Box } from '@kuma-ui/core'
 import { Event } from '@/model/event'
 import EventDetailsWidget from '@/modules/EventDetailsWidget'
 import TournamentsPanel from '@/modules/TournamentsPanel'
-import EventsPanelRounds from '@/modules/EventsPanelRounds'
+import TournamentEventsPanel from '@/modules/tournament/TournamentEventsPanel'
 
 interface TournamentDetailsPageProps {
   tournaments: Tournament[]
@@ -18,12 +18,7 @@ interface TournamentDetailsPageProps {
   tournamentId: Tournament['id']
 }
 
-export default function TournamentDetailsMatchesPage({
-  tournaments,
-  sportSlug,
-  tournamentDetails,
-  tournamentEvents,
-}: TournamentDetailsPageProps) {
+export default function TournamentDetailsMatchesPage({ tournaments, tournamentDetails }: TournamentDetailsPageProps) {
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
       <TournamentsPanel tournaments={tournaments} />
@@ -31,7 +26,7 @@ export default function TournamentDetailsMatchesPage({
         <TournamentHeadingPanel tournament={tournamentDetails} />
         <Box display="flex" gap="spacings.xl" alignItems="flex-start">
           <EventDetailsContextProvider>
-            <EventsPanelRounds events={tournamentEvents} tournamentId={tournamentDetails.id} />
+            <TournamentEventsPanel tournament={tournamentDetails} />
             <EventDetailsWidget />
           </EventDetailsContextProvider>
         </Box>
@@ -50,27 +45,11 @@ export async function getServerSideProps(context: {
 
   const tournamentDetails = await getTournamentDetails(tournamentId)
 
-  const previousEvents = await getTournamentEvents(tournamentId, 'last', 0)
-
-  const upcomingEvents = await getTournamentEvents(tournamentId, 'next', 0)
-
-  let tournamentEvents = [] as Event[]
-
-  if (previousEvents.length < 8) {
-    tournamentEvents = [...previousEvents, ...upcomingEvents.slice(upcomingEvents.length - 2, upcomingEvents.length)]
-  } else {
-    tournamentEvents = [
-      ...previousEvents.slice(previousEvents.length - 8, previousEvents.length),
-      ...upcomingEvents.slice(upcomingEvents.length - 2, upcomingEvents.length),
-    ]
-  }
-
   return {
     props: {
       tournaments,
       sportSlug,
       tournamentDetails,
-      tournamentEvents,
     },
   }
 }

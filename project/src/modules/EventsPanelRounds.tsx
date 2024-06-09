@@ -1,26 +1,33 @@
 import { Event } from '@/model/event'
 import { Box, Button } from '@kuma-ui/core'
-import { useEffect, useState } from 'react'
-import { Tournament } from '@/model/tournament'
 import EventLabelButton from './EventLabelButton'
-import { useEventDetailsContext } from '@/context/EventDetailsContext'
+import ErrorMessage from '@/components/ErrorMessage'
+import Loader from '@/components/Loader'
 
 interface EventsPanelRoundsProps {
-  events: Event[]
-  tournamentId: Tournament['id']
+  events: Event[] | undefined
+  eventsLoading: boolean
+  eventsError: any
+  previousEvents: Event[] | undefined
+  nextEvents: Event[] | undefined
+  span: 'last' | 'next'
+  setSpan: React.Dispatch<React.SetStateAction<'last' | 'next'>>
+  page: number
+  setPage: React.Dispatch<React.SetStateAction<number>>
 }
 
-export default function EventsPanelRounds({ events, tournamentId }: EventsPanelRoundsProps) {
-  const { setSelectedEvent, setIsDetailsPanelOpen } = useEventDetailsContext()
-  const [span, setSpan] = useState<'last' | 'next'>('next')
-  const [page, setPage] = useState(0)
-
-  useEffect(() => {
-    setSelectedEvent(null)
-    setIsDetailsPanelOpen(false)
-  }, [tournamentId])
-
-  const groupedEventsByRound = events.reduce((acc, event) => {
+export default function EventsPanelRounds({
+  events,
+  eventsLoading,
+  eventsError,
+  previousEvents,
+  nextEvents,
+  span,
+  setSpan,
+  page,
+  setPage,
+}: EventsPanelRoundsProps) {
+  const groupedEventsByRound = events?.reduce((acc, event) => {
     if (!acc[event.round]) {
       acc[event.round] = []
     }
@@ -52,23 +59,16 @@ export default function EventsPanelRounds({ events, tournamentId }: EventsPanelR
     }
   }
 
-  const rounds = Object.keys(groupedEventsByRound)
+  const rounds = groupedEventsByRound && Object.keys(groupedEventsByRound)
 
   return (
-    <Box
-      maxWidth="448px"
-      width="100%"
-      borderRadius="radii.lg"
-      bg="colors.surface.s1"
-      boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)"
-      paddingY="spacings.lg"
-    >
+    <>
       <Box
         display="flex"
-        justifyContent="space-between"
         alignItems="center"
         paddingX="spacings.lg"
         paddingY="spacings.xs"
+        justifyContent="space-between"
       >
         <Button
           borderStyle="solid"
@@ -79,6 +79,7 @@ export default function EventsPanelRounds({ events, tournamentId }: EventsPanelR
           paddingX="spacings.lg"
           paddingY="spacings.sm"
           onClick={handleLeftButtonClick}
+          visibility={previousEvents?.length === 0 ? 'hidden' : 'visible'}
         >
           <Box
             maskSize="24px 24px"
@@ -100,6 +101,7 @@ export default function EventsPanelRounds({ events, tournamentId }: EventsPanelR
           paddingX="spacings.lg"
           paddingY="spacings.sm"
           onClick={handleRightButtonClick}
+          visibility={nextEvents?.length === 0 ? 'hidden' : 'visible'}
         >
           <Box
             maskSize="24px 24px"
@@ -110,23 +112,35 @@ export default function EventsPanelRounds({ events, tournamentId }: EventsPanelR
           ></Box>
         </Button>
       </Box>
-      {rounds.map(round => (
-        <Box key={round}>
-          <Box
-            paddingX="spacings.lg"
-            paddingBottom="spacings.sm"
-            paddingTop="spacings.xl"
-            fontSize="fontSizes.xs"
-            fontWeight="fontWeights.bold"
-            color="colors.onSurface.lv1"
-          >
-            Round {round}
-          </Box>
-          {groupedEventsByRound[round].map(event => (
-            <EventLabelButton key={event.id} event={event} />
-          ))}
+      {rounds
+        ? rounds.map(round => (
+            <Box key={round}>
+              <Box
+                paddingX="spacings.lg"
+                paddingBottom="spacings.sm"
+                paddingTop="spacings.xl"
+                fontSize="fontSizes.xs"
+                fontWeight="fontWeights.bold"
+                color="colors.onSurface.lv1"
+              >
+                Round {round}
+              </Box>
+              {groupedEventsByRound[round].map(event => (
+                <EventLabelButton key={event.id} event={event} />
+              ))}
+            </Box>
+          ))
+        : null}
+      {eventsLoading ? (
+        <Box display="flex" justifyContent="center" padding="spacings.xxxl">
+          <Loader />
         </Box>
-      ))}
-    </Box>
+      ) : null}
+      {eventsError ? (
+        <Box display="flex" justifyContent="center" padding="spacings.xxxl">
+          <ErrorMessage message="Failed to load standings" />
+        </Box>
+      ) : null}
+    </>
   )
 }

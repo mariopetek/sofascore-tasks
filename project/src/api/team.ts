@@ -2,6 +2,7 @@ import { Event } from '@/model/event'
 import { Player } from '@/model/player'
 import { Team, TeamDetails } from '@/model/team'
 import { Tournament } from '@/model/tournament'
+import useSWR from 'swr'
 
 export async function getTeamDetails(teamId: Team['id']) {
   const response = await fetch(`https://academy-backend.sofascore.dev/team/${teamId}`)
@@ -29,4 +30,14 @@ export async function getTeamEvents(teamId: Team['id'], span: 'last' | 'next', p
   const events = (await response.json()) as Event[]
 
   return events
+}
+
+export function getTeamEventsClient(teamId: Team['id'], span: 'last' | 'next', page: number) {
+  const { data, isLoading, error } = useSWR<Event[]>(`/api/team/${teamId}/events/${span}/${page}`)
+
+  return {
+    events: data,
+    eventsError: error,
+    eventsLoading: isLoading,
+  }
 }

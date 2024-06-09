@@ -1,8 +1,11 @@
 import { getSportTournaments } from '@/api/sport'
 import { getTeamDetails } from '@/api/team'
+import { EventDetailsContextProvider } from '@/context/EventDetailsContext'
 import { Sport } from '@/model/sport'
 import { Team, TeamDetails } from '@/model/team'
 import { Tournament } from '@/model/tournament'
+import EventDetailsWidget from '@/modules/EventDetailsWidget'
+import TeamEventsPanel from '@/modules/team/TeamEventsPanel'
 import TeamHeadingPanel from '@/modules/team/TeamHeadingPanel'
 import TournamentsPanel from '@/modules/TournamentsPanel'
 import { Box } from '@kuma-ui/core'
@@ -19,7 +22,12 @@ export default function TeamMatchesPage({ sportTournaments, sportSlug, teamDetai
       <TournamentsPanel tournaments={sportTournaments} />
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TeamHeadingPanel team={teamDetails} sportSlug={sportSlug} />
-        <Box>Team matches page</Box>
+        <Box display="flex" gap="spacings.xl" alignItems="flex-start">
+          <EventDetailsContextProvider>
+            <TeamEventsPanel team={teamDetails} />
+            <EventDetailsWidget />
+          </EventDetailsContextProvider>
+        </Box>
       </Box>
     </Box>
   )
