@@ -4,8 +4,11 @@ import Link from 'next/link'
 import EventDetailsHeading from './EventDetailsHeading'
 import Separator from '@/components/Separator'
 import EventIncidentsWrapper from './EventIncidentsWrapper'
+import { useTranslation } from 'react-i18next'
 
 export default function EventDetailsWidget() {
+  const [t] = useTranslation('global')
+
   const { selectedEvent, setSelectedEvent, isDetailsPanelOpen, setIsDetailsPanelOpen } = useEventDetailsContext()
 
   function handleCloseEventClick() {
@@ -35,7 +38,7 @@ export default function EventDetailsWidget() {
         >
           <Box display="flex" alignItems="center">
             <Box color="colors.primary.default" fontSize="fontSizes.md" fontWeight="fontWeights.bold">
-              View Full Page
+              {t('eventDetailsWidget.viewFullPage')}
             </Box>
             <Box
               maskSize="24px 24px"

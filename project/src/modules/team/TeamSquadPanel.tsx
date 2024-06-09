@@ -6,6 +6,7 @@ import Separator from '../../components/Separator'
 import { Fragment } from 'react'
 import { TeamDetails } from '@/model/team'
 import { Sport } from '@/model/sport'
+import { useTranslation } from 'react-i18next'
 
 interface TeamSquadPanelProps {
   players: Player[]
@@ -14,6 +15,8 @@ interface TeamSquadPanelProps {
 }
 
 export default function TeamSquadPanel({ players, teamDetails, sportSlug }: TeamSquadPanelProps) {
+  const [t] = useTranslation('global')
+
   return (
     <Box
       bg="colors.surface.s1"
@@ -30,7 +33,7 @@ export default function TeamSquadPanel({ players, teamDetails, sportSlug }: Team
         paddingTop="spacings.xl"
         color="colors.onSurface.lv1"
       >
-        Coach
+        {t('teamSquadPanel.coach')}
       </Heading>
       <Box paddingY="spacings.sm" paddingX="spacings.lg" display="flex" alignItems="center" gap="spacings.lg">
         <ImagePlaceholder width="40px" height="40px" />
@@ -50,7 +53,7 @@ export default function TeamSquadPanel({ players, teamDetails, sportSlug }: Team
         paddingTop="spacings.xl"
         color="colors.onSurface.lv1"
       >
-        Players
+        {t('teamSquadPanel.players')}
       </Heading>
       {players.map((player, index) => (
         <Fragment key={player.id}>

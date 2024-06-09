@@ -1,12 +1,15 @@
 import { Tournament } from '@/model/tournament'
 import { Box, Heading, Image } from '@kuma-ui/core'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 
 interface TeamTournamentsPanelProps {
   tournaments: Tournament[]
 }
 
 export default function TeamTournamentsPanel({ tournaments }: TeamTournamentsPanelProps) {
+  const [t] = useTranslation('global')
+
   return (
     <Box
       bg="colors.surface.s1"
@@ -24,7 +27,7 @@ export default function TeamTournamentsPanel({ tournaments }: TeamTournamentsPan
         fontWeight="bold"
         color="colors.onSurface.lv1"
       >
-        Tournaments
+        {t('teamTournamentsPanel.tournaments')}
       </Heading>
       <Box display="grid" gridTemplateColumns="1fr 1fr 1fr">
         {tournaments.map(tournament => (

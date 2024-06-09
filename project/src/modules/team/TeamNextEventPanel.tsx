@@ -2,12 +2,15 @@ import { Event } from '@/model/event'
 import { Box, Heading, Image } from '@kuma-ui/core'
 import EventLabelLink from '../EventLabelLink'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 
 interface TeamNextEventPanelProps {
   nextEvent: Event
 }
 
 export default function TeamNextEventPanel({ nextEvent }: TeamNextEventPanelProps) {
+  const [t] = useTranslation('global')
+
   const tournamentLogo = `https://academy-backend.sofascore.dev/tournament/${nextEvent.tournament.id}/image`
   const tournamentCountry = nextEvent.tournament.country.name
   const tournamentName = nextEvent.tournament.name
@@ -29,7 +32,7 @@ export default function TeamNextEventPanel({ nextEvent }: TeamNextEventPanelProp
         fontWeight="bold"
         color="colors.onSurface.lv1"
       >
-        Next match
+        {t('teamNextEventPanel.nextMatch')}
       </Heading>
       <Box paddingX="spacings.lg" paddingY="spacings.md" display="flex" alignItems="center" gap="spacings.xxxl">
         <Image src={tournamentLogo} width="32px" height="32px" />

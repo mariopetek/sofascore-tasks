@@ -1,5 +1,11 @@
 import { Box } from '@kuma-ui/core'
-import { datesAroundDate, europeanDayMonthDateFormat, isoDateFormat } from '@/utils/date'
+import {
+  datesAroundDate,
+  formatDateByLocale,
+  getDateLongDayByLocale,
+  getDateShortDayByLocale,
+  isoDateFormat,
+} from '@/utils/date'
 import { useEventDetailsContext } from '@/context/EventDetailsContext'
 import { Event } from '@/model/event'
 import Link from 'next/link'
@@ -7,6 +13,10 @@ import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 import { Sport } from '@/model/sport'
 import SportEventsContainer from './SportEventsContainer'
+import { capitalizeFirstLetter } from '@/utils/string'
+import { useTranslation } from 'react-i18next'
+import { useDateContext } from '@/context/DateContext'
+import { useLanguageContext } from '@/context/LanguageContext'
 
 interface SportEventsPanelProps {
   events: Event[]
@@ -15,10 +25,15 @@ interface SportEventsPanelProps {
 }
 
 export default function SportEventsPanel({ events, selectedDate, sportSlug }: SportEventsPanelProps) {
+  const [t] = useTranslation('global')
+
   const { setSelectedEvent, setIsDetailsPanelOpen } = useEventDetailsContext()
   const pathname = usePathname()
   const pathnameSegments = pathname.split('/').filter(Boolean)
   const firstPathnameSegment = pathnameSegments[0]
+
+  const { dateLocale } = useDateContext()
+  const { languageLocale } = useLanguageContext()
 
   useEffect(() => {
     setSelectedEvent(null)
@@ -84,11 +99,11 @@ export default function SportEventsPanel({ events, selectedDate, sportSlug }: Sp
                 <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
                   <Box as="span" fontSize="fontSizes.xs" fontWeight="fontWeights.normal">
                     {isoDateFormat(new Date(date)) === isoDateFormat(todayDate)
-                      ? 'TODAY'
-                      : new Date(date).toLocaleString('en-US', { weekday: 'short' }).toUpperCase()}
+                      ? t('sportEventsPanel.today').toUpperCase()
+                      : getDateShortDayByLocale(new Date(date), languageLocale).toUpperCase()}
                   </Box>
                   <Box as="span" fontSize="fontSizes.xs">
-                    {europeanDayMonthDateFormat(new Date(date))}
+                    {formatDateByLocale(new Date(date), dateLocale)}
                   </Box>
                 </Box>
                 {isoDateFormat(new Date(selectedDate)) === date ? (
@@ -137,11 +152,11 @@ export default function SportEventsPanel({ events, selectedDate, sportSlug }: Sp
         >
           <Box fontSize="fontSizes.xs" fontWeight="fontWeights.bold" color="colors.onSurface.lv1">
             {isoDateFormat(new Date(selectedDate)) === isoDateFormat(new Date())
-              ? 'Today'
-              : new Date(selectedDate).toLocaleString('en-US', { weekday: 'long' })}
+              ? t('sportEventsPanel.today')
+              : capitalizeFirstLetter(getDateLongDayByLocale(new Date(selectedDate), languageLocale))}
           </Box>
           <Box fontSize="fontSizes.xs" fontWeight="fontWeights.bold" color="colors.onSurface.lv2">
-            {events.length} {events.length === 1 ? 'Event' : 'Events'}
+            {events.length} {events.length === 1 ? t('sportEventsPanel.event') : t('sportEventsPanel.events')}
           </Box>
         </Box>
         <SportEventsContainer events={events} />

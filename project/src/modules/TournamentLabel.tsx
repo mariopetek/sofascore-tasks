@@ -1,4 +1,3 @@
-import { Sport } from '@/model/sport'
 import { Tournament } from '@/model/tournament'
 import { Box, Image } from '@kuma-ui/core'
 import Link from 'next/link'

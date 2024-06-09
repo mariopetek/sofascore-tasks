@@ -5,6 +5,7 @@ import { Fragment, useMemo } from 'react'
 import FootballIncident from './football/FootballIncident'
 import BasketballIncident from './basketball/BasketballIncident'
 import AmericanFootballIncident from './americanFootball/AmericanFootballIncident'
+import { useTranslation } from 'react-i18next'
 
 interface EventDetailsIncidentsProps {
   incidents: Incident[]
@@ -12,6 +13,8 @@ interface EventDetailsIncidentsProps {
 }
 
 export default function EventDetailsIncidents({ incidents, event }: EventDetailsIncidentsProps) {
+  const [t] = useTranslation('global')
+
   const newestIncidents = useMemo(() => {
     return incidents.toReversed()
   }, [incidents])
@@ -45,7 +48,7 @@ export default function EventDetailsIncidents({ incidents, event }: EventDetails
             width="100%"
           >
             <Box as="span" color="colors.onSurface.lv2" fontSize="fontSizes.sm">
-              No results yet.
+              {t('eventDetailsIncidents.noResultsYet')}
             </Box>
           </Box>
           <Link href={`/${eventSport.slug}/tournament/${eventTournament.id}`}>
@@ -60,7 +63,7 @@ export default function EventDetailsIncidents({ incidents, event }: EventDetails
               fontSize="fontSizes.md"
               fontWeight="fontWeights.bold"
             >
-              View Tournament Details
+              {t('eventDetailsIncidents.viewTournamentDetails')}
             </Box>
           </Link>
         </Box>

@@ -1,14 +1,20 @@
+import { useDateContext } from '@/context/DateContext'
 import { Event } from '@/model/event'
-import { europeanDateFormat, isoDateFormat } from '@/utils/date'
+import { formatFullDateByLocale, getDateTimeByLocale, isoDateFormat } from '@/utils/date'
 import { Box, Image } from '@kuma-ui/core'
+import { useTranslation } from 'react-i18next'
 
 interface EventLabelProps {
   event: Event
 }
 
 export default function EventLabel({ event }: EventLabelProps) {
+  const [t] = useTranslation('global')
+
+  const { dateLocale } = useDateContext()
+
   const startDate = new Date(event.startDate)
-  const startTime = startDate.toLocaleTimeString('hr-HR', { hour: '2-digit', minute: '2-digit' })
+  const startTime = getDateTimeByLocale(startDate, dateLocale)
 
   const todayDate = new Date()
   const tomorrowDate = new Date()
@@ -40,17 +46,17 @@ export default function EventLabel({ event }: EventLabelProps) {
         <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
           <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs">
             {isoDateFormat(startDate) === isoDateFormat(tomorrowDate)
-              ? 'Tomorrow'
+              ? t('eventLabel.tomorrow')
               : isoDateFormat(startDate) === isoDateFormat(yesterdayDate)
-              ? 'Yesterday'
+              ? t('eventLabel.yesterday')
               : (isoDateFormat(startDate) !== isoDateFormat(todayDate) && eventStatus === 'notstarted') ||
                 eventStatus === 'finished'
-              ? europeanDateFormat(startDate)
+              ? formatFullDateByLocale(startDate, dateLocale)
               : startTime}
           </Box>
           <Box color={eventStatus === 'inprogress' ? 'colors.live' : 'colors.onSurface.lv2'} fontSize="fontSizes.xs">
             {eventStatus === 'finished'
-              ? 'FT'
+              ? t('eventLabel.ft')
               : isoDateFormat(startDate) !== isoDateFormat(todayDate) && eventStatus === 'notstarted'
               ? startTime
               : eventStatus === 'notstarted'

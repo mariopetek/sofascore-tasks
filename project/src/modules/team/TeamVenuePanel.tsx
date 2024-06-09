@@ -1,11 +1,14 @@
 import { TeamDetails } from '@/model/team'
 import { Box, Heading } from '@kuma-ui/core'
+import { useTranslation } from 'react-i18next'
 
 interface TeamVenuePanelProps {
   teamVenue: TeamDetails['venue']
 }
 
 export default function TeamVenuePanel({ teamVenue }: TeamVenuePanelProps) {
+  const [t] = useTranslation('global')
+
   return (
     <Box
       bg="colors.surface.s1"
@@ -22,7 +25,7 @@ export default function TeamVenuePanel({ teamVenue }: TeamVenuePanelProps) {
         fontSize="fontSizes.md"
         fontWeight="fontWeights.bold"
       >
-        Venue
+        {t('teamVenuePanel.venue')}
       </Heading>
       <Box
         paddingX="spacings.lg"
@@ -31,7 +34,7 @@ export default function TeamVenuePanel({ teamVenue }: TeamVenuePanelProps) {
         justifyContent="space-between"
         fontSize="fontSizes.sm"
       >
-        <Box as="span">Stadium</Box>
+        <Box as="span">{t('teamVenuePanel.stadium')}</Box>
         <Box as="span">{teamVenue}</Box>
       </Box>
     </Box>

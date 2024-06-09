@@ -4,6 +4,7 @@ import { TeamDetails } from '@/model/team'
 import { getCountryCodeByName } from '@/utils/country/country'
 import { Box, Heading, Image } from '@kuma-ui/core'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface PlayerHeadingPanelProps {
   player: Player
@@ -11,6 +12,8 @@ interface PlayerHeadingPanelProps {
 }
 
 export default function PlayerHeadingPanel({ player, team }: PlayerHeadingPanelProps) {
+  const [t] = useTranslation('global')
+
   const [isImageLoaded, setIsImageLoaded] = useState(true)
 
   return (
@@ -78,7 +81,7 @@ export default function PlayerHeadingPanel({ player, team }: PlayerHeadingPanelP
           flex="1"
         >
           <Box as="span" color="colors.onSurface.lv2" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
-            Nationality
+            {t('playerHeadingPanel.nationality')}
           </Box>
           <Box display="flex" alignItems="center" gap="spacings.xs">
             <Image
@@ -103,7 +106,7 @@ export default function PlayerHeadingPanel({ player, team }: PlayerHeadingPanelP
           flex="1"
         >
           <Box as="span" color="colors.onSurface.lv2" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
-            Position
+            {t('playerHeadingPanel.position')}
           </Box>
           <Box as="span" color="colors.onSurface.lv1" fontWeight="fontWeights.bold" fontSize="fontSizes.sm">
             {player.position}

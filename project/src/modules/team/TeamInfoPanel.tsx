@@ -3,6 +3,7 @@ import Separator from '@/components/Separator'
 import { Player } from '@/model/player'
 import { TeamDetails } from '@/model/team'
 import { Box, Heading } from '@kuma-ui/core'
+import { useTranslation } from 'react-i18next'
 
 interface TeamInfoPanelProps {
   team: TeamDetails
@@ -10,6 +11,8 @@ interface TeamInfoPanelProps {
 }
 
 export default function TeamInfoPanel({ team, players }: TeamInfoPanelProps) {
+  const [t] = useTranslation('global')
+
   const playersCount = players.length
 
   const foreignPlayersCount = players.filter(player => player.country.id !== team.country.id).length
@@ -32,12 +35,12 @@ export default function TeamInfoPanel({ team, players }: TeamInfoPanelProps) {
         fontWeight="bold"
         color="colors.onSurface.lv1"
       >
-        Team Info
+        {t('teamInfoPanel.teamInfo')}
       </Heading>
       <Box paddingX="spacings.lg" paddingY="spacings.sm" display="flex" alignItems="center" gap="spacings.lg">
         <ImagePlaceholder width="40px" height="40px" />
         <Box as="span" fontSize="fontSizes.sm" color="colors.onSurface.lv1">
-          Coach: {team.managerName}
+          {t('teamInfoPanel.coach')}: {team.managerName}
         </Box>
       </Box>
       <Box marginTop="spacings.sm">
@@ -64,7 +67,7 @@ export default function TeamInfoPanel({ team, players }: TeamInfoPanelProps) {
             {playersCount}
           </Box>
           <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs" paddingY="spacings.sm">
-            Total Players
+            {t('teamInfoPanel.totalPlayers')}
           </Box>
         </Box>
         <Box
@@ -95,7 +98,7 @@ export default function TeamInfoPanel({ team, players }: TeamInfoPanelProps) {
             {foreignPlayersCount}
           </Box>
           <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs" paddingY="spacings.sm">
-            Foreign Players
+            {t('teamInfoPanel.foreignPlayers')}
           </Box>
         </Box>
       </Box>

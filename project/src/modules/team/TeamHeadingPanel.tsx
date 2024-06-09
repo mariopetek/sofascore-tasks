@@ -4,20 +4,23 @@ import { getCountryCodeByName } from '@/utils/country/country'
 import { Box, Heading, Image } from '@kuma-ui/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 
 interface TeamHeadingPanelProps {
   team: TeamDetails
   sportSlug: Sport['slug']
 }
 
-const LINKS = [
-  { name: 'Details', path: '' },
-  { name: 'Matches', path: '/matches' },
-  { name: 'Standings', path: '/standings' },
-  { name: 'Squad', path: '/squad' },
-]
-
 export default function TeamHeadingPanel({ team, sportSlug }: TeamHeadingPanelProps) {
+  const [t] = useTranslation('global')
+
+  const LINKS = [
+    { name: t('teamHeadingPanel.details'), path: '' },
+    { name: t('teamHeadingPanel.matches'), path: '/matches' },
+    { name: t('teamHeadingPanel.standings'), path: '/standings' },
+    { name: t('teamHeadingPanel.squad'), path: '/squad' },
+  ]
+
   const router = useRouter()
 
   const isActive = (path: string) => router.asPath === `/${sportSlug}/team/${team.id}${path}`

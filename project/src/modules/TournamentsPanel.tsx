@@ -1,13 +1,15 @@
 import { Tournament } from '@/model/tournament'
 import { Box, Heading } from '@kuma-ui/core'
-import { Sport } from '@/model/sport'
 import TournamentLabel from './TournamentLabel'
+import { useTranslation } from 'react-i18next'
 
 interface TournamentsPanelProps {
   tournaments: Tournament[]
 }
 
 export default function TournamentsPanel({ tournaments }: TournamentsPanelProps) {
+  const [t] = useTranslation('global')
+
   return (
     <Box
       backgroundColor="colors.surface.s1"
@@ -25,7 +27,7 @@ export default function TournamentsPanel({ tournaments }: TournamentsPanelProps)
         paddingX="spacings.lg"
         paddingY="spacings.md"
       >
-        Leagues
+        {t('tournamentsPanel.leagues')}
       </Heading>
       <Box display="flex" flexDirection="column">
         {tournaments.map(tournament => (

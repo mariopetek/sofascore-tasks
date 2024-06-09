@@ -3,6 +3,7 @@ import { Box, Button } from '@kuma-ui/core'
 import EventLabelButton from './EventLabelButton'
 import ErrorMessage from '@/components/ErrorMessage'
 import Loader from '@/components/Loader'
+import { useTranslation } from 'react-i18next'
 
 interface EventsPanelRoundsProps {
   events: Event[] | undefined
@@ -27,6 +28,8 @@ export default function EventsPanelRounds({
   page,
   setPage,
 }: EventsPanelRoundsProps) {
+  const [t] = useTranslation('global')
+
   const groupedEventsByRound = events?.reduce((acc, event) => {
     if (!acc[event.round]) {
       acc[event.round] = []
@@ -90,7 +93,7 @@ export default function EventsPanelRounds({
           ></Box>
         </Button>
         <Box as="span" color="colors.onSurface.lv1" fontWeight="fontWeights.bold">
-          Matches
+          {t('eventsPanelRounds.matches')}
         </Box>
         <Button
           borderStyle="solid"
@@ -123,7 +126,7 @@ export default function EventsPanelRounds({
                 fontWeight="fontWeights.bold"
                 color="colors.onSurface.lv1"
               >
-                Round {round}
+                {t('eventsPanelRounds.round')} {round}
               </Box>
               {groupedEventsByRound[round].map(event => (
                 <EventLabelButton key={event.id} event={event} />

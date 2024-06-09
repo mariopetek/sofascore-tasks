@@ -1,18 +1,26 @@
+import { useDateContext } from '@/context/DateContext'
 import { Event } from '@/model/event'
-import { europeanDateFormat, isoDateFormat } from '@/utils/date'
+import { formatFullDateByLocale, getDateTimeByLocale, isoDateFormat } from '@/utils/date'
 import { Box, Heading, Image } from '@kuma-ui/core'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 
 interface EventDetailsHeadingProps {
   event: Event
 }
 
 export default function EventDetailsHeading({ event }: EventDetailsHeadingProps) {
+  const [t] = useTranslation('global')
+
+  const { dateLocale } = useDateContext()
+
   const todayDate = new Date()
   const tommorowDate = new Date(todayDate)
   tommorowDate.setDate(tommorowDate.getDate() + 1)
+  const yesterdayDate = new Date(todayDate)
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1)
   const startDate = new Date(event.startDate)
-  const startTime = startDate.toLocaleTimeString('hr-HR', { hour: '2-digit', minute: '2-digit' })
+  const startTime = getDateTimeByLocale(startDate, dateLocale)
 
   return (
     <Box padding="spacings.lg" display="flex" justifyContent="space-between">
@@ -42,10 +50,12 @@ export default function EventDetailsHeading({ event }: EventDetailsHeadingProps)
           <>
             <Box as="span" color="colors.onSurface.lv1" fontSize="fontSizes.xs">
               {isoDateFormat(todayDate) === isoDateFormat(startDate)
-                ? 'Today'
+                ? t('eventDetailsHeading.today')
                 : isoDateFormat(tommorowDate) === isoDateFormat(startDate)
-                ? 'Tommorow'
-                : europeanDateFormat(startDate)}
+                ? t('eventDetailsHeading.tomorrow')
+                : isoDateFormat(yesterdayDate) === isoDateFormat(startDate)
+                ? t('eventDetailsHeading.yesterday')
+                : formatFullDateByLocale(startDate, dateLocale)}
             </Box>
             <Box as="span" color="colors.onSurface.lv1" fontSize="fontSizes.xs">
               {startTime}
@@ -76,7 +86,7 @@ export default function EventDetailsHeading({ event }: EventDetailsHeadingProps)
               </Box>
             </Heading>
             <Box as="span" color="colors.onSurface.lv2" fontSize="fontSizes.xs">
-              Full Time
+              {t('eventDetailsHeading.fullTime')}
             </Box>
           </>
         ) : null}

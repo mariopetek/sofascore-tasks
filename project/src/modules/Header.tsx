@@ -1,45 +1,46 @@
-import { useThemeContext } from '@/context/ThemeContext'
-import { Box, Button } from '@kuma-ui/core'
+import { Box } from '@kuma-ui/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
-const SPORTS = [
-  {
-    slug: 'football',
-    name: 'Football',
-    icon: '/icons/sports/icon_football.svg',
-  },
-  {
-    slug: 'basketball',
-    name: 'Basketball',
-    icon: '/icons/sports/icon_basketball.svg',
-  },
-  {
-    slug: 'american-football',
-    name: 'American Football',
-    icon: '/icons/sports/icon_american_football.svg',
-  },
-]
+import { useTranslation } from 'react-i18next'
 
 export default function Header() {
-  const { setIsDark } = useThemeContext()
+  const [t] = useTranslation('global')
+
+  const SPORTS = [
+    {
+      slug: 'football',
+      name: t('header.football'),
+      icon: '/icons/sports/icon_football.svg',
+    },
+    {
+      slug: 'basketball',
+      name: t('header.basketball'),
+      icon: '/icons/sports/icon_basketball.svg',
+    },
+    {
+      slug: 'american-football',
+      name: t('header.americanFootball'),
+      icon: '/icons/sports/icon_american_football.svg',
+    },
+  ]
 
   const router = useRouter()
   const isActive = (href: string) => router.asPath.startsWith(href)
 
   return (
-    <Box as="header" position="sticky" top={0} backgroundColor="colors.primary.default" zIndex={1}>
-      <Button
-        position="absolute"
-        top="spacings.lg"
-        right="spacings.xl"
-        maskSize="24px 24px"
-        maskImage="url(/icons/system/ic_settings.svg)"
-        backgroundColor="colors.surface.s1"
-        width="24px"
-        height="24px"
-        onClick={() => setIsDark(v => !v)}
-      ></Button>
+    <Box as="header" position="sticky" top="0" backgroundColor="colors.primary.default" zIndex="2">
+      <Link href={`/settings`}>
+        <Box
+          position="absolute"
+          top="spacings.lg"
+          right="spacings.xl"
+          maskSize="24px 24px"
+          maskImage="url(/icons/system/ic_settings.svg)"
+          backgroundColor="colors.surface.s1"
+          width="24px"
+          height="24px"
+        ></Box>
+      </Link>
       <Box height="64px" display="flex" justifyContent="center" alignItems="center">
         <Link href="/">
           <Box

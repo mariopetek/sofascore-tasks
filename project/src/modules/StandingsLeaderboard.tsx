@@ -3,6 +3,7 @@ import { Team } from '@/model/team'
 import { StandingRow } from '@/model/tournament'
 import { Box } from '@kuma-ui/core'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 
 interface StandingsLeaderboardProps {
   standings: StandingRow[]
@@ -11,6 +12,8 @@ interface StandingsLeaderboardProps {
 }
 
 export default function StandingsLeaderboard({ standings, sportSlug, teamId }: StandingsLeaderboardProps) {
+  const [t] = useTranslation('global')
+
   function calculateGamesBehind(leaderWins: number, leaderLosses: number, teamWins: number, teamLosses: number) {
     const gamesBehind = (leaderWins - teamWins + (teamLosses - leaderLosses)) / 2
     return gamesBehind
@@ -23,26 +26,26 @@ export default function StandingsLeaderboard({ standings, sportSlug, teamId }: S
           <Box as="span" width="24px" textAlign="center">
             #
           </Box>
-          <Box as="span">Team</Box>
+          <Box as="span">{t('standingsLeaderboard.team')}</Box>
         </Box>
         <Box flex="3" display="flex" justifyContent="space-between" textAlign="center">
           <Box as="span" maxWidth="62px" width="100%">
-            P
+            {t('standingsLeaderboard.p')}
           </Box>
           <Box as="span" maxWidth="62px" width="100%">
-            W
+            {t('standingsLeaderboard.w')}
           </Box>
           <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'none' : 'inline'}>
-            D
+            {t('standingsLeaderboard.d')}
           </Box>
           <Box as="span" maxWidth="62px" width="100%">
-            L
+            {t('standingsLeaderboard.l')}
           </Box>
           <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
-            DIFF
+            {t('standingsLeaderboard.diff')}
           </Box>
           <Box as="span" maxWidth="62px" width="100%" display={sportSlug === 'basketball' ? 'inline' : 'none'}>
-            GB
+            {t('standingsLeaderboard.gb')}
           </Box>
           <Box
             as="span"
@@ -50,10 +53,14 @@ export default function StandingsLeaderboard({ standings, sportSlug, teamId }: S
             width="100%"
             display={sportSlug === 'basketball' || sportSlug === 'american-football' ? 'none' : 'inline'}
           >
-            Goals
+            {t('standingsLeaderboard.goals')}
           </Box>
           <Box as="span" maxWidth="62px" width="100%">
-            {standings[0].points ? 'PTS' : standings[0].percentage ? 'PCT' : null}
+            {standings[0].points
+              ? t('standingsLeaderboard.pts')
+              : standings[0].percentage
+              ? t('standingsLeaderboard.pct')
+              : null}
           </Box>
         </Box>
       </Box>
