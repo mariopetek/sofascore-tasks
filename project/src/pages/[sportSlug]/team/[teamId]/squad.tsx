@@ -1,5 +1,6 @@
 import { getSportTournaments } from '@/api/sport'
 import { getTeamDetails, getTeamPlayers } from '@/api/team'
+import { useWindowResize } from '@/hooks/useWindowResize'
 import { Player } from '@/model/player'
 import { Sport } from '@/model/sport'
 import { Team, TeamDetails } from '@/model/team'
@@ -17,9 +18,11 @@ interface TeamSquadPageProps {
 }
 
 export default function TeamSquadPage({ sportTournaments, sportSlug, teamDetails, teamPlayers }: TeamSquadPageProps) {
+  const windowWidth = useWindowResize()
+
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={sportTournaments} />
+      {windowWidth <= 900 ? null : <TournamentsPanel tournaments={sportTournaments} />}
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TeamHeadingPanel team={teamDetails} sportSlug={sportSlug} />
         <TeamSquadPanel players={teamPlayers} teamDetails={teamDetails} sportSlug={sportSlug} />

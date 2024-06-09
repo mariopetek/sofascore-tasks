@@ -1,5 +1,6 @@
 import { getSportTournaments } from '@/api/sport'
 import { getTeamDetails, getTeamTournaments } from '@/api/team'
+import { useWindowResize } from '@/hooks/useWindowResize'
 import { Sport } from '@/model/sport'
 import { Team, TeamDetails } from '@/model/team'
 import { Tournament } from '@/model/tournament'
@@ -21,9 +22,10 @@ export default function TeamStandingsPage({
   teamDetails,
   teamTournaments,
 }: TeamStandingsPageProps) {
+  const windowWidth = useWindowResize()
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={sportTournaments} />
+      {windowWidth <= 900 ? null : <TournamentsPanel tournaments={sportTournaments} />}
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TeamHeadingPanel team={teamDetails} sportSlug={sportSlug} />
         <TeamStandingsPanel tournaments={teamTournaments} teamId={teamDetails.id} />

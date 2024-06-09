@@ -4,12 +4,16 @@ import { Tournament } from '@/model/tournament'
 import Separator from '@/components/Separator'
 import Link from 'next/link'
 import EventLabelButton from '../EventLabelButton'
+import { useWindowResize } from '@/hooks/useWindowResize'
+import EventLabelLink from '../EventLabelLink'
 
 interface SportEventContainerProps {
   events: Event[]
 }
 
 export default function SportEventsContainer({ events }: SportEventContainerProps) {
+  const windowWidth = useWindowResize()
+
   const sportEventsGroupedByTournament = events.reduce((acc, event) => {
     if (!acc[event.tournament.id]) {
       acc[event.tournament.id] = []
@@ -56,9 +60,13 @@ export default function SportEventsContainer({ events }: SportEventContainerProp
         </Box>
       </Box>
       <Box>
-        {sportEventsGroupedByTournament[tournamentId].map(event => (
-          <EventLabelButton event={event} key={event.id} />
-        ))}
+        {sportEventsGroupedByTournament[tournamentId].map(event =>
+          windowWidth <= 900 ? (
+            <EventLabelLink event={event} key={event.id} />
+          ) : (
+            <EventLabelButton event={event} key={event.id} />
+          )
+        )}
       </Box>
 
       {idx < tournamentIds.length - 1 ? (

@@ -62,6 +62,7 @@ export default function EventDetailsIncidents({ incidents, event }: EventDetails
               color="colors.primary.default"
               fontSize="fontSizes.md"
               fontWeight="fontWeights.bold"
+              textAlign="center"
             >
               {t('eventDetailsIncidents.viewTournamentDetails')}
             </Box>

@@ -1,6 +1,7 @@
 import { getSportTournaments } from '@/api/sport'
 import { getTeamDetails } from '@/api/team'
 import { EventDetailsContextProvider } from '@/context/EventDetailsContext'
+import { useWindowResize } from '@/hooks/useWindowResize'
 import { Sport } from '@/model/sport'
 import { Team, TeamDetails } from '@/model/team'
 import { Tournament } from '@/model/tournament'
@@ -17,12 +18,19 @@ interface TeamMatchesPageProps {
 }
 
 export default function TeamMatchesPage({ sportTournaments, sportSlug, teamDetails }: TeamMatchesPageProps) {
+  const windowWidth = useWindowResize()
+
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={sportTournaments} />
+      {windowWidth <= 900 ? null : <TournamentsPanel tournaments={sportTournaments} />}
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TeamHeadingPanel team={teamDetails} sportSlug={sportSlug} />
-        <Box display="flex" gap="spacings.xl" alignItems="flex-start">
+        <Box
+          display="flex"
+          gap={windowWidth <= 900 ? 'spacings.md' : 'spacings.xl'}
+          flexDirection={windowWidth <= 900 ? 'column' : 'row'}
+          alignItems={windowWidth <= 900 ? 'center' : 'flex-start'}
+        >
           <EventDetailsContextProvider>
             <TeamEventsPanel team={teamDetails} />
             <EventDetailsWidget />

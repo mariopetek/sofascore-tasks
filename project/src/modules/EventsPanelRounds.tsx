@@ -4,6 +4,8 @@ import EventLabelButton from './EventLabelButton'
 import ErrorMessage from '@/components/ErrorMessage'
 import Loader from '@/components/Loader'
 import { useTranslation } from 'react-i18next'
+import { useWindowResize } from '@/hooks/useWindowResize'
+import EventLabelLink from './EventLabelLink'
 
 interface EventsPanelRoundsProps {
   events: Event[] | undefined
@@ -29,6 +31,8 @@ export default function EventsPanelRounds({
   setPage,
 }: EventsPanelRoundsProps) {
   const [t] = useTranslation('global')
+
+  const windowWidth = useWindowResize()
 
   const groupedEventsByRound = events?.reduce((acc, event) => {
     if (!acc[event.round]) {
@@ -92,7 +96,7 @@ export default function EventsPanelRounds({
             height="24px"
           ></Box>
         </Button>
-        <Box as="span" color="colors.onSurface.lv1" fontWeight="fontWeights.bold">
+        <Box as="span" color="colors.onSurface.lv1" fontWeight="fontWeights.bold" paddingX="spacings.xxxl">
           {t('eventsPanelRounds.matches')}
         </Box>
         <Button
@@ -128,9 +132,13 @@ export default function EventsPanelRounds({
               >
                 {t('eventsPanelRounds.round')} {round}
               </Box>
-              {groupedEventsByRound[round].map(event => (
-                <EventLabelButton key={event.id} event={event} />
-              ))}
+              {groupedEventsByRound[round].map(event =>
+                windowWidth <= 900 ? (
+                  <EventLabelLink key={event.id} event={event} />
+                ) : (
+                  <EventLabelButton key={event.id} event={event} />
+                )
+              )}
             </Box>
           ))
         : null}

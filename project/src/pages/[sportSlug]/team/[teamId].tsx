@@ -1,5 +1,6 @@
 import { getSportTournaments } from '@/api/sport'
 import { getTeamDetails, getTeamEvents, getTeamPlayers, getTeamTournaments } from '@/api/team'
+import { useWindowResize } from '@/hooks/useWindowResize'
 import { Event } from '@/model/event'
 import { Player } from '@/model/player'
 import { Sport } from '@/model/sport'
@@ -30,17 +31,24 @@ export default function TeamDetailsPage({
   teamTournaments,
   nextTeamEvent,
 }: TeamDetailsPageProps) {
+  const windowWidth = useWindowResize()
+
   return (
     <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      <TournamentsPanel tournaments={sportTournaments} />
+      {windowWidth <= 900 ? null : <TournamentsPanel tournaments={sportTournaments} />}
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TeamHeadingPanel team={teamDetails} sportSlug={sportSlug} />
-        <Box display="flex" gap="spacings.xl">
+        <Box
+          display="flex"
+          gap={windowWidth <= 900 ? 'spacings.md' : 'spacings.xl'}
+          flexDirection={windowWidth <= 900 ? 'column' : 'row'}
+          alignItems={windowWidth <= 900 ? 'center' : 'flex-start'}
+        >
           <Box display="flex" flexDirection="column" gap="spacings.md" maxWidth="448px" width="100%">
             <TeamInfoPanel team={teamDetails} players={teamPlayers} />
             <TeamVenuePanel teamVenue={teamDetails.venue} />
           </Box>
-          <Box display="flex" flexDirection="column" gap="spacings.md" maxWidth="100%" width="100%">
+          <Box display="flex" flexDirection="column" gap="spacings.md" maxWidth="448px" width="100%">
             <TeamTournamentsPanel tournaments={teamTournaments} />
             <TeamNextEventPanel nextEvent={nextTeamEvent} />
           </Box>

@@ -33,9 +33,12 @@ export default function TeamVenuePanel({ teamVenue }: TeamVenuePanelProps) {
         display="flex"
         justifyContent="space-between"
         fontSize="fontSizes.sm"
+        gap="spacings.lg"
       >
         <Box as="span">{t('teamVenuePanel.stadium')}</Box>
-        <Box as="span">{teamVenue}</Box>
+        <Box as="span" textAlign="end">
+          {teamVenue}
+        </Box>
       </Box>
     </Box>
   )

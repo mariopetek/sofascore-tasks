@@ -15,7 +15,7 @@ const LanguageContext = createContext<ContextValue>({} as ContextValue)
 
 i18next.init({
   interpolation: { escapeValue: true },
-  lng: 'hr-HR',
+  lng: 'en-US',
   resources: {
     'en-US': {
       global: globalEnUS,
@@ -27,7 +27,7 @@ i18next.init({
 })
 
 export const LanguageContextProvider = ({ children }: PropsWithChildren) => {
-  const [languageLocale, setLanguageLocale] = useState<LanguageLocale>('hr-HR')
+  const [languageLocale, setLanguageLocale] = useState<LanguageLocale>('en-US')
 
   return (
     <I18nextProvider i18n={i18next}>

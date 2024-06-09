@@ -1,3 +1,4 @@
+import { useWindowResize } from '@/hooks/useWindowResize'
 import { Box } from '@kuma-ui/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -5,6 +6,8 @@ import { useTranslation } from 'react-i18next'
 
 export default function Header() {
   const [t] = useTranslation('global')
+
+  const windowWidth = useWindowResize()
 
   const SPORTS = [
     {
@@ -19,31 +22,33 @@ export default function Header() {
     },
     {
       slug: 'american-football',
-      name: t('header.americanFootball'),
+      name:
+        windowWidth <= 400
+          ? `${t('header.americanFootball').slice(0, 2)}. ${t('header.americanFootball').split(' ')[1]}`
+          : t('header.americanFootball'),
       icon: '/icons/sports/icon_american_football.svg',
     },
   ]
 
   const router = useRouter()
-  const isActive = (href: string) => router.asPath.startsWith(href)
+  const activeSportSlug = router.asPath.split('/')[1]
 
   return (
-    <Box as="header" position="sticky" top="0" backgroundColor="colors.primary.default" zIndex="2">
-      <Link href={`/settings`}>
-        <Box
-          position="absolute"
-          top="spacings.lg"
-          right="spacings.xl"
-          maskSize="24px 24px"
-          maskImage="url(/icons/system/ic_settings.svg)"
-          backgroundColor="colors.surface.s1"
-          width="24px"
-          height="24px"
-        ></Box>
-      </Link>
-      <Box height="64px" display="flex" justifyContent="center" alignItems="center">
+    <Box
+      as="header"
+      position="sticky"
+      top="0"
+      backgroundColor="colors.primary.default"
+      zIndex="2"
+      display="flex"
+      flexDirection="column"
+      paddingX="spacings.lg"
+    >
+      <Box display="flex" alignItems="center" paddingY="spacings.lg">
+        {windowWidth <= 700 ? null : <Box flex="1"></Box>}
         <Link href="/">
           <Box
+            flex="1"
             maskSize="132px 20px"
             maskImage="url(/graphics/sofascore_lockup.svg)"
             backgroundColor="colors.surface.s1"
@@ -51,8 +56,31 @@ export default function Header() {
             height="20px"
           ></Box>
         </Link>
+        <Box display="flex" gap="spacings.xl" flex="1" justifyContent="flex-end">
+          {windowWidth <= 900 && SPORTS.find(sport => sport.slug === activeSportSlug) !== undefined ? (
+            <Link href={`/${activeSportSlug}/leagues`}>
+              <Box
+                maskSize="24px 24px"
+                maskImage="url(/icons/system/ic_trophy.svg)"
+                backgroundColor="colors.surface.s1"
+                width="24px"
+                height="24px"
+              ></Box>
+            </Link>
+          ) : null}
+          <Link href={`/settings`}>
+            <Box
+              marginLeft="auto"
+              maskSize="24px 24px"
+              maskImage="url(/icons/system/ic_settings.svg)"
+              backgroundColor="colors.surface.s1"
+              width="24px"
+              height="24px"
+            ></Box>
+          </Link>
+        </Box>
       </Box>
-      <Box height="48px" display="flex" justifyContent="center" gap="spacings.lg">
+      <Box display="flex" justifyContent="center" gap="spacings.md" paddingX="spacings.xs">
         {SPORTS.map(sport => (
           <Link href={`/${sport.slug}`} key={sport.slug}>
             <Box
@@ -61,8 +89,10 @@ export default function Header() {
               justifyContent="center"
               height="100%"
               gap="spacings.xs"
-              paddingX="spacings.xs"
+              paddingY="spacings.lg"
               position="relative"
+              paddingX="spacings.xs"
+              flexWrap="wrap"
             >
               <Box
                 maskSize="16px 16px"
@@ -74,7 +104,7 @@ export default function Header() {
               <Box color="colors.surface.s1" fontSize="fontSizes.sm">
                 {sport.name}
               </Box>
-              {isActive(`/${sport.slug}`) && (
+              {activeSportSlug === sport.slug && (
                 <Box
                   height="4px"
                   width="100%"

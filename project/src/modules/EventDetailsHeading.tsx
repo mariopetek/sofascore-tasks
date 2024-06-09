@@ -23,28 +23,29 @@ export default function EventDetailsHeading({ event }: EventDetailsHeadingProps)
   const startTime = getDateTimeByLocale(startDate, dateLocale)
 
   return (
-    <Box padding="spacings.lg" display="flex" justifyContent="space-between">
-      <Link href={`/${event.tournament.sport.slug}/team/${event.homeTeam.id}`}>
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          gap="spacings.sm"
-          width="96px"
-          textAlign="center"
-          color="colors.onSurface.lv1"
-          _hover={{ color: 'colors.onSurface.lv2' }}
-        >
-          <Image
-            src={`https://academy-backend.sofascore.dev/team/${event.homeTeam.id}/image`}
-            width="40px"
-            height="40px"
-          />
-          <Box as="span" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
-            {event.homeTeam.name}
+    <Box padding="spacings.lg" display="flex" justifyContent="space-between" gap="spacings.xl">
+      <Box flex="1">
+        <Link href={`/${event.tournament.sport.slug}/team/${event.homeTeam.id}`}>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            gap="spacings.sm"
+            textAlign="center"
+            color="colors.onSurface.lv1"
+            _hover={{ color: 'colors.onSurface.lv2' }}
+          >
+            <Image
+              src={`https://academy-backend.sofascore.dev/team/${event.homeTeam.id}/image`}
+              width="40px"
+              height="40px"
+            />
+            <Box as="span" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
+              {event.homeTeam.name}
+            </Box>
           </Box>
-        </Box>
-      </Link>
+        </Link>
+      </Box>
       <Box flex="1" display="flex" flexDirection="column" alignItems="center" gap="spacings.xs">
         {event.status === 'notstarted' ? (
           <>
@@ -105,27 +106,28 @@ export default function EventDetailsHeading({ event }: EventDetailsHeadingProps)
           </>
         ) : null}
       </Box>
-      <Link href={`/${event.tournament.sport.slug}/team/${event.awayTeam.id}`}>
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          gap="spacings.sm"
-          width="96px"
-          textAlign="center"
-          color="colors.onSurface.lv1"
-          _hover={{ color: 'colors.onSurface.lv2' }}
-        >
-          <Image
-            src={`https://academy-backend.sofascore.dev/team/${event.awayTeam.id}/image`}
-            width="40px"
-            height="40px"
-          />
-          <Box as="span" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
-            {event.awayTeam.name}
+      <Box flex="1">
+        <Link href={`/${event.tournament.sport.slug}/team/${event.awayTeam.id}`}>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            gap="spacings.sm"
+            textAlign="center"
+            color="colors.onSurface.lv1"
+            _hover={{ color: 'colors.onSurface.lv2' }}
+          >
+            <Image
+              src={`https://academy-backend.sofascore.dev/team/${event.awayTeam.id}/image`}
+              width="40px"
+              height="40px"
+            />
+            <Box as="span" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
+              {event.awayTeam.name}
+            </Box>
           </Box>
-        </Box>
-      </Link>
+        </Link>
+      </Box>
     </Box>
   )
 }

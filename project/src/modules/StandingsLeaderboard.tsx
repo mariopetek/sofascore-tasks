@@ -21,14 +21,20 @@ export default function StandingsLeaderboard({ standings, sportSlug, teamId }: S
 
   return (
     <>
-      <Box padding="spacings.lg" display="flex" justifyContent="space-evenly" color="colors.onSurface.lv2">
+      <Box
+        padding="spacings.lg"
+        display="flex"
+        justifyContent="space-between"
+        color="colors.onSurface.lv2"
+        gap="spacings.sm"
+      >
         <Box display="flex" alignItems="center" gap="spacings.lg" flex="2">
           <Box as="span" width="24px" textAlign="center">
             #
           </Box>
           <Box as="span">{t('standingsLeaderboard.team')}</Box>
         </Box>
-        <Box flex="3" display="flex" justifyContent="space-between" textAlign="center">
+        <Box flex="3" display="flex" justifyContent="space-between" textAlign="center" gap="spacings.xs">
           <Box as="span" maxWidth="62px" width="100%">
             {t('standingsLeaderboard.p')}
           </Box>
@@ -70,6 +76,7 @@ export default function StandingsLeaderboard({ standings, sportSlug, teamId }: S
             padding="spacings.lg"
             display="flex"
             justifyContent="space-between"
+            gap="spacings.sm"
             color="colors.onSurface.lv1"
             _hover={{ bg: teamId === standingRow.team.id ? 'colors.primary.highlight' : 'colors.surface.s2' }}
             bg={teamId === standingRow.team.id ? 'colors.primary.highlight' : 'colors.surface.s1'}
@@ -88,7 +95,14 @@ export default function StandingsLeaderboard({ standings, sportSlug, teamId }: S
               </Box>
               <Box as="span">{standingRow.team.name}</Box>
             </Box>
-            <Box flex="3" display="flex" justifyContent="space-between" textAlign="center">
+            <Box
+              flex="3"
+              display="flex"
+              justifyContent="space-between"
+              textAlign="center"
+              gap="spacings.xs"
+              alignItems="center"
+            >
               <Box as="span" maxWidth="62px" width="100%">
                 {standingRow.played}
               </Box>

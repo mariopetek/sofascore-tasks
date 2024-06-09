@@ -66,7 +66,7 @@ export default function TeamInfoPanel({ team, players }: TeamInfoPanelProps) {
           <Box color="colors.primary.default" fontSize="fontSizes.sm" fontWeight="fontWeights.bold">
             {playersCount}
           </Box>
-          <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs" paddingY="spacings.sm">
+          <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs" paddingY="spacings.sm" textAlign="center">
             {t('teamInfoPanel.totalPlayers')}
           </Box>
         </Box>
@@ -97,7 +97,7 @@ export default function TeamInfoPanel({ team, players }: TeamInfoPanelProps) {
           <Box color="colors.primary.default" fontSize="fontSizes.sm" fontWeight="fontWeights.bold">
             {foreignPlayersCount}
           </Box>
-          <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs" paddingY="spacings.sm">
+          <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs" paddingY="spacings.sm" textAlign="center">
             {t('teamInfoPanel.foreignPlayers')}
           </Box>
         </Box>

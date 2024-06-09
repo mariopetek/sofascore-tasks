@@ -17,7 +17,7 @@ export default function TournamentEventsPanel({ tournament }: EventsPanelRoundsP
   useEffect(() => {
     setSelectedEvent(null)
     setIsDetailsPanelOpen(false)
-  }, [tournament.id, page])
+  }, [tournament.id, page, span])
 
   const { events, eventsError, eventsLoading } = getTournamentEventsClient(tournament.id, span, page)
   const { events: previousEvents } = getTournamentEventsClient(

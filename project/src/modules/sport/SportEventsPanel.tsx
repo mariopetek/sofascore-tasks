@@ -10,13 +10,14 @@ import { useEventDetailsContext } from '@/context/EventDetailsContext'
 import { Event } from '@/model/event'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Sport } from '@/model/sport'
 import SportEventsContainer from './SportEventsContainer'
 import { capitalizeFirstLetter } from '@/utils/string'
 import { useTranslation } from 'react-i18next'
 import { useDateContext } from '@/context/DateContext'
 import { useLanguageContext } from '@/context/LanguageContext'
+import { useWindowResize } from '@/hooks/useWindowResize'
 
 interface SportEventsPanelProps {
   events: Event[]
@@ -26,6 +27,8 @@ interface SportEventsPanelProps {
 
 export default function SportEventsPanel({ events, selectedDate, sportSlug }: SportEventsPanelProps) {
   const [t] = useTranslation('global')
+
+  const windowWidth = useWindowResize()
 
   const { setSelectedEvent, setIsDetailsPanelOpen } = useEventDetailsContext()
   const pathname = usePathname()
@@ -41,6 +44,11 @@ export default function SportEventsPanel({ events, selectedDate, sportSlug }: Sp
   }, [selectedDate, sportSlug])
 
   const datesAroundSelectedDate = datesAroundDate(new Date(selectedDate), 3)
+
+  if (windowWidth <= 700) {
+    datesAroundSelectedDate.splice(0, 1)
+    datesAroundSelectedDate.splice(datesAroundSelectedDate.length - 1, 1)
+  }
 
   const nextDate = new Date(selectedDate)
   nextDate.setDate(nextDate.getDate() + 1)
@@ -92,7 +100,7 @@ export default function SportEventsPanel({ events, selectedDate, sportSlug }: Sp
           </Box>
         </Link>
 
-        <Box display="flex" flex="1" justifyContent="space-between" overflowX="hidden" overflowY="hidden">
+        <Box display="flex" flex="1" justifyContent="space-around" gap="spacings.sm">
           {datesAroundSelectedDate.map(date => (
             <Link key={date} href={`/${firstPathnameSegment}/${date}`}>
               <Box color="colors.surface.s1" position="relative" height="100%">

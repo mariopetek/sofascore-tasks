@@ -24,7 +24,7 @@ export default function EventDetailsWidget() {
       maxWidth="448px"
       width="100%"
     >
-      <Box display="flex" justifyContent="space-between" padding="spacings.lg">
+      <Box display="flex" justifyContent="space-between" padding="spacings.lg" gap="spacings.lg">
         <Button
           maskSize="24px 24px"
           maskImage="url(/icons/system/ic_close.svg)"
@@ -36,8 +36,8 @@ export default function EventDetailsWidget() {
         <Link
           href={`/${selectedEvent?.tournament.sport.slug}/tournament/${selectedEvent?.tournament.id}/event/${selectedEvent?.id}`}
         >
-          <Box display="flex" alignItems="center">
-            <Box color="colors.primary.default" fontSize="fontSizes.md" fontWeight="fontWeights.bold">
+          <Box display="flex" alignItems="center" width="max-content">
+            <Box color="colors.primary.default" fontSize="fontSizes.md" fontWeight="fontWeights.bold" textAlign="end">
               {t('eventDetailsWidget.viewFullPage')}
             </Box>
             <Box
