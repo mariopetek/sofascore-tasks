@@ -68,6 +68,18 @@ export default function Header() {
               ></Box>
             </Link>
           ) : null}
+          {SPORTS.find(sport => sport.slug === activeSportSlug) !== undefined ? (
+            <Link href={`/${activeSportSlug}/tracked-events`}>
+              <Box
+                maskSize="24px 24px"
+                maskImage="url(/icons/system/bookmark.svg)"
+                backgroundColor="colors.surface.s1"
+                width="24px"
+                height="24px"
+              ></Box>
+            </Link>
+          ) : null}
+
           <Link href={`/settings`}>
             <Box
               marginLeft="auto"

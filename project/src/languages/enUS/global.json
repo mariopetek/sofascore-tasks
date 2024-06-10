@@ -98,5 +98,12 @@
     "appName": "App Name",
     "apiCredit": "API Credit",
     "developer": "Developer"
+  },
+  "trackedEventsPanel": {
+    "trackedEvents": "Tracked Events",
+    "previous": "Previous",
+    "current": "Current",
+    "next": "Next",
+    "noTrackedEvents": "No tracked events in this section."
   }
 }

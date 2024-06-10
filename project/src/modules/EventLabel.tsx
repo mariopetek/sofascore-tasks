@@ -3,6 +3,7 @@ import { Event } from '@/model/event'
 import { formatFullDateByLocale, getDateTimeByLocale, isoDateFormat } from '@/utils/date'
 import { Box, Image } from '@kuma-ui/core'
 import { useTranslation } from 'react-i18next'
+import TrackEventButton from './TrackEventButton'
 
 interface EventLabelProps {
   event: Event
@@ -34,14 +35,7 @@ export default function EventLabel({ event }: EventLabelProps) {
   const eventStatus = event.status
 
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      justifyContent="space-between"
-      paddingY="spacings.sm"
-      paddingX="spacings.lg"
-      cursor="pointer"
-    >
+    <Box paddingY="spacings.sm" paddingX="spacings.lg" cursor="pointer">
       <Box display="flex" gap="spacings.lg">
         <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
           <Box color="colors.onSurface.lv2" fontSize="fontSizes.xs">
@@ -64,70 +58,78 @@ export default function EventLabel({ event }: EventLabelProps) {
               : eventStatus}
           </Box>
         </Box>
+
         <Box width="1px" bg="colors.onSurface.lv4"></Box>
-        <Box display="flex" flexDirection="column" gap="spacings.xs">
-          <Box display="flex" alignItems="center" gap="spacings.sm">
-            <Image src={homeTeamLogo} alt={homeTeamName} width={16} height={16} />
+
+        <Box display="flex" flexDirection="column" flex="1" gap="spacings.xs">
+          <Box display="flex" justifyContent="space-between">
+            <Box display="flex" alignItems="center" gap="spacings.sm">
+              <Image src={homeTeamLogo} alt={homeTeamName} width={16} height={16} />
+              <Box
+                as="span"
+                fontSize="fontSizes.sm"
+                color={
+                  homeTeamScore !== undefined && awayTeamScore !== undefined
+                    ? homeTeamScore > awayTeamScore
+                      ? 'colors.onSurface.lv1'
+                      : 'colors.onSurface.lv2'
+                    : 'colors.onSurface.lv1'
+                }
+              >
+                {homeTeamName}
+              </Box>
+            </Box>
             <Box
-              as="span"
-              fontSize="fontSizes.sm"
               color={
                 homeTeamScore !== undefined && awayTeamScore !== undefined
-                  ? homeTeamScore > awayTeamScore
+                  ? eventStatus === 'inprogress'
+                    ? 'colors.live'
+                    : homeTeamScore > awayTeamScore
                     ? 'colors.onSurface.lv1'
                     : 'colors.onSurface.lv2'
                   : 'colors.onSurface.lv1'
               }
+              textAlign="right"
             >
-              {homeTeamName}
+              {homeTeamScore}
             </Box>
           </Box>
-          <Box display="flex" alignItems="center" gap="spacings.sm">
-            <Image src={awayTeamLogo} alt={awayTeamName} width={16} height={16} />
+          <Box display="flex" justifyContent="space-between">
+            <Box display="flex" alignItems="center" gap="spacings.sm">
+              <Image src={awayTeamLogo} alt={awayTeamName} width={16} height={16} />
+              <Box
+                as="span"
+                fontSize="fontSizes.sm"
+                color={
+                  awayTeamScore !== undefined && homeTeamScore !== undefined
+                    ? awayTeamScore > homeTeamScore
+                      ? 'colors.onSurface.lv1'
+                      : 'colors.onSurface.lv2'
+                    : 'colors.onSurface.lv1'
+                }
+              >
+                {awayTeamName}
+              </Box>
+            </Box>
             <Box
-              as="span"
-              fontSize="fontSizes.sm"
               color={
                 awayTeamScore !== undefined && homeTeamScore !== undefined
-                  ? awayTeamScore > homeTeamScore
+                  ? eventStatus === 'inprogress'
+                    ? 'colors.live'
+                    : awayTeamScore > homeTeamScore
                     ? 'colors.onSurface.lv1'
                     : 'colors.onSurface.lv2'
                   : 'colors.onSurface.lv1'
               }
+              textAlign="right"
             >
-              {awayTeamName}
+              {awayTeamScore}
             </Box>
           </Box>
         </Box>
-      </Box>
-      <Box display="flex" flexDirection="column">
-        <Box
-          color={
-            homeTeamScore !== undefined && awayTeamScore !== undefined
-              ? eventStatus === 'inprogress'
-                ? 'colors.live'
-                : homeTeamScore > awayTeamScore
-                ? 'colors.onSurface.lv1'
-                : 'colors.onSurface.lv2'
-              : 'colors.onSurface.lv1'
-          }
-          textAlign="right"
-        >
-          {homeTeamScore}
-        </Box>
-        <Box
-          color={
-            awayTeamScore !== undefined && homeTeamScore !== undefined
-              ? eventStatus === 'inprogress'
-                ? 'colors.live'
-                : awayTeamScore > homeTeamScore
-                ? 'colors.onSurface.lv1'
-                : 'colors.onSurface.lv2'
-              : 'colors.onSurface.lv1'
-          }
-          textAlign="right"
-        >
-          {awayTeamScore}
+        <Box width="1px" bg="colors.onSurface.lv4"></Box>
+        <Box display="flex" alignItems="center" justifyContent="center">
+          <TrackEventButton event={event} />
         </Box>
       </Box>
     </Box>

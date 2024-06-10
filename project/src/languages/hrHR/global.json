@@ -98,5 +98,12 @@
     "appName": "Naziv aplikacije",
     "apiCredit": "Zasluga za API",
     "developer": "Programer"
+  },
+  "trackedEventsPanel": {
+    "trackedEvents": "Praćeni događaji",
+    "previous": "Prethodni",
+    "current": "Trenutni",
+    "next": "Sljedeći",
+    "noTrackedEvents": "Nema praćenih događaja u ovoj sekciji."
   }
 }

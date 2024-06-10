@@ -2,6 +2,7 @@ import { Tournament } from '@/model/tournament'
 import { Box, Heading } from '@kuma-ui/core'
 import TournamentLabel from './TournamentLabel'
 import { useTranslation } from 'react-i18next'
+import { useWindowResize } from '@/hooks/useWindowResize'
 
 interface TournamentsPanelProps {
   tournaments: Tournament[]
@@ -9,6 +10,8 @@ interface TournamentsPanelProps {
 
 export default function TournamentsPanel({ tournaments }: TournamentsPanelProps) {
   const [t] = useTranslation('global')
+
+  const windowWidth = useWindowResize()
 
   return (
     <Box
@@ -18,6 +21,7 @@ export default function TournamentsPanel({ tournaments }: TournamentsPanelProps)
       maxWidth="448px"
       width="100%"
       paddingY="spacings.lg"
+      display={windowWidth <= 900 ? 'none' : 'block'}
     >
       <Heading
         as="h2"

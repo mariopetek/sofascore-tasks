@@ -7,6 +7,7 @@ import Head from 'next/head'
 import { ThemeContextProvider } from '@/context/ThemeContext'
 import { LanguageContextProvider } from '@/context/LanguageContext'
 import { DateContextProvider } from '@/context/DateContext'
+import { TracnkedEventsContextProvider } from '@/context/TrackedEventsContext'
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -27,25 +28,27 @@ export const fetcher = (...args) =>
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <SWRConfig value={{ fetcher }}>
-      <ThemeContextProvider>
-        <DateContextProvider>
-          <LanguageContextProvider>
-            <AppLayout>
-              <style jsx global>{`
-                html {
-                  font-family: ${roboto.style.fontFamily};
-                }
-              `}</style>
-              <Head>
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
-                <title>Mini Sofascore</title>
-              </Head>
-              <Component {...pageProps} />
-            </AppLayout>
-          </LanguageContextProvider>
-        </DateContextProvider>
-      </ThemeContextProvider>
+      <TracnkedEventsContextProvider>
+        <ThemeContextProvider>
+          <DateContextProvider>
+            <LanguageContextProvider>
+              <AppLayout>
+                <style jsx global>{`
+                  html {
+                    font-family: ${roboto.style.fontFamily};
+                  }
+                `}</style>
+                <Head>
+                  <meta name="viewport" content="width=device-width, initial-scale=1" />
+                  <link rel="icon" href="/favicon.ico" />
+                  <title>Mini Sofascore</title>
+                </Head>
+                <Component {...pageProps} />
+              </AppLayout>
+            </LanguageContextProvider>
+          </DateContextProvider>
+        </ThemeContextProvider>
+      </TracnkedEventsContextProvider>
     </SWRConfig>
   )
 }
