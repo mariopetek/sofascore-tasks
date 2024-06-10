@@ -83,12 +83,6 @@ a {
   flex-direction: column;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
