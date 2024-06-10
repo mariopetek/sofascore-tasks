@@ -17,11 +17,13 @@ export default function TrackEventButton({ event }: TrackEventButtonProps) {
 
   function handleTrackEventClick(e: MouseEvent<HTMLDivElement>) {
     e.stopPropagation()
+    e.preventDefault()
     setEvents([...events, event])
   }
 
   function handleUntrackEventClick(e: MouseEvent<HTMLDivElement>) {
     e.stopPropagation()
+    e.preventDefault()
     setEvents(events.filter(trackedEvent => trackedEvent.id !== event.id))
     if (selectedEvent?.id === event.id) {
       setIsDetailsPanelOpen(false)

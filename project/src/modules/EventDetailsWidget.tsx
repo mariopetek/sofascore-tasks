@@ -5,6 +5,7 @@ import EventDetailsHeading from './EventDetailsHeading'
 import Separator from '@/components/Separator'
 import EventIncidentsWrapper from './EventIncidentsWrapper'
 import { useTranslation } from 'react-i18next'
+import StyledPanel from './styledComponents/StyledPanel'
 
 export default function EventDetailsWidget() {
   const [t] = useTranslation('global')
@@ -17,14 +18,8 @@ export default function EventDetailsWidget() {
   }
 
   return !isDetailsPanelOpen ? null : (
-    <Box
-      backgroundColor="colors.surface.s1"
-      boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)"
-      borderRadius="radii.lg"
-      maxWidth="448px"
-      width="100%"
-    >
-      <Box display="flex" justifyContent="space-between" padding="spacings.lg" gap="spacings.lg">
+    <StyledPanel>
+      <Box display="flex" justifyContent="space-between" paddingX="spacings.lg" gap="spacings.lg">
         <Button
           maskSize="24px 24px"
           maskImage="url(/icons/system/ic_close.svg)"
@@ -57,6 +52,6 @@ export default function EventDetailsWidget() {
           <EventIncidentsWrapper event={selectedEvent} />
         </>
       )}
-    </Box>
+    </StyledPanel>
   )
 }

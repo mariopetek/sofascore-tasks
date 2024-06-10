@@ -1,10 +1,11 @@
 import { getSportTournaments } from '@/api/sport'
 import { getTeamDetails, getTeamPlayers } from '@/api/team'
-import { useWindowResize } from '@/hooks/useWindowResize'
 import { Player } from '@/model/player'
 import { Sport } from '@/model/sport'
 import { Team, TeamDetails } from '@/model/team'
 import { Tournament } from '@/model/tournament'
+import StyledPageContainer from '@/modules/styledComponents/StyledPageContainer'
+import StyledTournamentsPanelWrapper from '@/modules/styledComponents/StyledTournamentsPanelWrapper'
 import TeamHeadingPanel from '@/modules/team/TeamHeadingPanel'
 import TeamSquadPanel from '@/modules/team/TeamSquadPanel'
 import TournamentsPanel from '@/modules/TournamentsPanel'
@@ -18,16 +19,16 @@ interface TeamSquadPageProps {
 }
 
 export default function TeamSquadPage({ sportTournaments, sportSlug, teamDetails, teamPlayers }: TeamSquadPageProps) {
-  const windowWidth = useWindowResize()
-
   return (
-    <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      {windowWidth <= 900 ? null : <TournamentsPanel tournaments={sportTournaments} />}
+    <StyledPageContainer>
+      <StyledTournamentsPanelWrapper>
+        <TournamentsPanel tournaments={sportTournaments} />
+      </StyledTournamentsPanelWrapper>
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TeamHeadingPanel team={teamDetails} sportSlug={sportSlug} />
         <TeamSquadPanel players={teamPlayers} teamDetails={teamDetails} sportSlug={sportSlug} />
       </Box>
-    </Box>
+    </StyledPageContainer>
   )
 }
 

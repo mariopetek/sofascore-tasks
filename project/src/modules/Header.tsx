@@ -3,6 +3,8 @@ import { Box } from '@kuma-ui/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
+import StyledHeaderPlaceholder from './styledComponents/StyledHeaderPlaceholder'
+import StyledHeaderLeaguesButton from './styledComponents/StyledHeaderLeaguesButton'
 
 export default function Header() {
   const [t] = useTranslation('global')
@@ -23,7 +25,7 @@ export default function Header() {
     {
       slug: 'american-football',
       name:
-        windowWidth <= 400
+        windowWidth <= 700
           ? `${t('header.americanFootball').slice(0, 2)}. ${t('header.americanFootball').split(' ')[1]}`
           : t('header.americanFootball'),
       icon: '/icons/sports/icon_american_football.svg',
@@ -45,7 +47,7 @@ export default function Header() {
       paddingX="spacings.lg"
     >
       <Box display="flex" alignItems="center" paddingY="spacings.lg">
-        {windowWidth <= 700 ? null : <Box flex="1"></Box>}
+        <StyledHeaderPlaceholder></StyledHeaderPlaceholder>
         <Link href="/">
           <Box
             flex="1"
@@ -57,16 +59,18 @@ export default function Header() {
           ></Box>
         </Link>
         <Box display="flex" gap="spacings.xl" flex="1" justifyContent="flex-end">
-          {windowWidth <= 900 && SPORTS.find(sport => sport.slug === activeSportSlug) !== undefined ? (
-            <Link href={`/${activeSportSlug}/leagues`}>
-              <Box
-                maskSize="24px 24px"
-                maskImage="url(/icons/system/ic_trophy.svg)"
-                backgroundColor="colors.surface.s1"
-                width="24px"
-                height="24px"
-              ></Box>
-            </Link>
+          {SPORTS.find(sport => sport.slug === activeSportSlug) !== undefined ? (
+            <StyledHeaderLeaguesButton>
+              <Link href={`/${activeSportSlug}/leagues`}>
+                <Box
+                  maskSize="24px 24px"
+                  maskImage="url(/icons/system/ic_trophy.svg)"
+                  backgroundColor="colors.surface.s1"
+                  width="24px"
+                  height="24px"
+                ></Box>
+              </Link>
+            </StyledHeaderLeaguesButton>
           ) : null}
           {SPORTS.find(sport => sport.slug === activeSportSlug) !== undefined ? (
             <Link href={`/${activeSportSlug}/tracked-events`}>

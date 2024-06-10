@@ -1,9 +1,9 @@
 import { getTeamEventsClient } from '@/api/team'
 import { TeamDetails } from '@/model/team'
-import { Box } from '@kuma-ui/core'
 import { useEffect, useState } from 'react'
 import EventsPanelRounds from '../EventsPanelRounds'
 import { useEventDetailsContext } from '@/context/EventDetailsContext'
+import StyledPanel from '../styledComponents/StyledPanel'
 
 interface TeamEventsPanelProps {
   team: TeamDetails
@@ -31,14 +31,7 @@ export default function TeamEventsPanel({ team }: TeamEventsPanelProps) {
   )
 
   return (
-    <Box
-      maxWidth="448px"
-      width="100%"
-      borderRadius="radii.lg"
-      bg="colors.surface.s1"
-      boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)"
-      paddingY="spacings.lg"
-    >
+    <StyledPanel>
       <EventsPanelRounds
         events={events}
         eventsError={eventsError}
@@ -50,6 +43,6 @@ export default function TeamEventsPanel({ team }: TeamEventsPanelProps) {
         page={page}
         setPage={setPage}
       />
-    </Box>
+    </StyledPanel>
   )
 }

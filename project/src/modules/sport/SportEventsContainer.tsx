@@ -61,7 +61,7 @@ export default function SportEventsContainer({ events }: SportEventContainerProp
       </Box>
       <Box>
         {sportEventsGroupedByTournament[tournamentId].map(event =>
-          windowWidth <= 900 ? (
+          windowWidth <= 1200 ? (
             <EventLabelLink event={event} key={event.id} />
           ) : (
             <EventLabelButton event={event} key={event.id} />

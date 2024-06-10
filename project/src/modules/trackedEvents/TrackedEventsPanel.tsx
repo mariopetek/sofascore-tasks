@@ -1,11 +1,15 @@
 import { useTrackedEventsContext } from '@/context/TrackedEventsContext'
 import { Box } from '@kuma-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import EventLabelButton from '../EventLabelButton'
 import { Sport } from '@/model/sport'
 import { isoDateFormat } from '@/utils/date'
 import { Event } from '@/model/event'
 import { useTranslation } from 'react-i18next'
+import { useWindowResize } from '@/hooks/useWindowResize'
+import EventLabelLink from '../EventLabelLink'
+import { useEventDetailsContext } from '@/context/EventDetailsContext'
+import StyledPanel from '../styledComponents/StyledPanel'
 
 interface TrackedEventsPanelProps {
   sportSlug: Sport['slug']
@@ -13,12 +17,21 @@ interface TrackedEventsPanelProps {
 export default function TrackedEventsPanel({ sportSlug }: TrackedEventsPanelProps) {
   const [t] = useTranslation('global')
 
+  const windowWidth = useWindowResize()
+
   const { events } = useTrackedEventsContext()
   const sportEvents = events.filter(event => event.tournament.sport.slug === sportSlug)
 
   type Page = 'previous' | 'current' | 'next'
 
   const [page, setPage] = useState<Page>('current')
+
+  const { setIsDetailsPanelOpen, setSelectedEvent } = useEventDetailsContext()
+
+  useEffect(() => {
+    setIsDetailsPanelOpen(false)
+    setSelectedEvent(null)
+  }, [page])
 
   const todayDate = new Date()
   const tommorowDate = new Date()
@@ -51,22 +64,15 @@ export default function TrackedEventsPanel({ sportSlug }: TrackedEventsPanelProp
       : { current: [], previous: [], next: [] }
 
   return (
-    <Box
-      maxWidth="448px"
-      width="100%"
-      borderRadius="radii.lg"
-      bg="colors.surface.s1"
-      boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)"
-      paddingY="spacings.lg"
-    >
+    <StyledPanel>
       <Box display="flex" flexDirection="column">
         <Box display="flex" justifyContent="center" paddingX="spacings.sm">
           <Box as="h2" color="colors.onSurface.lv1" fontSize="fontSizes.md" fontWeight="fontWeights.bold">
             {t('trackedEventsPanel.trackedEvents')}
           </Box>
         </Box>
-        <Box display="flex" paddingY="spacings.lg" paddingX="spacings.sm">
-          <Box flex="1" display="flex" justifyContent="center">
+        <Box display="flex" paddingY="spacings.lg" paddingX="spacings.sm" gap="spacings.xl">
+          <Box flex="1" display="flex" justifyContent="flex-end">
             <Box
               cursor="pointer"
               onClick={() => setPage('previous')}
@@ -102,7 +108,7 @@ export default function TrackedEventsPanel({ sportSlug }: TrackedEventsPanelProp
               {t('trackedEventsPanel.current')}
             </Box>
           </Box>
-          <Box flex="1" display="flex" justifyContent="center">
+          <Box flex="1" display="flex">
             <Box
               onClick={() => setPage('next')}
               cursor="pointer"
@@ -137,8 +143,14 @@ export default function TrackedEventsPanel({ sportSlug }: TrackedEventsPanelProp
           </Box>
         </Box>
       ) : (
-        groupedEventsByPage[page].map(event => <EventLabelButton event={event} key={event.id} />)
+        groupedEventsByPage[page].map(event =>
+          windowWidth <= 1200 ? (
+            <EventLabelLink event={event} key={event.id} />
+          ) : (
+            <EventLabelButton event={event} key={event.id} />
+          )
+        )
       )}
-    </Box>
+    </StyledPanel>
   )
 }

@@ -1,9 +1,9 @@
 import { getPlayerEventsClient } from '@/api/player'
 import { useEventDetailsContext } from '@/context/EventDetailsContext'
 import { Player } from '@/model/player'
-import { Box } from '@kuma-ui/core'
 import { useEffect, useState } from 'react'
 import EventsPanelRounds from '../EventsPanelRounds'
+import StyledPanel from '../styledComponents/StyledPanel'
 
 interface PlayerEventsPanelProps {
   player: Player
@@ -31,14 +31,7 @@ export default function PlayerEventsPanel({ player }: PlayerEventsPanelProps) {
   )
 
   return (
-    <Box
-      maxWidth="448px"
-      width="100%"
-      borderRadius="radii.lg"
-      bg="colors.surface.s1"
-      boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)"
-      paddingY="spacings.lg"
-    >
+    <StyledPanel>
       <EventsPanelRounds
         events={events}
         eventsError={eventsError}
@@ -50,6 +43,6 @@ export default function PlayerEventsPanel({ player }: PlayerEventsPanelProps) {
         page={page}
         setPage={setPage}
       />
-    </Box>
+    </StyledPanel>
   )
 }

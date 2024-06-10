@@ -27,7 +27,7 @@ export default function EventDetailsIncidents({ incidents, event }: EventDetails
   const eventSport = eventTournament.sport
 
   return (
-    <Box paddingTop="spacings.sm" paddingBottom="spacings.lg">
+    <Box paddingTop="spacings.sm">
       {incidents.length === 0 ? (
         <Box
           paddingX="spacings.sm"

@@ -9,7 +9,9 @@ import { Event } from '@/model/event'
 import EventDetailsWidget from '@/modules/EventDetailsWidget'
 import TournamentsPanel from '@/modules/TournamentsPanel'
 import TournamentEventsPanel from '@/modules/tournament/TournamentEventsPanel'
-import { useWindowResize } from '@/hooks/useWindowResize'
+import StyledPageContainer from '@/modules/styledComponents/StyledPageContainer'
+import StyledTournamentsPanelWrapper from '@/modules/styledComponents/StyledTournamentsPanelWrapper'
+import StyledPanelContainer from '@/modules/styledComponents/StyledPanelContainer'
 
 interface TournamentDetailsPageProps {
   tournaments: Tournament[]
@@ -20,35 +22,21 @@ interface TournamentDetailsPageProps {
 }
 
 export default function TournamentDetailsMatchesPage({ tournaments, tournamentDetails }: TournamentDetailsPageProps) {
-  const windwWidth = useWindowResize()
-
   return (
-    <Box
-      maxWidth="1392px"
-      width="100%"
-      display="flex"
-      justifyContent={windwWidth <= 900 ? 'center' : 'flex-start'}
-      alignItems="flex-start"
-      gap="spacings.xl"
-    >
-      {windwWidth <= 900 ? null : <TournamentsPanel tournaments={tournaments} />}
+    <StyledPageContainer>
+      <StyledTournamentsPanelWrapper>
+        <TournamentsPanel tournaments={tournaments} />
+      </StyledTournamentsPanelWrapper>
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TournamentHeadingPanel tournament={tournamentDetails} />
-
-        <Box
-          display="flex"
-          flex="1"
-          gap={windwWidth <= 900 ? 'spacings.md' : 'spacings.xl'}
-          alignItems={windwWidth <= 900 ? 'center' : 'flex-start'}
-          flexDirection={windwWidth <= 900 ? 'column' : 'row'}
-        >
+        <StyledPanelContainer>
           <EventDetailsContextProvider>
             <TournamentEventsPanel tournament={tournamentDetails} />
             <EventDetailsWidget />
           </EventDetailsContextProvider>
-        </Box>
+        </StyledPanelContainer>
       </Box>
-    </Box>
+    </StyledPageContainer>
   )
 }
 

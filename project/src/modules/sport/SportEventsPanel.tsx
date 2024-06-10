@@ -18,6 +18,7 @@ import { useTranslation } from 'react-i18next'
 import { useDateContext } from '@/context/DateContext'
 import { useLanguageContext } from '@/context/LanguageContext'
 import { useWindowResize } from '@/hooks/useWindowResize'
+import StyledSportEventsPanel from '../styledComponents/StyledSportEventsPanel'
 
 interface SportEventsPanelProps {
   events: Event[]
@@ -45,7 +46,7 @@ export default function SportEventsPanel({ events, selectedDate, sportSlug }: Sp
 
   const datesAroundSelectedDate = datesAroundDate(new Date(selectedDate), 3)
 
-  if (windowWidth <= 700) {
+  if (windowWidth < 448) {
     datesAroundSelectedDate.splice(0, 1)
     datesAroundSelectedDate.splice(datesAroundSelectedDate.length - 1, 1)
   }
@@ -59,16 +60,7 @@ export default function SportEventsPanel({ events, selectedDate, sportSlug }: Sp
   const todayDate = new Date()
 
   return (
-    <Box
-      backgroundColor="colors.surface.s1"
-      boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)"
-      borderRadius="radii.lg"
-      maxWidth="448px"
-      width="100%"
-      display="flex"
-      flexDirection="column"
-      paddingBottom="spacings.lg"
-    >
+    <StyledSportEventsPanel>
       <Box
         height="48px"
         bg="colors.primary.variant"
@@ -169,6 +161,6 @@ export default function SportEventsPanel({ events, selectedDate, sportSlug }: Sp
         </Box>
         <SportEventsContainer events={events} />
       </Box>
-    </Box>
+    </StyledSportEventsPanel>
   )
 }

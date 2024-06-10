@@ -1,9 +1,9 @@
 import { getTournamentEventsClient } from '@/api/tournament'
 import { useEventDetailsContext } from '@/context/EventDetailsContext'
 import { Tournament } from '@/model/tournament'
-import { Box } from '@kuma-ui/core'
 import { useEffect, useState } from 'react'
 import EventsPanelRounds from '../EventsPanelRounds'
+import StyledPanel from '../styledComponents/StyledPanel'
 
 interface EventsPanelRoundsProps {
   tournament: Tournament
@@ -32,14 +32,7 @@ export default function TournamentEventsPanel({ tournament }: EventsPanelRoundsP
   )
 
   return (
-    <Box
-      maxWidth="448px"
-      width="100%"
-      borderRadius="radii.lg"
-      bg="colors.surface.s1"
-      boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)"
-      paddingY="spacings.lg"
-    >
+    <StyledPanel>
       <EventsPanelRounds
         events={events}
         eventsError={eventsError}
@@ -51,6 +44,6 @@ export default function TournamentEventsPanel({ tournament }: EventsPanelRoundsP
         page={page}
         setPage={setPage}
       />
-    </Box>
+    </StyledPanel>
   )
 }

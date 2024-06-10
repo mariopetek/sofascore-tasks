@@ -62,7 +62,7 @@ export default function EventLabel({ event }: EventLabelProps) {
         <Box width="1px" bg="colors.onSurface.lv4"></Box>
 
         <Box display="flex" flexDirection="column" flex="1" gap="spacings.xs">
-          <Box display="flex" justifyContent="space-between">
+          <Box display="flex" justifyContent="space-between" gap="spacings.sm">
             <Box display="flex" alignItems="center" gap="spacings.sm">
               <Image src={homeTeamLogo} alt={homeTeamName} width={16} height={16} />
               <Box
@@ -94,7 +94,7 @@ export default function EventLabel({ event }: EventLabelProps) {
               {homeTeamScore}
             </Box>
           </Box>
-          <Box display="flex" justifyContent="space-between">
+          <Box display="flex" justifyContent="space-between" gap="spacings.sm">
             <Box display="flex" alignItems="center" gap="spacings.sm">
               <Image src={awayTeamLogo} alt={awayTeamName} width={16} height={16} />
               <Box

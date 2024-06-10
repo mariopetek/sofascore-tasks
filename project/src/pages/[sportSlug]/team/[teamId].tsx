@@ -1,11 +1,14 @@
 import { getSportTournaments } from '@/api/sport'
 import { getTeamDetails, getTeamEvents, getTeamPlayers, getTeamTournaments } from '@/api/team'
-import { useWindowResize } from '@/hooks/useWindowResize'
 import { Event } from '@/model/event'
 import { Player } from '@/model/player'
 import { Sport } from '@/model/sport'
 import { Team, TeamDetails } from '@/model/team'
 import { Tournament } from '@/model/tournament'
+import StyledPageContainer from '@/modules/styledComponents/StyledPageContainer'
+import StyledPanelContainer from '@/modules/styledComponents/StyledPanelContainer'
+import StyledPanelSection from '@/modules/styledComponents/StyledPanelSection'
+import StyledTournamentsPanelWrapper from '@/modules/styledComponents/StyledTournamentsPanelWrapper'
 import TeamHeadingPanel from '@/modules/team/TeamHeadingPanel'
 import TeamInfoPanel from '@/modules/team/TeamInfoPanel'
 import TeamNextEventPanel from '@/modules/team/TeamNextEventPanel'
@@ -31,30 +34,25 @@ export default function TeamDetailsPage({
   teamTournaments,
   nextTeamEvent,
 }: TeamDetailsPageProps) {
-  const windowWidth = useWindowResize()
-
   return (
-    <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      {windowWidth <= 900 ? null : <TournamentsPanel tournaments={sportTournaments} />}
+    <StyledPageContainer>
+      <StyledTournamentsPanelWrapper>
+        <TournamentsPanel tournaments={sportTournaments} />
+      </StyledTournamentsPanelWrapper>
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TeamHeadingPanel team={teamDetails} sportSlug={sportSlug} />
-        <Box
-          display="flex"
-          gap={windowWidth <= 900 ? 'spacings.md' : 'spacings.xl'}
-          flexDirection={windowWidth <= 900 ? 'column' : 'row'}
-          alignItems={windowWidth <= 900 ? 'center' : 'flex-start'}
-        >
-          <Box display="flex" flexDirection="column" gap="spacings.md" maxWidth="448px" width="100%">
+        <StyledPanelContainer>
+          <StyledPanelSection>
             <TeamInfoPanel team={teamDetails} players={teamPlayers} />
             <TeamVenuePanel teamVenue={teamDetails.venue} />
-          </Box>
-          <Box display="flex" flexDirection="column" gap="spacings.md" maxWidth="448px" width="100%">
+          </StyledPanelSection>
+          <StyledPanelSection>
             <TeamTournamentsPanel tournaments={teamTournaments} />
             <TeamNextEventPanel nextEvent={nextTeamEvent} />
-          </Box>
-        </Box>
+          </StyledPanelSection>
+        </StyledPanelContainer>
       </Box>
-    </Box>
+    </StyledPageContainer>
   )
 }
 

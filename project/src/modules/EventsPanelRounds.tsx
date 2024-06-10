@@ -133,7 +133,7 @@ export default function EventsPanelRounds({
                 {t('eventsPanelRounds.round')} {round}
               </Box>
               {groupedEventsByRound[round].map(event =>
-                windowWidth <= 900 ? (
+                windowWidth <= 1200 ? (
                   <EventLabelLink key={event.id} event={event} />
                 ) : (
                   <EventLabelButton key={event.id} event={event} />

@@ -1,8 +1,9 @@
 import { getSportTournaments } from '@/api/sport'
 import { getTournamentDetails, getTournamentStandings } from '@/api/tournament'
-import { useWindowResize } from '@/hooks/useWindowResize'
 import { Sport } from '@/model/sport'
 import { StandingRow, Tournament } from '@/model/tournament'
+import StyledPageContainer from '@/modules/styledComponents/StyledPageContainer'
+import StyledTournamentsPanelWrapper from '@/modules/styledComponents/StyledTournamentsPanelWrapper'
 import TournamentHeadingPanel from '@/modules/tournament/TournamentHeadingPanel'
 import TournamentStandingsPanel from '@/modules/tournament/TournamentStandingsPanel'
 import TournamentsPanel from '@/modules/TournamentsPanel'
@@ -21,16 +22,16 @@ export default function TournamentDetailsStandingsPage({
   tournamentDetails,
   tournamentStandings,
 }: TournamentDetailsPageProps) {
-  const windwWidth = useWindowResize()
-
   return (
-    <Box maxWidth="1392px" width="100%" display="flex" alignItems="flex-start" gap="spacings.xl">
-      {windwWidth <= 900 ? null : <TournamentsPanel tournaments={tournaments} />}
+    <StyledPageContainer>
+      <StyledTournamentsPanelWrapper>
+        <TournamentsPanel tournaments={tournaments} />
+      </StyledTournamentsPanelWrapper>
       <Box maxWidth="920px" width="100%" display="flex" flexDirection="column" gap="spacings.md">
         <TournamentHeadingPanel tournament={tournamentDetails} />
         <TournamentStandingsPanel standings={tournamentStandings} sportSlug={sportSlug} />
       </Box>
-    </Box>
+    </StyledPageContainer>
   )
 }
 

@@ -26,7 +26,7 @@ export default function TeamHeadingPanel({ team, sportSlug }: TeamHeadingPanelPr
   const isActive = (path: string) => router.asPath === `/${sportSlug}/team/${team.id}${path}`
   return (
     <Box bg="colors.surface.s1" borderRadius="radii.lg" boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)">
-      <Box padding="spacings.lg" display="flex" alignItems="center" gap="spacings.xl">
+      <Box padding="spacings.lg" display="flex" alignItems="center" gap="spacings.xl" flexWrap="wrap">
         <Box
           border="1px solid"
           borderColor="colors.onSurface.lv3"

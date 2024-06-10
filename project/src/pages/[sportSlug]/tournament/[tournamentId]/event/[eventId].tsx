@@ -1,12 +1,12 @@
 import { getEventDetails, getEventIncidents } from '@/api/event'
 import { getSportTournaments } from '@/api/sport'
-import { useWindowResize } from '@/hooks/useWindowResize'
 import { Event, Incident } from '@/model/event'
 import { Sport } from '@/model/sport'
 import { Tournament } from '@/model/tournament'
 import EventDetailsPanel from '@/modules/event/EventDetailsPanel'
+import StyledPageContainer from '@/modules/styledComponents/StyledPageContainer'
+import StyledTournamentsPanelWrapper from '@/modules/styledComponents/StyledTournamentsPanelWrapper'
 import TournamentsPanel from '@/modules/TournamentsPanel'
-import { Box } from '@kuma-ui/core'
 
 interface EventPageProps {
   tournaments: Tournament[]
@@ -15,20 +15,13 @@ interface EventPageProps {
 }
 
 export default function EventPage({ tournaments, eventDetails, eventIncidents }: EventPageProps) {
-  const windwWidth = useWindowResize()
-
   return (
-    <Box
-      maxWidth="1392px"
-      width="100%"
-      display="flex"
-      alignItems="flex-start"
-      justifyContent={windwWidth <= 900 ? 'center' : 'flex-start'}
-      gap="spacings.xl"
-    >
-      {windwWidth <= 900 ? null : <TournamentsPanel tournaments={tournaments} />}
+    <StyledPageContainer>
+      <StyledTournamentsPanelWrapper>
+        <TournamentsPanel tournaments={tournaments} />
+      </StyledTournamentsPanelWrapper>
       <EventDetailsPanel event={eventDetails} incidents={eventIncidents} />
-    </Box>
+    </StyledPageContainer>
   )
 }
 

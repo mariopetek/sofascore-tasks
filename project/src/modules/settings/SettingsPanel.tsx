@@ -4,22 +4,13 @@ import DateFormatSection from './DateFormatSection'
 import AboutSection from './AboutSection'
 import LanguageSelection from './LanguageSelection'
 import { useTranslation } from 'react-i18next'
+import StyledSettingsPanel from '../styledComponents/StyledSettingsPanel'
 
 export default function SettingsPanel() {
   const [t] = useTranslation('global')
 
   return (
-    <Box
-      maxWidth="448px"
-      width="100%"
-      borderRadius="radii.lg"
-      bg="colors.surface.s1"
-      boxShadow="0 1px 4px 0 rgba(0, 0, 0, 0.08)"
-      paddingY="spacings.lg"
-      display="flex"
-      flexDirection="column"
-      gap="spacings.lg"
-    >
+    <StyledSettingsPanel>
       <Box>
         <Heading
           as="h1"
@@ -38,6 +29,6 @@ export default function SettingsPanel() {
         <DateFormatSection />
         <AboutSection />
       </Box>
-    </Box>
+    </StyledSettingsPanel>
   )
 }
