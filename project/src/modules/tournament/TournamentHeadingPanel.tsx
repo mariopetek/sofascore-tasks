@@ -54,13 +54,13 @@ export default function TournamentHeadingPanel({ tournament }: TournamentHeading
           </Box>
         </Box>
       </Box>
-      <Box paddingX="spacings.lg" display="flex">
+      <Box paddingX="spacings.sm" display="flex">
         {LINKS.map(link => (
           <Link key={link.path} href={`/${tournament.sport.slug}/tournament/${tournament.id}${link.path}`}>
             <Box position="relative" paddingY="spacings.lg" marginX="spacings.sm">
               <Box
                 as="span"
-                paddingX="spacings.sm"
+                paddingX="spacings.xs"
                 color={isActive(link.path) ? 'colors.primary.default' : 'colors.onSurface.lv2'}
                 fontSize="fontSizes.sm"
               >
