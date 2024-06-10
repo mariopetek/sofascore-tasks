@@ -105,5 +105,11 @@
     "current": "Current",
     "next": "Next",
     "noTrackedEvents": "No tracked events in this section."
+  },
+  "search": {
+    "searchPlayersOrTeams": "Search players or teams",
+    "players": "Players",
+    "teams": "Teams",
+    "searchPlaceholder": "Search"
   }
 }

@@ -5,8 +5,11 @@ import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
 import { SearchType } from '@/model/search'
 import PlayersSearchOutput from './PlayersSearchOutput'
 import TeamsSearchOutput from './TeamsSearchOutput'
+import { useTranslation } from 'react-i18next'
 
 export default function SearchDialog() {
+  const [t] = useTranslation('global')
+
   const { isDialogOpen, setIsDialogOpen } = useSearchDialogContext()
 
   const [searchType, setSearchType] = useState<SearchType>('player')
@@ -51,7 +54,7 @@ export default function SearchDialog() {
       <StyledPanel>
         <Box paddingX="spacings.lg" display="flex" justifyContent="space-between" alignItems="center">
           <Heading as="h2" color="colors.onSurface.lv1" fontWeight="fontWeights.bold" fontSize="fontSizes.md">
-            Search players or teams
+            {t('search.searchPlayersOrTeams')}
           </Heading>
           <Button
             maskSize="24px 24px"
@@ -78,7 +81,7 @@ export default function SearchDialog() {
               fontSize="fontSizes.md"
               fontWeight="fontWeights.bold"
             >
-              Players
+              {t('search.players')}
             </Box>
           </Box>
           <Box flex="1" display="flex" justifyContent="flex-start">
@@ -96,7 +99,7 @@ export default function SearchDialog() {
               fontSize="fontSizes.md"
               fontWeight="fontWeights.bold"
             >
-              Teams
+              {t('search.teams')}
             </Box>
           </Box>
         </Box>
@@ -119,8 +122,8 @@ export default function SearchDialog() {
             ></Box>
             <Input
               id="search"
-              type="search"
-              placeholder="Search"
+              type="text"
+              placeholder={t('search.searchPlaceholder')}
               width="100%"
               borderStyle="1px"
               value={searchQuery}
@@ -132,6 +135,16 @@ export default function SearchDialog() {
               fontFamily="inherit"
               color="colors.onSurface.lv1"
             />
+            {searchQuery.length > 0 ? (
+              <Button
+                maskSize="20px 20px"
+                maskImage="url(/icons/system/ic_close.svg)"
+                backgroundColor="colors.onSurface.lv1"
+                width="20px"
+                height="20px"
+                onClick={() => setSearchQuery('')}
+              ></Button>
+            ) : null}
           </Box>
         </Box>
         <Box marginTop="spacings.lg" overflowY="auto" maxHeight="50vh">

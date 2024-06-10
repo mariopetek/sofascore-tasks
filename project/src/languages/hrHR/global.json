@@ -105,5 +105,11 @@
     "current": "Trenutni",
     "next": "Sljedeći",
     "noTrackedEvents": "Nema praćenih događaja u ovoj sekciji."
+  },
+  "search": {
+    "searchPlayersOrTeams": "Pretraži igrače ili timove",
+    "players": "Igrači",
+    "teams": "Timovi",
+    "searchPlaceholder": "Pretraži"
   }
 }
