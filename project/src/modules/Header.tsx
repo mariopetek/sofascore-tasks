@@ -1,10 +1,11 @@
 import { useWindowResize } from '@/hooks/useWindowResize'
-import { Box } from '@kuma-ui/core'
+import { Box, Button } from '@kuma-ui/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import StyledHeaderPlaceholder from './styledComponents/StyledHeaderPlaceholder'
 import StyledHeaderLeaguesButton from './styledComponents/StyledHeaderLeaguesButton'
+import { useSearchDialogContext } from '@/context/SearchDialogContext'
 
 export default function Header() {
   const [t] = useTranslation('global')
@@ -35,6 +36,8 @@ export default function Header() {
   const router = useRouter()
   const activeSportSlug = router.asPath.split('/')[1]
 
+  const { setIsDialogOpen } = useSearchDialogContext()
+
   return (
     <Box
       as="header"
@@ -46,7 +49,7 @@ export default function Header() {
       flexDirection="column"
       paddingX="spacings.lg"
     >
-      <Box display="flex" alignItems="center" paddingY="spacings.lg">
+      <Box display="flex" alignItems="center" paddingY="spacings.lg" gap="spacings.lg">
         <StyledHeaderPlaceholder></StyledHeaderPlaceholder>
         <Link href="/">
           <Box
@@ -58,7 +61,7 @@ export default function Header() {
             height="20px"
           ></Box>
         </Link>
-        <Box display="flex" gap="spacings.xl" flex="1" justifyContent="flex-end">
+        <Box display="flex" gap="spacings.lg" flex="1" justifyContent="flex-end">
           {SPORTS.find(sport => sport.slug === activeSportSlug) !== undefined ? (
             <StyledHeaderLeaguesButton>
               <Link href={`/${activeSportSlug}/leagues`}>
@@ -83,10 +86,16 @@ export default function Header() {
               ></Box>
             </Link>
           ) : null}
-
+          <Button
+            maskSize="24px 24px"
+            maskImage="url(/icons/system/search.svg)"
+            backgroundColor="colors.surface.s1"
+            width="24px"
+            height="24px"
+            onClick={() => setIsDialogOpen(true)}
+          ></Button>
           <Link href={`/settings`}>
             <Box
-              marginLeft="auto"
               maskSize="24px 24px"
               maskImage="url(/icons/system/ic_settings.svg)"
               backgroundColor="colors.surface.s1"
