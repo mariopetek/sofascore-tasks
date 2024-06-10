@@ -54,7 +54,9 @@ export default function TrackedEventsPanel({ sportSlug }: TrackedEventsPanelProp
             isoDateFormat(new Date(event.startDate)) === isoDateFormat(tommorowDate)
           ) {
             acc['current'].push(event)
-          } else if (new Date(event.startDate) < todayDate) {
+          } else if (
+            new Date(isoDateFormat(new Date(event.startDate))).getTime() < new Date(isoDateFormat(todayDate)).getTime()
+          ) {
             acc['previous'].push(event)
           } else {
             acc['next'].push(event)
