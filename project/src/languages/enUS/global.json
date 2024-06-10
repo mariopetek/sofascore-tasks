@@ -81,7 +81,8 @@
   },
   "playerHeadingPanel": {
     "nationality": "Nationality",
-    "position": "Position"
+    "position": "Position",
+    "years": "Yrs"
   },
   "settingsPanel": {
     "settings": "Settings",

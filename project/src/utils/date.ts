@@ -45,3 +45,7 @@ export function getDateShortDayByLocale(date: Date, language: LanguageLocale) {
 export function getDateLongDayByLocale(date: Date, language: LanguageLocale) {
   return date.toLocaleDateString(language, { weekday: 'long' })
 }
+
+export function getFullDateByLocale(date: Date, language: LanguageLocale) {
+  return date.toLocaleDateString(language, { day: 'numeric', month: 'short', year: 'numeric' })
+}

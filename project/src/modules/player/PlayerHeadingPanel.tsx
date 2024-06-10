@@ -1,6 +1,8 @@
 import ImagePlaceholder from '@/components/ImagePlaceholder'
+import { useLanguageContext } from '@/context/LanguageContext'
 import { PlayerDetails } from '@/model/player'
 import { getCountryCodeByName } from '@/utils/country/country'
+import { getFullDateByLocale } from '@/utils/date'
 import { Box, Heading, Image } from '@kuma-ui/core'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -13,6 +15,21 @@ export default function PlayerHeadingPanel({ player }: PlayerHeadingPanelProps) 
   const [t] = useTranslation('global')
 
   const [isImageLoaded, setIsImageLoaded] = useState(true)
+
+  const { languageLocale } = useLanguageContext()
+
+  function calculateYears(dateOfBirth: Date) {
+    const today = new Date()
+
+    let yearsDifference = today.getFullYear() - dateOfBirth.getFullYear()
+
+    const monthDifference = today.getMonth() - dateOfBirth.getMonth()
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dateOfBirth.getDate())) {
+      yearsDifference--
+    }
+
+    return yearsDifference
+  }
 
   return (
     <Box
@@ -77,6 +94,9 @@ export default function PlayerHeadingPanel({ player }: PlayerHeadingPanelProps) 
           bg="colors.secondary.highlight"
           borderRadius="radii.sm"
           flex="1"
+          paddingX="spacings.sm"
+          textAlign="center"
+          justifyContent="center"
         >
           <Box as="span" color="colors.onSurface.lv2" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
             {t('playerHeadingPanel.nationality')}
@@ -102,12 +122,36 @@ export default function PlayerHeadingPanel({ player }: PlayerHeadingPanelProps) 
           bg="colors.secondary.highlight"
           borderRadius="radii.sm"
           flex="1"
+          paddingX="spacings.sm"
+          textAlign="center"
+          justifyContent="center"
         >
           <Box as="span" color="colors.onSurface.lv2" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
             {t('playerHeadingPanel.position')}
           </Box>
           <Box as="span" color="colors.onSurface.lv1" fontWeight="fontWeights.bold" fontSize="fontSizes.sm">
             {player.position}
+          </Box>
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="column"
+          gap="spacings.xs"
+          alignItems="center"
+          paddingTop="spacings.sm"
+          paddingBottom="spacings.md"
+          bg="colors.secondary.highlight"
+          borderRadius="radii.sm"
+          flex="1"
+          paddingX="spacings.sm"
+          textAlign="center"
+          justifyContent="center"
+        >
+          <Box as="span" color="colors.onSurface.lv2" fontWeight="fontWeights.bold" fontSize="fontSizes.xs">
+            {getFullDateByLocale(new Date(player.dateOfBirth), languageLocale)}
+          </Box>
+          <Box as="span" color="colors.onSurface.lv1" fontWeight="fontWeights.bold" fontSize="fontSizes.sm">
+            {calculateYears(new Date(player.dateOfBirth))} {t('playerHeadingPanel.years')}
           </Box>
         </Box>
       </Box>

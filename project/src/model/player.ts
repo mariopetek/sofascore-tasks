@@ -13,7 +13,7 @@ export interface Player {
 export interface PlayerDetails extends Player {
   sport: Sport
   team: Team
-  dateOfBirth: Date
+  dateOfBirth: string
 }
 
 export interface PlayerSearch extends Player {

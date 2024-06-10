@@ -81,7 +81,8 @@
   },
   "playerHeadingPanel": {
     "nationality": "Nacionalnost",
-    "position": "Pozicija"
+    "position": "Pozicija",
+    "years": "god"
   },
   "settingsPanel": {
     "settings": "Postavke",
