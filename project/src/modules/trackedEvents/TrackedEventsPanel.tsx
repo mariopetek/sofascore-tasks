@@ -1,15 +1,15 @@
 import { useTrackedEventsContext } from '@/context/TrackedEventsContext'
 import { Box } from '@kuma-ui/core'
 import React, { useEffect, useState } from 'react'
-import EventLabelButton from '../EventLabelButton'
 import { Sport } from '@/model/sport'
 import { isoDateFormat } from '@/utils/date'
 import { Event } from '@/model/event'
 import { useTranslation } from 'react-i18next'
 import { useWindowResize } from '@/hooks/useWindowResize'
-import EventLabelLink from '../EventLabelLink'
 import { useEventDetailsContext } from '@/context/EventDetailsContext'
 import StyledPanel from '../styledComponents/StyledPanel'
+import EventLabelLink from '../eventLabel/EventLabelLink'
+import EventLabelButton from '../eventLabel/EventLabelButton'
 
 interface TrackedEventsPanelProps {
   sportSlug: Sport['slug']

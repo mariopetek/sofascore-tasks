@@ -1,8 +1,8 @@
 import { Event } from '@/model/event'
 import { Box, Heading, Image } from '@kuma-ui/core'
-import EventLabelLink from '../EventLabelLink'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
+import EventLabelLink from '../eventLabel/EventLabelLink'
 
 interface TeamNextEventPanelProps {
   nextEvent: Event

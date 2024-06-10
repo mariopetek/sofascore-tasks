@@ -6,7 +6,7 @@ import StyledPageContainer from '@/modules/styledComponents/StyledPageContainer'
 import StyledTournamentsPanelWrapper from '@/modules/styledComponents/StyledTournamentsPanelWrapper'
 import TournamentHeadingPanel from '@/modules/tournament/TournamentHeadingPanel'
 import TournamentStandingsPanel from '@/modules/tournament/TournamentStandingsPanel'
-import TournamentsPanel from '@/modules/TournamentsPanel'
+import TournamentsPanel from '@/modules/tournamentsPanel/TournamentsPanel'
 import { Box } from '@kuma-ui/core'
 
 interface TournamentDetailsPageProps {

@@ -2,11 +2,11 @@ import { getSportTournaments } from '@/api/sport'
 import { EventDetailsContextProvider } from '@/context/EventDetailsContext'
 import { Sport } from '@/model/sport'
 import { Tournament } from '@/model/tournament'
-import EventDetailsWidget from '@/modules/EventDetailsWidget'
+import EventDetailsWidget from '@/modules/eventDetails/EventDetailsWidget'
 import StyledPageContainer from '@/modules/styledComponents/StyledPageContainer'
 import StyledPanelContainer from '@/modules/styledComponents/StyledPanelContainer'
 import StyledTournamentsPanelWrapper from '@/modules/styledComponents/StyledTournamentsPanelWrapper'
-import TournamentsPanel from '@/modules/TournamentsPanel'
+import TournamentsPanel from '@/modules/tournamentsPanel/TournamentsPanel'
 import TrackedEventsPanel from '@/modules/trackedEvents/TrackedEventsPanel'
 
 interface TrackedEventsPageProps {

@@ -5,7 +5,7 @@ import EventDetailsHeading from './EventDetailsHeading'
 import Separator from '@/components/Separator'
 import EventIncidentsWrapper from './EventIncidentsWrapper'
 import { useTranslation } from 'react-i18next'
-import StyledPanel from './styledComponents/StyledPanel'
+import StyledPanel from '../styledComponents/StyledPanel'
 
 export default function EventDetailsWidget() {
   const [t] = useTranslation('global')

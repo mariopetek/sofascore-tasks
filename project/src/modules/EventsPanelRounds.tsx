@@ -1,11 +1,11 @@
 import { Event } from '@/model/event'
 import { Box, Button } from '@kuma-ui/core'
-import EventLabelButton from './EventLabelButton'
 import ErrorMessage from '@/components/ErrorMessage'
 import Loader from '@/components/Loader'
 import { useTranslation } from 'react-i18next'
 import { useWindowResize } from '@/hooks/useWindowResize'
-import EventLabelLink from './EventLabelLink'
+import EventLabelLink from './eventLabel/EventLabelLink'
+import EventLabelButton from './eventLabel/EventLabelButton'
 
 interface EventsPanelRoundsProps {
   events: Event[] | undefined

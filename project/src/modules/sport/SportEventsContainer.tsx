@@ -3,9 +3,9 @@ import { Box, Image } from '@kuma-ui/core'
 import { Tournament } from '@/model/tournament'
 import Separator from '@/components/Separator'
 import Link from 'next/link'
-import EventLabelButton from '../EventLabelButton'
 import { useWindowResize } from '@/hooks/useWindowResize'
-import EventLabelLink from '../EventLabelLink'
+import EventLabelLink from '../eventLabel/EventLabelLink'
+import EventLabelButton from '../eventLabel/EventLabelButton'
 
 interface SportEventContainerProps {
   events: Event[]

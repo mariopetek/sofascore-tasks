@@ -1,7 +1,7 @@
 import { getSportTournaments } from '@/api/sport'
 import { Sport } from '@/model/sport'
 import { Tournament } from '@/model/tournament'
-import TournamentsPanel from '@/modules/TournamentsPanel'
+import TournamentsPanel from '@/modules/tournamentsPanel/TournamentsPanel'
 import { Box } from '@kuma-ui/core'
 
 interface LeaguesPageProps {

@@ -2,9 +2,9 @@ import { Event, Incident, isPeriodIncident } from '@/model/event'
 import { Box } from '@kuma-ui/core'
 import Link from 'next/link'
 import { Fragment, useMemo } from 'react'
-import FootballIncident from './football/FootballIncident'
-import BasketballIncident from './basketball/BasketballIncident'
-import AmericanFootballIncident from './americanFootball/AmericanFootballIncident'
+import FootballIncident from '../football/FootballIncident'
+import BasketballIncident from '../basketball/BasketballIncident'
+import AmericanFootballIncident from '../americanFootball/AmericanFootballIncident'
 import { useTranslation } from 'react-i18next'
 
 interface EventDetailsIncidentsProps {

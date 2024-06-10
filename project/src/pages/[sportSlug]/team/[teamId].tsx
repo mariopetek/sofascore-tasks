@@ -14,7 +14,7 @@ import TeamInfoPanel from '@/modules/team/TeamInfoPanel'
 import TeamNextEventPanel from '@/modules/team/TeamNextEventPanel'
 import TeamTournamentsPanel from '@/modules/team/TeamTournamentsPanel'
 import TeamVenuePanel from '@/modules/team/TeamVenuePanel'
-import TournamentsPanel from '@/modules/TournamentsPanel'
+import TournamentsPanel from '@/modules/tournamentsPanel/TournamentsPanel'
 import { Box } from '@kuma-ui/core'
 
 interface TeamDetailsPageProps {

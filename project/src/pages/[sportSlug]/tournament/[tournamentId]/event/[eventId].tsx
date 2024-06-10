@@ -6,7 +6,7 @@ import { Tournament } from '@/model/tournament'
 import EventDetailsPanel from '@/modules/event/EventDetailsPanel'
 import StyledPageContainer from '@/modules/styledComponents/StyledPageContainer'
 import StyledTournamentsPanelWrapper from '@/modules/styledComponents/StyledTournamentsPanelWrapper'
-import TournamentsPanel from '@/modules/TournamentsPanel'
+import TournamentsPanel from '@/modules/tournamentsPanel/TournamentsPanel'
 
 interface EventPageProps {
   tournaments: Tournament[]

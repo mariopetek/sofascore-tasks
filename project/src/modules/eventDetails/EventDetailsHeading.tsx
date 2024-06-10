@@ -4,7 +4,7 @@ import { formatFullDateByLocale, getDateTimeByLocale, isoDateFormat } from '@/ut
 import { Box, Heading, Image } from '@kuma-ui/core'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
-import TrackEventButton from './TrackEventButton'
+import TrackEventButton from '../eventLabel/TrackEventButton'
 
 interface EventDetailsHeadingProps {
   event: Event

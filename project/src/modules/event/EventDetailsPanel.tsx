@@ -1,6 +1,6 @@
 import { Event, Incident } from '@/model/event'
-import EventDetailsHeading from '../EventDetailsHeading'
-import EventDetailsIncidents from '../EventDetailsIncidents'
+import EventDetailsHeading from '../eventDetails/EventDetailsHeading'
+import EventDetailsIncidents from '../eventDetails/EventDetailsIncidents'
 import Separator from '@/components/Separator'
 import StyledPanel from '../styledComponents/StyledPanel'
 

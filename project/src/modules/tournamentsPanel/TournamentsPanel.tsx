@@ -2,7 +2,7 @@ import { Tournament } from '@/model/tournament'
 import { Box, Heading } from '@kuma-ui/core'
 import TournamentLabel from './TournamentLabel'
 import { useTranslation } from 'react-i18next'
-import StyledPanel from './styledComponents/StyledPanel'
+import StyledPanel from '../styledComponents/StyledPanel'
 
 interface TournamentsPanelProps {
   tournaments: Tournament[]
