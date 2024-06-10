@@ -1,17 +1,15 @@
 import ImagePlaceholder from '@/components/ImagePlaceholder'
-import { Player } from '@/model/player'
-import { TeamDetails } from '@/model/team'
+import { PlayerDetails } from '@/model/player'
 import { getCountryCodeByName } from '@/utils/country/country'
 import { Box, Heading, Image } from '@kuma-ui/core'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 interface PlayerHeadingPanelProps {
-  player: Player
-  team: TeamDetails
+  player: PlayerDetails
 }
 
-export default function PlayerHeadingPanel({ player, team }: PlayerHeadingPanelProps) {
+export default function PlayerHeadingPanel({ player }: PlayerHeadingPanelProps) {
   const [t] = useTranslation('global')
 
   const [isImageLoaded, setIsImageLoaded] = useState(true)
@@ -59,13 +57,13 @@ export default function PlayerHeadingPanel({ player, team }: PlayerHeadingPanelP
       </Box>
       <Box paddingX="spacings.lg" paddingY="spacings.sm" display="flex" alignItems="center" gap="spacings.lg">
         <Image
-          src={`https://academy-backend.sofascore.dev/team/${team.id}/image`}
-          alt={team.name}
+          src={`https://academy-backend.sofascore.dev/team/${player.team.id}/image`}
+          alt={player.team.name}
           width="40px"
           height="40px"
         />
         <Heading as="h2" fontSize="fontSizes.sm" fontWeight="bold" color="colors.onSurface.lv1">
-          {team.name}
+          {player.team.name}
         </Heading>
       </Box>
       <Box paddingY="spacings.xs" display="flex" paddingX="spacings.lg" gap="spacings.lg">

@@ -57,7 +57,7 @@ export default function TeamSquadPanel({ players, teamDetails, sportSlug }: Team
       </Heading>
       {players.map((player, index) => (
         <Fragment key={player.id}>
-          <TeamPlayerLabel key={player.id} player={player} sportSlug={sportSlug} teamId={teamDetails.id} />
+          <TeamPlayerLabel key={player.id} player={player} sportSlug={sportSlug} />
           {index !== players.length - 1 ? (
             <Box marginTop="spacings.sm">
               <Separator />

@@ -148,8 +148,12 @@ export default function SearchDialog() {
           </Box>
         </Box>
         <Box marginTop="spacings.lg" overflowY="auto" maxHeight="50vh">
-          {searchType === 'player' && searchQuery.length >= 2 ? <PlayersSearchOutput query={searchQuery} /> : null}
-          {searchType === 'team' && searchQuery.length >= 2 ? <TeamsSearchOutput query={searchQuery} /> : null}
+          {searchType === 'player' && searchQuery.length >= 2 ? (
+            <PlayersSearchOutput query={searchQuery} handleCloseDialog={handleCloseDialog} />
+          ) : null}
+          {searchType === 'team' && searchQuery.length >= 2 ? (
+            <TeamsSearchOutput query={searchQuery} handleCloseDialog={handleCloseDialog} />
+          ) : null}
         </Box>
       </StyledPanel>
     </Box>

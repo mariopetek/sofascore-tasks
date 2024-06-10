@@ -3,21 +3,19 @@ import { getCountryCodeByName } from '@/utils/country/country'
 import Link from 'next/link'
 import { Player } from '@/model/player'
 import { Sport } from '@/model/sport'
-import { Team } from '@/model/team'
 import { useState } from 'react'
 import ImagePlaceholder from '../../components/ImagePlaceholder'
 
 interface TeamPlayerLabelProps {
   player: Player
   sportSlug: Sport['slug']
-  teamId: Team['id']
 }
 
-export default function TeamPlayerLabel({ player, sportSlug, teamId }: TeamPlayerLabelProps) {
+export default function TeamPlayerLabel({ player, sportSlug }: TeamPlayerLabelProps) {
   const [isImageLoaded, setIsImageLoaded] = useState(true)
 
   return (
-    <Link href={`/${sportSlug}/team/${teamId}/player/${player.id}`}>
+    <Link href={`/${sportSlug}/player/${player.id}`}>
       <Box
         paddingX="spacings.lg"
         paddingY="spacings.sm"

@@ -1,10 +1,10 @@
 import { Event } from '@/model/event'
-import { Player } from '@/model/player'
+import { Player, PlayerDetails } from '@/model/player'
 import useSWR from 'swr'
 
 export async function getPlayerDetails(playerId: Player['id']) {
   const response = await fetch(`https://academy-backend.sofascore.dev/player/${playerId}`)
-  const player = (await response.json()) as Player
+  const player = (await response.json()) as PlayerDetails
 
   return player
 }

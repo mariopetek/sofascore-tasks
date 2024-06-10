@@ -1,9 +1,9 @@
-import { Player } from '@/model/player'
-import { Team } from '@/model/team'
+import { PlayerSearch } from '@/model/player'
+import { TeamSearch } from '@/model/team'
 import useSWR from 'swr'
 
 export function searchPlayersClient(query: string) {
-  const { data, error, isLoading } = useSWR<Player[]>(`/api/search/player/${query}`)
+  const { data, error, isLoading } = useSWR<PlayerSearch[]>(`/api/search/player/${query}`)
 
   return {
     players: data,
@@ -13,7 +13,7 @@ export function searchPlayersClient(query: string) {
 }
 
 export function searchTeamsClient(query: string) {
-  const { data, error, isLoading } = useSWR<Team[]>(`/api/search/team/${query}`)
+  const { data, error, isLoading } = useSWR<TeamSearch[]>(`/api/search/team/${query}`)
 
   return {
     teams: data,
