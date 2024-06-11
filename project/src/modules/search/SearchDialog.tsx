@@ -29,13 +29,15 @@ export default function SearchDialog() {
     setIsDialogOpen(false)
   }
 
+  function clearSearchQuery() {
+    searchRef.current?.focus()
+    setSearchQuery('')
+  }
+
   const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (isDialogOpen) {
-      searchRef.current?.focus()
-    }
-    setSearchQuery('')
+    clearSearchQuery()
   }, [isDialogOpen, searchType])
 
   return !isDialogOpen ? null : (
@@ -147,7 +149,7 @@ export default function SearchDialog() {
                 backgroundColor="colors.onSurface.lv1"
                 width="20px"
                 height="20px"
-                onClick={() => setSearchQuery('')}
+                onClick={clearSearchQuery}
               ></Button>
             ) : null}
           </Box>
