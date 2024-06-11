@@ -1,7 +1,7 @@
 import { Box, Button, Heading, Input } from '@kuma-ui/core'
 import StyledPanel from '../styledComponents/StyledPanel'
 import { useSearchDialogContext } from '@/context/SearchDialogContext'
-import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from 'react'
 import { SearchType } from '@/model/search'
 import PlayersSearchOutput from './PlayersSearchOutput'
 import TeamsSearchOutput from './TeamsSearchOutput'
@@ -27,12 +27,16 @@ export default function SearchDialog() {
 
   function handleCloseDialog() {
     setIsDialogOpen(false)
-    setSearchQuery('')
   }
 
+  const searchRef = useRef<HTMLInputElement>(null)
+
   useEffect(() => {
+    if (isDialogOpen) {
+      searchRef.current?.focus()
+    }
     setSearchQuery('')
-  }, [searchType])
+  }, [isDialogOpen, searchType])
 
   return !isDialogOpen ? null : (
     <Box
@@ -121,6 +125,7 @@ export default function SearchDialog() {
               height="24px"
             ></Box>
             <Input
+              ref={searchRef}
               id="search"
               type="text"
               placeholder={t('search.searchPlaceholder')}
