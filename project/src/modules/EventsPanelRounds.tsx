@@ -87,6 +87,7 @@ export default function EventsPanelRounds({
           paddingY="spacings.sm"
           onClick={handleLeftButtonClick}
           visibility={previousEvents?.length === 0 ? 'hidden' : 'visible'}
+          disabled={!previousEvents}
         >
           <Box
             maskSize="24px 24px"
@@ -109,6 +110,7 @@ export default function EventsPanelRounds({
           paddingY="spacings.sm"
           onClick={handleRightButtonClick}
           visibility={nextEvents?.length === 0 ? 'hidden' : 'visible'}
+          disabled={!nextEvents}
         >
           <Box
             maskSize="24px 24px"
