@@ -24,7 +24,7 @@
     "round": "Round"
   },
   "eventLabel": {
-    "tommorow": "Tommorow",
+    "tomorrow": "Tomorrow",
     "yesterday": "Yesterday",
     "ft": "FT"
   },
@@ -33,7 +33,7 @@
   },
   "eventDetailsHeading": {
     "today": "Today",
-    "tommorow": "Tommorow",
+    "tomorrow": "Tomorrow",
     "yesterday": "Yesterday",
     "fullTime": "Full Time"
   },

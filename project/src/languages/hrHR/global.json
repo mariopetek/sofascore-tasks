@@ -24,7 +24,7 @@
     "round": "Runda"
   },
   "eventLabel": {
-    "tommorow": "Sutra",
+    "tomorrow": "Sutra",
     "yesterday": "Jučer",
     "ft": "KRAJ"
   },
@@ -33,7 +33,7 @@
   },
   "eventDetailsHeading": {
     "today": "Danas",
-    "tommorow": "Sutra",
+    "tomorrow": "Sutra",
     "yesterday": "Jučer",
     "fullTime": "Kraj"
   },
