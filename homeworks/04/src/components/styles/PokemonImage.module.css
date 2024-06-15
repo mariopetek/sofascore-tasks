@@ -1,0 +1,103 @@
+.pokemonImageContainer {
+    flex: 1;
+    background-color: var(--image-bg-color);
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+    position: relative;
+}
+
+.pokemonImageContainer.odd {
+    order: 1;
+    justify-content: flex-end;
+}
+
+.pokemonImageContainer.even {
+    order: 2;
+    justify-content: flex-start;
+}
+
+.pokemonImage {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+}
+
+.pokemonImageContainer.odd .pokemonImage {
+    animation: slide-right 0.5s forwards;
+}
+
+.pokemonImageContainer.even .pokemonImage {
+    animation: slide-left 0.5s forwards;
+}
+
+@keyframes slide-left {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-right {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.oddButton,
+.evenButton {
+    position: absolute;
+}
+
+.oddButton {
+    top: 20px;
+    right: 20px;
+}
+
+.evenButton {
+    top: 20px;
+    left: 20px;
+}
+
+@media screen and (max-width: 900px) {
+    .pokemonImageContainer {
+        padding: 0 30px;
+    }
+
+    .pokemonImageContainer.odd {
+        justify-content: center;
+    }
+
+    .pokemonImageContainer.even {
+        order: 1;
+        justify-content: center;
+    }
+
+    .pokemonImage {
+        max-width: 300px;
+        width: 100%;
+        height: auto;
+    }
+
+    .oddButton {
+        top: auto;
+        bottom: 20px;
+    }
+
+    .evenButton {
+        left: auto;
+        right: 20px;
+        top: auto;
+        bottom: 20px;
+    }
+}

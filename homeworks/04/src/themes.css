@@ -1,0 +1,51 @@
+:root {
+    --header-text-color: #eeeeee;
+    --bg-color: #ffffff;
+    --header-bg-color: #e3350d;
+    --image-bg-color: #eeeeee;
+    --details-bg-color: #ffffff;
+    --text-color: #262626;
+    --liked-color: #e3350d;
+    --modal-bg-color: #ffffff;
+    --error-bg-color: #ff6969;
+    --error-text-color: #520000;
+    --hover-color: #ffc94a;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1f2735;
+        --header-bg-color: #4d638c;
+        --image-bg-color: #354159;
+        --details-bg-color: #1f2735;
+        --text-color: #acacac;
+        --liked-color: #4d638c;
+        --modal-bg-color: #1f2735;
+        --error-bg-color: #520000;
+        --error-text-color: #ff6969;
+    }
+}
+
+.light {
+    --bg-color: #ffffff;
+    --header-bg-color: #e3350d;
+    --image-bg-color: #eeeeee;
+    --details-bg-color: #ffffff;
+    --text-color: #262626;
+    --liked-color: #e3350c;
+    --modal-bg-color: #ffffff;
+    --error-bg-color: #ff6969;
+    --error-text-color: #520000;
+}
+
+.dark {
+    --bg-color: #1f2735;
+    --header-bg-color: #4d638c;
+    --image-bg-color: #354159;
+    --details-bg-color: #1f2735;
+    --text-color: #acacac;
+    --liked-color: #4d638c;
+    --modal-bg-color: #1f2735;
+    --error-bg-color: #520000;
+    --error-text-color: #ff6969;
+}
