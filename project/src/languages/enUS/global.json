@@ -1,0 +1,116 @@
+{
+  "header": {
+    "football": "Football",
+    "basketball": "Basketball",
+    "americanFootball": "American Football"
+  },
+  "footer": {
+    "allRightsReserved": "All rights reserved."
+  },
+  "tournamentsPanel": {
+    "leagues": "Leagues"
+  },
+  "sportEventsPanel": {
+    "today": "Today",
+    "event": "Event",
+    "events": "Events"
+  },
+  "tournamentHeadingPanel": {
+    "matches": "Matches",
+    "standings": "Standings"
+  },
+  "eventsPanelRounds": {
+    "matches": "Matches",
+    "round": "Round"
+  },
+  "eventLabel": {
+    "tommorow": "Tommorow",
+    "yesterday": "Yesterday",
+    "ft": "FT"
+  },
+  "eventDetailsWidget": {
+    "viewFullPage": "View Full Page"
+  },
+  "eventDetailsHeading": {
+    "today": "Today",
+    "tommorow": "Tommorow",
+    "yesterday": "Yesterday",
+    "fullTime": "Full Time"
+  },
+  "eventDetailsIncidents": {
+    "noResultsYet": "No results yet.",
+    "viewTournamentDetails": "View Tournament Details"
+  },
+  "standingsLeaderboard": {
+    "team": "Team",
+    "p": "P",
+    "w": "W",
+    "d": "D",
+    "l": "L",
+    "goals": "Goals",
+    "diff": "DIFF",
+    "gb": "GB",
+    "pts": "PTS",
+    "pct": "PCT"
+  },
+  "teamHeadingPanel": {
+    "details": "Details",
+    "matches": "Matches",
+    "standings": "Standings",
+    "squad": "Squad"
+  },
+  "teamInfoPanel": {
+    "teamInfo": "Team Info",
+    "coach": "Coach",
+    "totalPlayers": "Total Players",
+    "foreignPlayers": "Foreign Players"
+  },
+  "teamVenuePanel": {
+    "venue": "Venue",
+    "stadium": "Stadium"
+  },
+  "teamTournamentsPanel": {
+    "tournaments": "Tournaments"
+  },
+  "teamNextEventPanel": {
+    "nextMatch": "Next Match"
+  },
+  "teamSquadPanel": {
+    "coach": "Coach",
+    "players": "Players"
+  },
+  "playerHeadingPanel": {
+    "nationality": "Nationality",
+    "position": "Position",
+    "years": "Yrs"
+  },
+  "settingsPanel": {
+    "settings": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "dateFormat": "Date Format",
+    "deDEDateFormat": "DD.MM.YY",
+    "enUSDateFormat": "MM/DD/YY",
+    "about": "About",
+    "sofascoreAcademy": "Sofascore Frontend Academy",
+    "class": "Class 2024",
+    "appName": "App Name",
+    "apiCredit": "API Credit",
+    "developer": "Developer"
+  },
+  "trackedEventsPanel": {
+    "trackedEvents": "Tracked Events",
+    "previous": "Previous",
+    "current": "Current",
+    "next": "Next",
+    "noTrackedEvents": "No tracked events in this section."
+  },
+  "search": {
+    "searchPlayersOrTeams": "Search players or teams",
+    "players": "Players",
+    "teams": "Teams",
+    "searchPlaceholder": "Search"
+  }
+}

@@ -13,14 +13,17 @@ export const ThemeContextProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setIsDark(true)
+      document.documentElement.style.colorScheme = 'dark'
     }
   }, [])
 
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add('dark')
+      document.documentElement.style.colorScheme = 'dark'
     } else {
       document.documentElement.classList.remove('dark')
+      document.documentElement.style.colorScheme = 'light'
     }
   }, [isDark])
 

@@ -1,0 +1,116 @@
+{
+  "header": {
+    "football": "Nogomet",
+    "basketball": "Košarka",
+    "americanFootball": "Američki nogomet"
+  },
+  "footer": {
+    "allRightsReserved": "Sva prava pridržana."
+  },
+  "tournamentsPanel": {
+    "leagues": "Lige"
+  },
+  "sportEventsPanel": {
+    "today": "Danas",
+    "event": "događaj",
+    "events": "događaja"
+  },
+  "tournamentHeadingPanel": {
+    "matches": "Utakmice",
+    "standings": "Tablica"
+  },
+  "eventsPanelRounds": {
+    "matches": "Utakmice",
+    "round": "Runda"
+  },
+  "eventLabel": {
+    "tommorow": "Sutra",
+    "yesterday": "Jučer",
+    "ft": "KRAJ"
+  },
+  "eventDetailsWidget": {
+    "viewFullPage": "Pogledaj cijelu stranicu"
+  },
+  "eventDetailsHeading": {
+    "today": "Danas",
+    "tommorow": "Sutra",
+    "yesterday": "Jučer",
+    "fullTime": "Kraj"
+  },
+  "eventDetailsIncidents": {
+    "noResultsYet": "Još nema rezultata.",
+    "viewTournamentDetails": "Pregledaj detalje natjecanja"
+  },
+  "standingsLeaderboard": {
+    "team": "Tim",
+    "p": "O",
+    "w": "P",
+    "d": "N",
+    "l": "I",
+    "goals": "Golovi",
+    "diff": "RAZ",
+    "gb": "UZ",
+    "pts": "BOD",
+    "pct": "POS"
+  },
+  "teamHeadingPanel": {
+    "details": "Detalji",
+    "matches": "Utakmice",
+    "standings": "Tablica",
+    "squad": "Momčad"
+  },
+  "teamInfoPanel": {
+    "teamInfo": "Podaci o timu",
+    "coach": "Trener",
+    "totalPlayers": "Ukupno igrača",
+    "foreignPlayers": "Strani igrači"
+  },
+  "teamVenuePanel": {
+    "venue": "Sjedište",
+    "stadium": "Stadion"
+  },
+  "teamTournamentsPanel": {
+    "tournaments": "Natjecanja"
+  },
+  "teamNextEventPanel": {
+    "nextMatch": "Sljedeća utakmica"
+  },
+  "teamSquadPanel": {
+    "coach": "Trener",
+    "players": "Igrači"
+  },
+  "playerHeadingPanel": {
+    "nationality": "Nacionalnost",
+    "position": "Pozicija",
+    "years": "god"
+  },
+  "settingsPanel": {
+    "settings": "Postavke",
+    "language": "Jezik",
+    "theme": "Tema",
+    "dark": "Tamna",
+    "light": "Svijetla",
+    "dateFormat": "Format datuma",
+    "deDEDateFormat": "DD.MM.GG",
+    "enUSDateFormat": "MM/DD/GG",
+    "about": "Opis",
+    "sofascoreAcademy": "Sofascore Frontend Akademija",
+    "class": "Generacija 2024",
+    "appName": "Naziv aplikacije",
+    "apiCredit": "Zasluga za API",
+    "developer": "Programer"
+  },
+  "trackedEventsPanel": {
+    "trackedEvents": "Praćeni događaji",
+    "previous": "Prethodni",
+    "current": "Trenutni",
+    "next": "Sljedeći",
+    "noTrackedEvents": "Nema praćenih događaja u ovoj sekciji."
+  },
+  "search": {
+    "searchPlayersOrTeams": "Pretraži igrače ili timove",
+    "players": "Igrači",
+    "teams": "Timovi",
+    "searchPlaceholder": "Pretraži"
+  }
+}

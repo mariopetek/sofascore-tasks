@@ -9,17 +9,18 @@ export default class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) => (
-            <StyleRegistry registry={registry}>
-              <App {...props} />
-            </StyleRegistry>
-          )
+          enhanceApp: App => props =>
+            (
+              <StyleRegistry registry={registry}>
+                <App {...props} />
+              </StyleRegistry>
+            ),
         })
 
       const initialProps = await Document.getInitialProps(ctx)
       return {
         ...initialProps,
-        styles: [initialProps.styles, registry.styles()]
+        styles: [initialProps.styles, registry.styles()],
       }
     } finally {
       registry.flush()
@@ -28,11 +29,8 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang='en'>
-        <Head>
-          <meta name='viewport' content='width=device-width, initial-scale=1' />
-          <link rel='icon' href='/favicon.ico' />
-        </Head>
+      <Html lang="en">
+        <Head />
         <body>
           <Main />
           <NextScript />
